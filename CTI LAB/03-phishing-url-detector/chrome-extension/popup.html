@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CTI Phishing URL Detector</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CTI Lab 03</p>
+          <h1>Phishing URL Detector</h1>
+        </div>
+        <span id="serverState" class="server-state">Ready</span>
+      </header>
+
+      <section id="resultPanel" class="result-panel idle" aria-live="polite">
+        <p id="verdict" class="verdict">Classify the current tab</p>
+        <p id="urlText" class="url-text">No URL checked yet.</p>
+        <div class="confidence">
+          <div id="confidenceFill" class="confidence-fill"></div>
+        </div>
+        <p id="metaText" class="meta-text">Uses the local Flask detector on port 5000.</p>
+      </section>
+
+      <section class="controls">
+        <button id="classifyTabButton" type="button">Classify Current Tab</button>
+        <label for="manualUrl">Manual URL</label>
+        <div class="manual-row">
+          <input id="manualUrl" type="url" placeholder="https://example.com/login" spellcheck="false">
+          <button id="manualButton" type="button">Check</button>
+        </div>
+      </section>
+
+      <section class="signals">
+        <h2>Signals</h2>
+        <div id="signalsList" class="signals-list">
+          <span class="empty">Run a classification to see URL features.</span>
+        </div>
+      </section>
+
+      <footer>
+        Start the CTI 03 web app first: <code>python run.py web</code>
+      </footer>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

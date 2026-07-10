@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}CTI Lab{% endblock %}
+{% block content %}
+  <div class="page-header">
+    <h1 class="page-header__title">CTI Lab</h1>
+    <p class="page-header__desc">
+      18 cyber threat intelligence projects spanning spam detection, phishing analysis,
+      malware detection, network security, and biometric authentication.
+    </p>
+  </div>
+  <div class="project-grid">
+    {% for p in projects %}
+    <div class="project-card">
+      <div class="project-card__num">{{ p.num }}</div>
+      <div class="project-card__title">{{ p.title }}</div>
+      <div class="project-card__desc">{{ p.description[:120] }}{% if p.description|length > 120 %}&hellip;{% endif %}</div>
+      <a href="/cti/{{ p.id }}" class="project-card__link">View Project &rarr;</a>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

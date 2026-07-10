@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "CTI Phishing URL Detector",
+  "description": "Classify the current tab URL with the CTI Lab Exercise 3 phishing detector.",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Classify URL"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*",
+    "http://localhost:5000/*"
+  ]
+}

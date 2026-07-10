@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV Lab Workbench</title>
+    <link rel="stylesheet" href="tokens.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="mast">
+        <div>
+          <p class="mast__kicker">Computer Vision Laboratory · Semester 9</p>
+          <h1 class="mast__title">CV Lab Workbench</h1>
+          <p class="mast__copy">
+            Twelve experiments spanning geometric transformations, feature detection, deep
+            learning, and multi-modal vision. Each entry below links to its source, outputs,
+            and usage.
+          </p>
+        </div>
+        <aside class="runbox" aria-label="Quick start">
+          <p class="runbox__label">Run any experiment</p>
+          <code>pwsh -Command "&amp; '.\.venv\Scripts\python.exe' 'CV LAB\experiment_1_rectangle_transformations.py'"</code>
+        </aside>
+      </header>
+
+      <section class="strip" aria-label="Lab summary">
+        <div class="strip__item">
+          <span class="strip__num">12</span>
+          <span class="strip__text">experiments</span>
+        </div>
+        <div class="strip__item">
+          <span class="strip__num">6</span>
+          <span class="strip__text">multi-file packages</span>
+        </div>
+        <div class="strip__item">
+          <span class="strip__num">9</span>
+          <span class="strip__text">live OpenCV UIs</span>
+        </div>
+        <div class="strip__item">
+          <span class="strip__num">3</span>
+          <span class="strip__text">deep learning trainers</span>
+        </div>
+      </section>
+
+      <section class="content">
+        <header class="section-head">
+          <span class="section-head__label">Experiment index</span>
+          <h2 class="section-head__title">Use the cards as the practical record for execution and review.</h2>
+        </header>
+
+        <div class="matrix">
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">01</span>
+              <span class="experiment__status badge-live">OpenCV UI</span>
+            </div>
+            <h3 class="experiment__title">Rectangle transformations</h3>
+            <div class="experiment__meta">
+              <span>Translation, rotation, scaling, shearing</span>
+              <span>Keyboard (WASD) + mouse controls</span>
+              <span class="experiment__file">CV LAB\experiment_1_rectangle_transformations.py</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_1_rectangle_transformations.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">02</span>
+              <span class="experiment__status badge-restore">Restoration</span>
+            </div>
+            <h3 class="experiment__title">Image blending, morphing, edge enhancement</h3>
+            <div class="experiment__meta">
+              <span>Poisson blend, Scharr edges, cross-dissolve morph</span>
+              <span>Output: outputs\experiment_2_image_restoration\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_2_image_restoration.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">03</span>
+              <span class="experiment__status badge-feature">Feature match</span>
+            </div>
+            <h3 class="experiment__title">SIFT, SURF, ORB comparison</h3>
+            <div class="experiment__meta">
+              <span>Keypoint matching, homography inliers, latency</span>
+              <span>Output: outputs\experiment_3_feature_detectors\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_3_feature_detectors.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">04</span>
+              <span class="experiment__status badge-depth">RGB-D</span>
+            </div>
+            <h3 class="experiment__title">Multi-object detection with depth</h3>
+            <div class="experiment__meta">
+              <span>YOLOv3-tiny + MiDaS monocular depth</span>
+              <span>3D bounding-box projection overlay</span>
+              <span class="experiment__file">CV LAB\program_4_rgb_depth\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_4_rgb_depth.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">05</span>
+              <span class="experiment__status badge-text">OCR + NLP</span>
+            </div>
+            <h3 class="experiment__title">OCR and image captioning</h3>
+            <div class="experiment__meta">
+              <span>Tesseract (or MSER fallback) + BLIP (or template fallback)</span>
+              <span>Output: outputs\experiment_5_ocr_captioning\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_5_ocr_captioning.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">06</span>
+              <span class="experiment__status badge-video">Traffic video</span>
+            </div>
+            <h3 class="experiment__title">YOLOv3 + Mask R-CNN</h3>
+            <div class="experiment__meta">
+              <span>Detection and instance segmentation side-by-side</span>
+              <span>Synthetic traffic clip fallback + CSV counts</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_6_yolo_maskrcnn.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">07</span>
+              <span class="experiment__status badge-train">Defect detection</span>
+            </div>
+            <h3 class="experiment__title">Industrial defect detection</h3>
+            <div class="experiment__meta">
+              <span>Faster R-CNN trained on synthetic metal defects (scratch, dent, hole)</span>
+              <span>Output: outputs\experiment_7_defect_detection\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_7_defect_detection.py" --epochs 4</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">08</span>
+              <span class="experiment__status badge-anim">Animation</span>
+            </div>
+            <h3 class="experiment__title">Flip-book registration</h3>
+            <div class="experiment__meta">
+              <span>ORB matching → homography → aligned GIF/MP4 export</span>
+              <span>Output: outputs\experiment_8_flipbook_registration\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_8_flipbook_registration.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">09</span>
+              <span class="experiment__status badge-face">Faces</span>
+            </div>
+            <h3 class="experiment__title">VGGFace2 recognition</h3>
+            <div class="experiment__meta">
+              <span>Detect / identify / verify modes</span>
+              <span>Gallery: assets\gallery\&lt;person&gt;\  Probes: assets\probes\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_9_vggface2.py"</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">10</span>
+              <span class="experiment__status badge-embed">Embeddings</span>
+            </div>
+            <h3 class="experiment__title">FaceNet classification</h3>
+            <div class="experiment__meta">
+              <span>FaceNet embeddings + SVM/KNN on LFW subset</span>
+              <span>Output: outputs\experiment_10_facenet\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_10_facenet.py" --classifier svm</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">11</span>
+              <span class="experiment__status badge-cnn">CNN</span>
+            </div>
+            <h3 class="experiment__title">Fashion-MNIST classifier</h3>
+            <div class="experiment__meta">
+              <span>Custom CNN on 28×28 grayscale clothing images</span>
+              <span>Quick mode: --quick --epochs 1</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_11_fashion_mnist.py" --quick --epochs 2</code>
+          </article>
+
+          <article class="experiment">
+            <div class="experiment__top">
+              <span class="experiment__num">12</span>
+              <span class="experiment__status badge-sat">Satellite</span>
+            </div>
+            <h3 class="experiment__title">Small object + environmental labels</h3>
+            <div class="experiment__meta">
+              <span>CIFAR-10 + synthetic EuroSAT multi-label + Grad-CAM</span>
+              <span>Output: outputs\experiment_12_smallobj_satellite\</span>
+            </div>
+            <code class="experiment__cmd">python "CV LAB\experiment_12_smallobj_satellite.py" --quick --epochs 2</code>
+          </article>
+        </div>
+
+        <section class="notes">
+          <div class="notes__panel">
+            <h3>Run notes</h3>
+            <ul>
+              <li>Heavy model weights (<em>YOLOv3 ~248 MB, MiDaS ~25 MB, Mask R-CNN via torchvision</em>) download on first run to <code>assets\models\</code>.</li>
+              <li>Experiments without real video/assets fall back to synthetic generators so the pipeline always runs end-to-end.</li>
+              <li>All outputs (figures, CSVs, JSON summaries, GIFs, videos) land under <code>outputs\&lt;experiment&gt;\</code>.</li>
+            </ul>
+          </div>
+          <div class="notes__panel">
+            <h3>Key fixes applied</h3>
+            <ul>
+              <li><strong>Exp 1</strong> — rectangle center computed from scaled dimensions, not constants</li>
+              <li><strong>Exp 6</strong> — <code>current_frame</code> initialised before pause check</li>
+              <li><strong>Exp 7</strong> — IoU-based TP metric replaces always-zero proxy</li>
+              <li><strong>Exp 12</strong> — Grad-CAM input images properly de-normalised</li>
+              <li><strong>Global</strong> — <code>+</code>/<code>-</code> key detection fixed across layouts; <code>fit_to</code> deduplicated into <code>_common.py</code></li>
+            </ul>
+          </div>
+        </section>
+      </section>
+
+      <footer class="foot">
+        <span>CV Lab Workbench · SEM 9</span>
+        <code>Open dashboard.html in your browser</code>
+      </footer>
+    </main>
+  </body>
+</html>

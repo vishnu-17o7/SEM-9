@@ -10,6 +10,8 @@ import ctypes
 import time
 from ctypes import wintypes
 
+from _common import draw_panel, print_banner
+
 user32 = ctypes.windll.user32
 
 def key_down(vk):
@@ -21,9 +23,6 @@ BG       = (18, 18, 28)    # dark background
 GRID_LINE = (40, 40, 55)
 RECT_FILL = (100, 180, 255)  # warm orange-gold
 RECT_EDGE = (200, 230, 255)
-PANEL_BG  = (10, 10, 18, 180)  # semi-transparent overlay
-TEXT      = (220, 220, 235)
-TEXT_DIM  = (140, 140, 155)
 ACCENT    = (100, 220, 255)
 MARKER     = (80, 80, 100)
 
@@ -49,24 +48,6 @@ def make_canvas():
     for y in range(0, WINDOW_H, 40):
         cv2.line(img, (0, y), (WINDOW_W, y), GRID_LINE, 1)
     return img
-
-def draw_info_panel(img, lines, x=12, y=12, font_scale=0.5):
-    """Semi-transparent rounded panel with text lines."""
-    line_h = 22
-    pad = 10
-    panel_w = max(cv2.getTextSize(l, cv2.FONT_HERSHEY_DUPLEX, font_scale, 1)[0][0] for l in lines) + pad * 2
-    panel_h = len(lines) * line_h + pad * 2
-    # Dark overlay rectangle
-    overlay = img.copy()
-    cv2.rectangle(overlay, (x, y), (x + panel_w, y + panel_h), (10, 10, 18), -1)
-    cv2.addWeighted(overlay, 0.75, img, 0.25, 0, img)
-    # Thin border
-    cv2.rectangle(img, (x, y), (x + panel_w, y + panel_h), (60, 60, 80), 1)
-
-    for i, line in enumerate(lines):
-        ty = y + pad + i * line_h + 14
-        cv2.putText(img, line, (x + pad, ty),
-                    cv2.FONT_HERSHEY_DUPLEX, font_scale, TEXT, 1, cv2.LINE_AA)
 
 def draw_rounded_rect(img, pts, fill, edge, thickness=2):
     """Draw a filled polygon with anti-aliased outline (simulated rounded look)."""
@@ -119,7 +100,7 @@ def part_a_keyboard_control():
         cv2.rectangle(img, (k_x, k_y), (k_x + RECT_W, k_y + RECT_H), RECT_EDGE, 2, cv2.LINE_AA)
         draw_origin_cross(img, k_x + RECT_W // 2, k_y + RECT_H // 2)
 
-        draw_info_panel(img, [
+        draw_panel(img, [
             "KEYBOARD CONTROL",
             f"Position: ({k_x}, {k_y})",
             "W A S D  ·  ESC to exit",
@@ -128,13 +109,16 @@ def part_a_keyboard_control():
         cv2.imshow("Part A — Keyboard Control (ESC to exit)", img)
         cv2.waitKey(1)
 
+    cv2.destroyWindow("Part A — Keyboard Control (ESC to exit)")
+
 # ─────────────────────────────────────────────────────────────
 # Part (b) — Mouse-controlled transformations
 # ─────────────────────────────────────────────────────────────
 def get_transformed_rect():
     """Return the four corners of the current rectangle, possibly rotated/scaled/affine."""
-    cx, cy = m_x + RECT_W / 2, m_y + RECT_H / 2
-    w, h = RECT_W * m_scale, RECT_H * m_scale
+    sw, sh = int(RECT_W * m_scale), int(RECT_H * m_scale)
+    cx, cy = m_x + sw / 2, m_y + sh / 2
+    w, h = sw, sh
     pts = np.array([[-w/2, -h/2], [ w/2, -h/2],
                     [ w/2,  h/2], [-w/2,  h/2]], dtype=np.float32)
 
@@ -205,7 +189,7 @@ def part_b_mouse_control():
         cx, cy = int(m_x + RECT_W / 2), int(m_y + RECT_H / 2)
         draw_origin_cross(img, cx, cy)
 
-        draw_info_panel(img, [
+        draw_panel(img, [
             "MOUSE CONTROL  (keyboard shortcuts also available)",
             f"Translation: ({m_x}, {m_y})",
             f"Scale: {m_scale:.1f}x  (L-click / S / Z)",

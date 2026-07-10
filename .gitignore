@@ -1,0 +1,101 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Environment ---
+.env
+
+# --- Config / agent dirs ---
+.agents/
+.codex/
+.commandcode/
+.hallmark/
+.hermes/
+.vscode/
+.factory/
+
+# --- Ignore AGENTS.md (project instructions) ---
+AGENTS.md
+
+# --- Data / Datasets ---
+**/data/
+**/datasets/
+
+# --- Model weights / checkpoints ---
+*.weights
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.caffemodel
+*.joblib
+*.pkl
+*.pickle
+
+# --- NumPy data files ---
+*.npy
+*.npz
+
+# --- Outputs / results ---
+**/outputs/
+**/results/
+
+# --- Assets (images, videos, models) ---
+**/assets/
+
+# --- Media files ---
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webm
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webp
+
+# --- Archive formats ---
+*.zip
+*.tar
+*.gz
+*.bz2
+*.7z
+*.rar
+
+# --- Large data files ---
+**/data/*.csv
+**/data/*.json
+
+# --- Logs and run artifacts ---
+*.log
+*.out
+server.log
+
+# --- Spatial Lab ---
+Spatial Lab/
+
+# --- Research directory ---
+Research - Explainable Privacy Preserving Multi Agent Healthcare/
+
+# --- CTI Theory / CV Theory (notes) ---
+CTI Theory/
+CV Thoery/
+
+# --- Root-level junk ---
+tmp/
+-p/
+9/
+*.webm

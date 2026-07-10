@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PhishDetect · URL Classifier</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            /* Hallmark · macrostructure: Workbench (Terminal-adapted) · tone: technical · anchor hue: 145 (phosphor-green)
+ * Theme: Terminal · Nav: N9 Edge-aligned minimal · Footer: Ft2 Inline single line
+ * pre-emit critique: P5 H5 E5 S5 R5 V5
+ */
+
+            :root {
+                --font-display: "JetBrains Mono", ui-monospace, monospace;
+                --font-body: "JetBrains Mono", ui-monospace, monospace;
+
+                /* Paper layers — deep green-black */
+                --color-paper: oklch(10% 0.008 150);
+                --color-paper-2: oklch(14% 0.01 150);
+                --color-paper-3: oklch(19% 0.012 150);
+                --color-rule: oklch(27% 0.01 150);
+
+                /* Text levels */
+                --color-neutral: oklch(50% 0.008 150);
+                --color-muted: oklch(68% 0.006 150);
+                --color-ink: oklch(93% 0.012 150);
+
+                /* Semantic */
+                --color-phish: oklch(65% 0.22 25);
+                --color-phish-dim: oklch(17% 0.1 25);
+                --color-safe: oklch(75% 0.18 145);
+                --color-safe-dim: oklch(17% 0.08 145);
+
+                /* Interactive */
+                --color-accent: oklch(75% 0.18 145);
+                --color-focus: oklch(86% 0.14 145);
+
+                /* Spacing (4-pt scale) */
+                --space-xs: 0.25rem;
+                --space-sm: 0.5rem;
+                --space-md: 1rem;
+                --space-lg: 1.5rem;
+                --space-xl: 2rem;
+                --space-2xl: 3rem;
+                --space-3xl: 4rem;
+                --space-4xl: 6rem;
+
+                /* Type scale */
+                --text-xs: 0.7rem;
+                --text-sm: 0.8rem;
+                --text-base: 0.875rem;
+                --text-md: 1rem;
+                --text-lg: 1.25rem;
+                --text-xl: 1.625rem;
+                --text-display: clamp(1.5rem, 3vw + 0.5rem, 2.25rem);
+
+                /* Motion */
+                --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+                --ease-in: cubic-bezier(0.4, 0, 0.68, 0.06);
+                --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+                --dur-fast: 150ms;
+                --dur-slow: 400ms;
+
+                /* Shape */
+                --radius: 0px;
+                --radius-pill: 9999px;
+            }
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                overflow-x: clip;
+            }
+            body {
+                font-family: var(--font-body);
+                font-size: var(--text-base);
+                line-height: 1.6;
+                color: var(--color-ink);
+                background: var(--color-paper);
+                overflow-x: clip;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* ─── N9 Minimal nav ──────────────────────────────── */
+            nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: var(--space-md) var(--space-xl);
+                max-width: 960px;
+                margin: 0 auto;
+                width: 100%;
+                border-bottom: 1px solid var(--color-rule);
+            }
+            nav .wordmark {
+                font-family: var(--font-display);
+                font-size: var(--text-sm);
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--color-accent);
+                text-decoration: none;
+            }
+            nav .wordmark span {
+                color: var(--color-ink);
+            }
+            nav .nav-cta {
+                font-size: var(--text-xs);
+                color: var(--color-neutral);
+                text-decoration: none;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                transition: color var(--dur-fast) var(--ease-out);
+            }
+            nav .nav-cta:hover {
+                color: var(--color-muted);
+            }
+            nav .nav-cta:focus-visible {
+                outline: 1px solid var(--color-focus);
+                outline-offset: 3px;
+            }
+
+            /* ─── Main layout ─────────────────────────────────── */
+            main {
+                flex: 1;
+                max-width: 720px;
+                width: 100%;
+                margin: 0 auto;
+                padding: var(--space-2xl) var(--space-xl) var(--space-4xl);
+            }
+
+            /* ─── Tool header ─────────────────────────────────── */
+            .tool-header {
+                margin-bottom: var(--space-2xl);
+                padding-bottom: var(--space-xl);
+                border-bottom: 1px solid var(--color-rule);
+            }
+            .tool-header h1 {
+                font-family: var(--font-display);
+                font-size: var(--text-display);
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                line-height: 1.1;
+                margin-bottom: var(--space-sm);
+                color: var(--color-ink);
+                overflow-wrap: anywhere;
+                min-width: 0;
+            }
+            .tool-header h1 span {
+                color: var(--color-accent);
+            }
+            .tool-header p {
+                color: var(--color-neutral);
+                font-size: var(--text-sm);
+                max-width: 56ch;
+                line-height: 1.65;
+            }
+
+            /* ─── URL input — terminal prompt style ───────────── */
+            .input-group {
+                display: flex;
+                align-items: center;
+                gap: 0;
+                margin-bottom: var(--space-lg);
+                border: 1px solid var(--color-rule);
+                background: var(--color-paper-2);
+                transition: border-color var(--dur-fast) var(--ease-out);
+            }
+            .input-group:focus-within {
+                border-color: var(--color-accent);
+            }
+            .input-group::before {
+                content: "›";
+                flex-shrink: 0;
+                padding: 0 var(--space-sm) 0 var(--space-md);
+                color: var(--color-accent);
+                font-size: var(--text-md);
+                line-height: 1;
+                user-select: none;
+                pointer-events: none;
+            }
+            .input-group input[type="text"] {
+                flex: 1;
+                min-width: 0;
+                padding: var(--space-md) var(--space-sm);
+                font-family: var(--font-display);
+                font-size: var(--text-sm);
+                color: var(--color-ink);
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+            .input-group input[type="text"]::placeholder {
+                color: var(--color-neutral);
+            }
+            .input-group button {
+                flex-shrink: 0;
+                padding: var(--space-md) var(--space-lg);
+                font-family: var(--font-display);
+                font-size: var(--text-xs);
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--color-paper);
+                background: var(--color-accent);
+                border: none;
+                border-left: 1px solid var(--color-rule);
+                cursor: pointer;
+                white-space: nowrap;
+                transition: background var(--dur-fast) var(--ease-out);
+            }
+            .input-group button:hover {
+                background: var(--color-focus);
+            }
+            .input-group button:active {
+                opacity: 0.82;
+            }
+            .input-group button:focus-visible {
+                outline: 2px solid var(--color-focus);
+                outline-offset: -2px;
+            }
+            .input-group button:disabled {
+                opacity: 0.35;
+                cursor: not-allowed;
+            }
+            .input-group button.loading {
+                position: relative;
+                color: transparent;
+            }
+            .input-group button.loading::after {
+                content: "";
+                position: absolute;
+                inset: 50%;
+                width: 14px;
+                height: 14px;
+                margin: -7px 0 0 -7px;
+                border: 2px solid var(--color-paper-3);
+                border-top-color: var(--color-paper);
+                border-radius: 50%;
+                animation: spin 0.6s linear infinite;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* ─── Error ───────────────────────────────────────── */
+            .error-msg {
+                display: none;
+                padding: var(--space-sm) var(--space-md);
+                font-size: var(--text-xs);
+                color: var(--color-phish);
+                border-left: 2px solid var(--color-phish);
+                margin-bottom: var(--space-lg);
+            }
+            .error-msg.visible {
+                display: block;
+            }
+
+            /* ─── Results panel ───────────────────────────────── */
+            .results {
+                display: none;
+                margin-top: var(--space-2xl);
+                animation: fadeUp var(--dur-slow) var(--ease-out);
+            }
+            .results.visible {
+                display: block;
+            }
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* ─── Status badge ────────────────────────────────── */
+            .status-badge {
+                display: flex;
+                align-items: center;
+                gap: var(--space-sm);
+                padding: var(--space-lg);
+                border-left: 3px solid currentColor;
+                margin-bottom: var(--space-lg);
+                font-size: var(--text-lg);
+                font-weight: 700;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
+            .status-badge.phishing {
+                color: var(--color-phish);
+                background: var(--color-phish-dim);
+            }
+            .status-badge.legitimate {
+                color: var(--color-safe);
+                background: var(--color-safe-dim);
+            }
+            .status-badge .icon {
+                font-size: var(--text-xl);
+                line-height: 1;
+            }
+
+            /* ─── URL display ─────────────────────────────────── */
+            .url-display {
+                font-size: var(--text-xs);
+                color: var(--color-muted);
+                word-break: break-all;
+                overflow-wrap: anywhere;
+                min-width: 0;
+                padding: var(--space-md) 0;
+                margin-bottom: var(--space-lg);
+                border-bottom: 1px solid var(--color-rule);
+            }
+
+            /* ─── Source badge ────────────────────────────────── */
+            .source-badge {
+                display: inline-block;
+                padding: var(--space-xs) var(--space-sm);
+                font-size: var(--text-xs);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                margin-bottom: var(--space-lg);
+                border: 1px solid var(--color-rule);
+                color: var(--color-muted);
+            }
+
+            /* ─── Confidence ──────────────────────────────────── */
+            .confidence-section {
+                margin-bottom: var(--space-xl);
+            }
+            .confidence-section label {
+                display: block;
+                font-size: var(--text-xs);
+                color: var(--color-neutral);
+                margin-bottom: var(--space-xs);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-weight: 600;
+            }
+            .confidence-bar-track {
+                height: 3px;
+                background: var(--color-paper-3);
+                margin-bottom: var(--space-xs);
+            }
+            .confidence-bar-fill {
+                height: 100%;
+                width: 0%;
+                transition:
+                    width 0.7s var(--ease-in-out),
+                    background 0.3s var(--ease-out);
+            }
+            .confidence-bar-fill.phishing {
+                background: var(--color-phish);
+            }
+            .confidence-bar-fill.legitimate {
+                background: var(--color-safe);
+            }
+            .confidence-pct {
+                font-size: var(--text-xs);
+                color: var(--color-muted);
+                text-align: right;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+            }
+
+            /* ─── Signal badges ───────────────────────────────── */
+            .signals {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--space-xs);
+                margin-bottom: var(--space-xl);
+            }
+            .signal-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-xs);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: var(--text-xs);
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                border: 1px solid currentColor;
+            }
+            .signal-badge.suspicious {
+                color: var(--color-phish);
+                background: var(--color-phish-dim);
+            }
+            .signal-badge.legitimate {
+                color: var(--color-safe);
+                background: var(--color-safe-dim);
+            }
+
+            /* ─── Feature table ───────────────────────────────── */
+            .features-section {
+                margin-bottom: var(--space-xl);
+            }
+            .features-section h3 {
+                font-size: var(--text-xs);
+                color: var(--color-neutral);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-weight: 600;
+                margin-bottom: var(--space-md);
+                padding-bottom: var(--space-sm);
+                border-bottom: 1px solid var(--color-rule);
+            }
+            .feature-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: var(--text-xs);
+            }
+            .feature-table th {
+                text-align: left;
+                padding: var(--space-xs) var(--space-sm);
+                color: var(--color-neutral);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                border-bottom: 1px solid var(--color-rule);
+            }
+            .feature-table td {
+                padding: var(--space-xs) var(--space-sm);
+                border-bottom: 1px solid var(--color-paper-3);
+                color: var(--color-muted);
+            }
+            .feature-table td:first-child {
+                color: var(--color-ink);
+                font-weight: 500;
+            }
+            .feature-table td:nth-child(2) {
+                text-align: right;
+                color: var(--color-neutral);
+            }
+            .feature-table tr.suspicious td:first-child {
+                color: var(--color-phish);
+            }
+            .feature-table tr.legitimate td:first-child {
+                color: var(--color-safe);
+            }
+
+            /* ─── Toggle ──────────────────────────────────────── */
+            .toggle-features {
+                display: inline-block;
+                margin-top: var(--space-sm);
+                font-family: var(--font-display);
+                font-size: var(--text-xs);
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--color-accent);
+                cursor: pointer;
+                border: none;
+                background: none;
+                transition: color var(--dur-fast) var(--ease-out);
+            }
+            .toggle-features:hover {
+                color: var(--color-focus);
+            }
+            .toggle-features:focus-visible {
+                outline: 1px solid var(--color-focus);
+                outline-offset: 2px;
+            }
+
+            /* ─── Ft2 Footer ──────────────────────────────────── */
+            footer {
+                border-top: 1px solid var(--color-rule);
+                padding: var(--space-md) var(--space-xl);
+                text-align: center;
+                font-size: var(--text-xs);
+                color: var(--color-neutral);
+            }
+            footer a {
+                color: var(--color-muted);
+                text-decoration: none;
+                transition: color var(--dur-fast) var(--ease-out);
+            }
+            footer a:hover {
+                color: var(--color-ink);
+            }
+            footer a:focus-visible {
+                outline: 1px solid var(--color-focus);
+                outline-offset: 2px;
+            }
+            footer .separator {
+                display: inline-block;
+                margin: 0 var(--space-sm);
+                color: var(--color-rule);
+            }
+
+            /* ─── Responsive ──────────────────────────────────── */
+            @media (max-width: 60rem) {
+                main {
+                    padding: var(--space-xl) var(--space-lg) var(--space-3xl);
+                }
+            }
+            @media (max-width: 40rem) {
+                nav {
+                    padding: var(--space-md);
+                }
+                main {
+                    padding: var(--space-lg) var(--space-md) var(--space-2xl);
+                }
+                .tool-header {
+                    margin-bottom: var(--space-xl);
+                }
+                .tool-header h1 {
+                    font-size: clamp(1.25rem, 5vw, 1.75rem);
+                }
+                .input-group {
+                    flex-direction: column;
+                    border: none;
+                    background: transparent;
+                    gap: var(--space-sm);
+                }
+                .input-group::before {
+                    display: none;
+                }
+                .input-group input[type="text"] {
+                    width: 100%;
+                    padding: var(--space-md);
+                    font-size: 16px;
+                    background: var(--color-paper-2);
+                    border: 1px solid var(--color-rule);
+                    outline: none;
+                }
+                .input-group input[type="text"]:focus {
+                    border-color: var(--color-accent);
+                }
+                .input-group button {
+                    width: 100%;
+                    padding: var(--space-md);
+                    border-left: none;
+                }
+                .feature-table td,
+                .feature-table th {
+                    padding: var(--space-xs);
+                }
+                .status-badge {
+                    font-size: var(--text-md);
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .results {
+                    animation: none;
+                }
+                .confidence-bar-fill {
+                    transition: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- N9 Nav -->
+        <nav>
+            <a href="/" class="wordmark">Phish<span>Detect</span></a>
+            <a
+                href="#"
+                class="nav-cta"
+                onclick="
+                    document.querySelector('input').focus();
+                    return false;
+                "
+                >Classify a URL</a
+            >
+        </nav>
+
+        <!-- Main tool -->
+        <main>
+            <div class="tool-header">
+                <h1>Phishing URL <span>Detector</span></h1>
+                <p>
+                    Paste a URL below to classify it as phishing or legitimate
+                    using an ensemble machine learning model trained on 28
+                    hand-crafted features.
+                </p>
+            </div>
+
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="urlInput"
+                    placeholder="https://example.com/login"
+                    autofocus
+                    spellcheck="false"
+                    @keydown.enter.prevent="classifyUrl()"
+                />
+                <button id="classifyBtn" onclick="classifyUrl()">
+                    Classify →
+                </button>
+            </div>
+
+            <div id="errorMsg" class="error-msg"></div>
+
+            <div id="results" class="results">
+                <div class="status-badge" id="statusBadge">
+                    <span class="icon" id="statusIcon"></span>
+                    <span id="statusLabel"></span>
+                </div>
+
+                <div class="url-display" id="urlDisplay"></div>
+
+                <div class="source-badge" id="sourceBadge"></div>
+
+                <div class="confidence-section">
+                    <label>Confidence</label>
+                    <div class="confidence-bar-track">
+                        <div
+                            class="confidence-bar-fill"
+                            id="confidenceFill"
+                        ></div>
+                    </div>
+                    <div class="confidence-pct" id="confidencePct"></div>
+                </div>
+
+                <div class="signals" id="signals"></div>
+
+                <div class="features-section">
+                    <h3>Feature Breakdown</h3>
+                    <table class="feature-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="featureBody"></tbody>
+                    </table>
+                    <button
+                        class="toggle-features"
+                        id="toggleFeatures"
+                        style="display: none"
+                        onclick="toggleAllFeatures()"
+                    >
+                        Show all features
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Ft2 Footer -->
+        <footer>
+            PhishDetect
+            <span class="separator">&middot;</span>
+            CTI Lab Exercise 3
+            <span class="separator">&middot;</span>
+            <a href="https://github.com/vishnudev">Source</a>
+        </footer>
+
+        <script>
+            const classifyBtn = document.getElementById("classifyBtn");
+            const urlInput = document.getElementById("urlInput");
+            const results = document.getElementById("results");
+            const errorMsg = document.getElementById("errorMsg");
+            const statusBadge = document.getElementById("statusBadge");
+            const statusIcon = document.getElementById("statusIcon");
+            const statusLabel = document.getElementById("statusLabel");
+            const urlDisplay = document.getElementById("urlDisplay");
+            const sourceBadge = document.getElementById("sourceBadge");
+            const confidenceFill = document.getElementById("confidenceFill");
+            const confidencePct = document.getElementById("confidencePct");
+            const signals = document.getElementById("signals");
+            const featureBody = document.getElementById("featureBody");
+            const toggleBtn = document.getElementById("toggleFeatures");
+
+            let showAllFeatures = false;
+            let allFeatureData = [];
+
+            urlInput.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") classifyUrl();
+            });
+
+            async function classifyUrl() {
+                let url = urlInput.value.trim();
+                if (!url) return;
+
+                // Reset UI
+                results.classList.remove("visible");
+                errorMsg.classList.remove("visible");
+                classifyBtn.disabled = true;
+                classifyBtn.classList.add("loading");
+
+                // Auto-add scheme
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+
+                try {
+                    const res = await fetch("/predict", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ url }),
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        showError(data.error || "Prediction failed");
+                        return;
+                    }
+
+                    displayResults(data);
+                } catch (err) {
+                    showError("Network error — is the server running?");
+                } finally {
+                    classifyBtn.disabled = false;
+                    classifyBtn.classList.remove("loading");
+                }
+            }
+
+            function showError(msg) {
+                errorMsg.textContent = msg;
+                errorMsg.classList.add("visible");
+            }
+
+            function displayResults(data) {
+                const isPhishing = data.prediction === 1;
+
+                // Status badge
+                statusBadge.className = "status-badge " + data.label;
+                statusIcon.textContent = isPhishing ? "\u{1F534}" : "\u{1F7E2}";
+                statusLabel.textContent = isPhishing
+                    ? "PHISHING DETECTED"
+                    : "LEGITIMATE";
+
+                // URL
+                urlDisplay.textContent = data.url;
+
+                // Source badge
+                const source = data.source || "model";
+                sourceBadge.className = "source-badge " + source;
+                sourceBadge.textContent =
+                    source === "dataset"
+                        ? "📚 Matched in Dataset"
+                        : "🤖 ML Model Prediction";
+
+                // Confidence
+                const pct = (data.confidence * 100).toFixed(1);
+                confidenceFill.className = "confidence-bar-fill " + data.label;
+                confidenceFill.style.width = pct + "%";
+                confidencePct.textContent = pct + "%";
+
+                // Signals
+                signals.innerHTML = "";
+                data.sus_signals.forEach((s) => {
+                    const badge = document.createElement("span");
+                    badge.className = "signal-badge suspicious";
+                    badge.textContent = "\u26A0 " + s;
+                    signals.appendChild(badge);
+                });
+                data.leg_signals.forEach((s) => {
+                    const badge = document.createElement("span");
+                    badge.className = "signal-badge legitimate";
+                    badge.textContent = "\u2713 " + s;
+                    signals.appendChild(badge);
+                });
+
+                // Feature table
+                allFeatureData = data.features;
+                showAllFeatures = false;
+                toggleBtn.textContent = "Show all features";
+                buildFeatureTable();
+
+                // Show
+                results.classList.add("visible");
+                results.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            function buildFeatureTable() {
+                const maxDefault = 10;
+                const features = showAllFeatures
+                    ? allFeatureData
+                    : allFeatureData.slice(0, maxDefault);
+                featureBody.innerHTML = "";
+
+                features.forEach((f) => {
+                    const tr = document.createElement("tr");
+                    if (f.is_suspicious) tr.className = "suspicious";
+                    else if (f.is_legitimate) tr.className = "legitimate";
+
+                    const tdName = document.createElement("td");
+                    tdName.textContent = f.name;
+                    const tdVal = document.createElement("td");
+                    tdVal.textContent =
+                        typeof f.value === "number"
+                            ? f.value.toFixed(4)
+                            : f.value;
+
+                    tr.appendChild(tdName);
+                    tr.appendChild(tdVal);
+                    featureBody.appendChild(tr);
+                });
+
+                toggleBtn.style.display =
+                    allFeatureData.length > maxDefault
+                        ? "inline-block"
+                        : "none";
+            }
+
+            function toggleAllFeatures() {
+                showAllFeatures = !showAllFeatures;
+                toggleBtn.textContent = showAllFeatures
+                    ? "Show fewer features"
+                    : "Show all features";
+                buildFeatureTable();
+            }
+        </script>
+    </body>
+</html>

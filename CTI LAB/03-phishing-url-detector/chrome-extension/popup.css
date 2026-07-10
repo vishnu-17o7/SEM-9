@@ -1,0 +1,232 @@
+:root {
+  color-scheme: dark;
+  --bg: #07100d;
+  --panel: #0d1a16;
+  --panel-2: #12241e;
+  --line: #24443a;
+  --text: #eef7f2;
+  --muted: #98ada5;
+  --safe: #4ade80;
+  --safe-bg: #0f2f1e;
+  --danger: #fb7185;
+  --danger-bg: #35131a;
+  --warn: #facc15;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 380px;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.shell {
+  padding: 16px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.eyebrow,
+.meta-text,
+footer,
+label,
+.empty {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+.verdict,
+.url-text,
+.meta-text {
+  margin: 0;
+}
+
+h1 {
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+h2 {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.server-state {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.result-panel {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.result-panel.phishing {
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.result-panel.legitimate {
+  border-color: var(--safe);
+  background: var(--safe-bg);
+}
+
+.result-panel.error {
+  border-color: var(--warn);
+}
+
+.verdict {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.url-text {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.confidence {
+  height: 7px;
+  margin: 14px 0 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.confidence-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--muted);
+  transition: width 160ms ease-out;
+}
+
+.phishing .confidence-fill {
+  background: var(--danger);
+}
+
+.legitimate .confidence-fill {
+  background: var(--safe);
+}
+
+.controls,
+.signals {
+  margin-top: 14px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: var(--panel-2);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--text);
+}
+
+button:disabled {
+  cursor: progress;
+  opacity: 0.65;
+}
+
+#classifyTabButton {
+  width: 100%;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.manual-row {
+  display: grid;
+  grid-template-columns: 1fr 74px;
+  gap: 8px;
+}
+
+input {
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: #08130f;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--safe);
+}
+
+.signals-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.signal {
+  padding: 5px 7px;
+  border: 1px solid var(--line);
+  font-size: 11px;
+}
+
+.signal.suspicious {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.signal.legitimate {
+  border-color: var(--safe);
+  color: var(--safe);
+}
+
+footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+code {
+  color: var(--safe);
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SEM 9 Lab Hub{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="/" class="sidebar__header" style="text-decoration:none;">
+        <span class="sidebar__title">SEM 9 Hub</span>
+        <span class="sidebar__subtitle">CTI &middot; CV Labs</span>
+      </a>
+      <div class="sidebar__nav">
+        <div class="sidebar__category">CTI Lab</div>
+        <a href="/cti" class="sidebar__link {% if active == 'cti' %}sidebar__link--active{% endif %}">
+          Overview (18 projects)
+        </a>
+        <div class="sidebar__category">CV Lab</div>
+        <a href="/cv" class="sidebar__link {% if active == 'cv' %}sidebar__link--active{% endif %}">
+          Overview (12 experiments)
+        </a>
+      </div>
+    </nav>
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

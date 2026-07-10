@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}SEM 9 Lab Hub{% endblock %}
+{% block content %}
+  <div class="page-header">
+    <h1 class="page-header__title">SEM 9 Lab Hub</h1>
+    <p class="page-header__desc">
+      Unified dashboard for Cyber Threat Intelligence and Computer Vision laboratory projects.
+      Select a category below or use the sidebar to browse projects.
+    </p>
+  </div>
+
+  {% if memories %}
+  <div class="memories-section">
+    <h2 class="memories-section__title">Recent Activity</h2>
+    <div class="memories-grid">
+      {% for mem in memories %}
+      <div class="memory-card">
+        <div class="memory-card__meta">
+          {% if mem.get("metadata") and mem.metadata.get("type") == "script_run" %}
+            {% if mem.metadata.get("exit_code") == 0 %}
+            <span class="memory-card__status memory-card__status--ok">OK</span>
+            {% else %}
+            <span class="memory-card__status memory-card__status--err">FAIL</span>
+            {% endif %}
+          {% endif %}
+          {% if mem.get("metadata") and mem.metadata.get("exit_code") is defined %}
+          <span class="memory-card__exit">exit {{ mem.metadata.exit_code }}</span>
+          {% endif %}
+        </div>
+        <div class="memory-card__title">
+          {% if mem.get("content") %}
+            {{ mem.content | truncate(120) }}
+          {% elif mem.get("title") %}
+            {{ mem.title }}
+          {% else %}
+            {{ mem.get("summary", "") | truncate(120) }}
+          {% endif %}
+        </div>
+        {% if mem.get("metadata") and mem.metadata.get("project_title") %}
+        <div class="memory-card__project">{{ mem.metadata.project_title }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="category-cards">
+    <a href="/cti" class="category-card">
+      <div class="category-card__title">CTI Lab</div>
+      <div class="category-card__count">18 projects</div>
+      <div class="category-card__desc">
+        Cyber Threat Intelligence: spam detection, phishing analysis, malware detection,
+        network intrusion, facial recognition, and multi-factor authentication.
+      </div>
+    </a>
+    <a href="/cv" class="category-card">
+      <div class="category-card__title">CV Lab</div>
+      <div class="category-card__count">12 experiments</div>
+      <div class="category-card__desc">
+        Computer Vision: geometric transformations, image restoration, feature detection,
+        deep learning classifiers, object detection, face recognition, and more.
+      </div>
+    </a>
+  </div>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}CV {{ experiment.num }} — {{ experiment.title }}{% endblock %}
+{% block content %}
+<div class="exp-topbar">
+  <div class="exp-topbar__stat">
+    <span class="exp-topbar__num">CV {{ experiment.num }}</span>
+    <span class="exp-topbar__badge {% if experiment.has_package %}exp-topbar__badge--pkg{% endif %}">{{ "OpenCV + Package" if experiment.has_package else "OpenCV Live UI" }}</span>
+  </div>
+  <div class="exp-topbar__actions">
+    {% if experiment.run_script %}
+    <button class="btn-run" data-project="{{ experiment.id }}" data-script="{{ experiment.run_script }}" onclick="startRun(this)">Run Experiment</button>
+    {% endif %}
+  </div>
+</div>
+
+<header class="exp-header">
+  <h1 class="exp-header__title">{{ experiment.title }}</h1>
+  <div class="exp-header__cmd"><code>{{ experiment.launch_cmd }}</code></div>
+</header>
+
+<div class="exp-body">
+  <div class="exp-body__desc">{{ experiment.description }}</div>
+
+  <div class="exp-detail-grid">
+    {% if experiment.models %}
+    <div class="exp-detail-cell">
+      <div class="exp-detail-cell__label">Models</div>
+      <ul class="exp-detail-cell__list">
+        {% for m in experiment.models %}
+        <li>{{ m }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if experiment.datasets and experiment.datasets|length > 0 %}
+    <div class="exp-detail-cell">
+      <div class="exp-detail-cell__label">Datasets</div>
+      <ul class="exp-detail-cell__list">
+        {% for ds in experiment.datasets %}
+        <li>{{ ds }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if experiment.comparisons %}
+    <div class="exp-detail-cell exp-detail-cell--wide">
+      <div class="exp-detail-cell__label">Comparisons</div>
+      <p class="exp-detail-cell__text">{{ experiment.comparisons }}</p>
+    </div>
+    {% endif %}
+
+    {% if experiment.ui_controls %}
+    <div class="exp-detail-cell">
+      <div class="exp-detail-cell__label">Controls</div>
+      <p class="exp-detail-cell__text">{{ experiment.ui_controls }}</p>
+    </div>
+    {% endif %}
+
+    {% if experiment.extra_args %}
+    <div class="exp-detail-cell">
+      <div class="exp-detail-cell__label">Extra Args</div>
+      <div class="exp-detail-cell__args">
+        {% for arg in experiment.extra_args %}
+        <code>{{ arg }}</code>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if experiment.run_script %}
+  <div class="exp-run">
+    <div class="exp-run__toolbar">
+      <span class="exp-run__label">Output</span>
+      <button class="exp-run__clear" onclick="stopRun('{{ experiment.id }}')">Clear</button>
+    </div>
+    <div id="output-{{ experiment.id }}" class="exp-run__terminal"></div>
+  </div>
+  {% endif %}
+
+  {% if experiment.output_dir %}
+  <div class="exp-gallery">
+    <div class="exp-gallery__header">
+      <h2 class="exp-gallery__title">Outputs</h2>
+    </div>
+    <div id="gallery-{{ experiment.id }}" class="exp-gallery__grid">
+      <p class="exp-gallery__placeholder">Loading outputs …</p>
+    </div>
+  </div>
+
+{% if memories %}
+<div class="memories-section" style="margin-top:var(--space-xl);padding-top:var(--space-lg);border-top:1px solid var(--color-rule);">
+  <h2 class="memories-section__title">Previous Runs</h2>
+  <div class="memories-grid">
+    {% for mem in memories %}
+    <div class="memory-card">
+      <div class="memory-card__meta">
+        {% if mem.metadata and mem.metadata.get("exit_code") is not none %}
+          {% if mem.metadata.exit_code == 0 %}
+          <span class="memory-card__status memory-card__status--ok">OK</span>
+          {% else %}
+          <span class="memory-card__status memory-card__status--err">FAIL</span>
+          {% endif %}
+          <span class="memory-card__exit">exit {{ mem.metadata.exit_code }}</span>
+        {% endif %}
+      </div>
+      <div class="memory-card__title">{{ mem.content | truncate(120) if mem.get("content") else "" }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+  <!-- Lightbox overlay for full-size image preview -->
+  <div id="lightbox" class="exp-lightbox" onclick="this.classList.remove('exp-lightbox--open')">
+    <img id="lightbox-img" class="exp-lightbox__img" alt="Preview">
+    <span class="exp-lightbox__close">&times;</span>
+  </div>
+
+  <script>
+  (function(){
+    var eid = '{{ experiment.id }}', grid = document.getElementById('gallery-'+eid);
+    var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lightbox-img');
+
+    function openLightbox(src, alt) {
+      lbImg.src = src; lbImg.alt = alt;
+      lb.classList.add('exp-lightbox--open');
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    fetch('/api/outputs/'+encodeURIComponent(eid))
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(files){
+        if (!Array.isArray(files) || !files.length){
+          grid.innerHTML = '<p class="exp-gallery__placeholder">No saved outputs yet. Run the experiment to generate output files.</p>';
+          return;
+        }
+        grid.innerHTML = '';
+        files.forEach(function(f){
+          var item = document.createElement('div');
+          item.className = 'exp-gallery__item';
+          var label = f.rel || f.name;
+
+          if (f.category === 'image') {
+            item.innerHTML = '<img src="'+f.path+'" alt="'+f.name+'" class="exp-gallery__thumb" loading="lazy">'
+              + '<span class="exp-gallery__name" title="'+label+'">'+label+'</span>';
+            item.style.cursor = 'pointer';
+            item.onclick = function(){ openLightbox(f.path, f.name); };
+          } else if (f.category === 'video') {
+            item.innerHTML = '<video src="'+f.path+'" class="exp-gallery__thumb" muted preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>'
+              + '<span class="exp-gallery__name" title="'+label+'">'+label+'</span>'
+              + '<span class="exp-gallery__size">'+formatSize(f.size)+'</span>';
+            item.onclick = function(){ window.open(f.path, '_blank'); };
+            item.style.cursor = 'pointer';
+          } else {
+            item.innerHTML = '<div class="exp-gallery__file-icon">'+(f.type.slice(0,4).toUpperCase())+'</div>'
+              + '<span class="exp-gallery__name" title="'+label+'">'+label+'</span>'
+              + '<span class="exp-gallery__size">'+formatSize(f.size)+'</span>';
+            item.onclick = function(){ window.open(f.path, '_blank'); };
+            item.style.cursor = 'pointer';
+          }
+          grid.appendChild(item);
+        });
+      })
+      .catch(function(){ grid.innerHTML = '<p class="exp-gallery__placeholder">Could not load outputs.</p>'; });
+  })();
+  </script>
+  {% endif %}
+</div>
+{% endblock %}
