@@ -1,0 +1,58 @@
+{
+  "Statue of Liberty": {
+    "SIFT": {
+      "keypoints": 974,
+      "latency_ms": 73.83
+    },
+    "AKAZE": {
+      "keypoints": 689,
+      "latency_ms": 49.84
+    },
+    "ORB": {
+      "keypoints": 6811,
+      "latency_ms": 2688.69
+    }
+  },
+  "Eiffel Tower": {
+    "SIFT": {
+      "keypoints": 3710,
+      "latency_ms": 82.82
+    },
+    "AKAZE": {
+      "keypoints": 1194,
+      "latency_ms": 48.16
+    },
+    "ORB": {
+      "keypoints": 14775,
+      "latency_ms": 15.72
+    }
+  },
+  "Colosseum": {
+    "SIFT": {
+      "keypoints": 554,
+      "latency_ms": 62.83
+    },
+    "AKAZE": {
+      "keypoints": 330,
+      "latency_ms": 48.85
+    },
+    "ORB": {
+      "keypoints": 5623,
+      "latency_ms": 9.73
+    }
+  },
+  "Taj Mahal": {
+    "SIFT": {
+      "keypoints": 62,
+      "latency_ms": 60.4
+    },
+    "AKAZE": {
+      "keypoints": 9,
+      "latency_ms": 43.43
+    },
+    "ORB": {
+      "keypoints": 67,
+      "latency_ms": 2.89
+    }
+  }
+}

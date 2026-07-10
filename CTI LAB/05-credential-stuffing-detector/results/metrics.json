@@ -1,0 +1,86 @@
+{
+  "RuleBased": {
+    "name": "RuleBased",
+    "accuracy": 0.9799,
+    "precision": 0.9837,
+    "recall": 0.9311,
+    "f1": 0.9567,
+    "train_time_s": 0,
+    "predict_time_s": 0.003,
+    "confusion_matrix": [
+      [
+        104706,
+        508
+      ],
+      [
+        2272,
+        30695
+      ]
+    ],
+    "detection_count": 31203,
+    "false_positive_rate": 0.0048
+  },
+  "IsolationForest": {
+    "name": "IsolationForest",
+    "accuracy": 0.7333,
+    "precision": 0.4445,
+    "recall": 0.4722,
+    "f1": 0.4579,
+    "train_time_s": 4.689,
+    "predict_time_s": 0.896,
+    "confusion_matrix": [
+      [
+        85762,
+        19452
+      ],
+      [
+        17401,
+        15566
+      ]
+    ],
+    "detection_count": 35018,
+    "false_positive_rate": 0.1849
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "accuracy": 0.9845,
+    "precision": 0.9943,
+    "recall": 0.9402,
+    "f1": 0.9665,
+    "train_time_s": 16.75,
+    "predict_time_s": 0.18,
+    "confusion_matrix": [
+      [
+        105037,
+        177
+      ],
+      [
+        1971,
+        30996
+      ]
+    ],
+    "detection_count": 31173,
+    "false_positive_rate": 0.0017
+  },
+  "LOF": {
+    "name": "LOF",
+    "accuracy": 0.5336,
+    "precision": 0.0489,
+    "recall": 0.0534,
+    "f1": 0.0511,
+    "train_time_s": 0,
+    "predict_time_s": 3.441,
+    "confusion_matrix": [
+      [
+        10421,
+        4881
+      ],
+      [
+        4447,
+        251
+      ]
+    ],
+    "detection_count": 5132,
+    "false_positive_rate": 0.319
+  }
+}

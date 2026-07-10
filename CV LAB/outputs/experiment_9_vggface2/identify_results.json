@@ -1,0 +1,26 @@
+[
+  {
+    "probe": "Donald_Rumsfeld_00.jpg",
+    "face": 0,
+    "box": [
+      45,
+      45,
+      120,
+      120
+    ],
+    "name": "Donald_Rumsfeld",
+    "score": 0.89
+  },
+  {
+    "probe": "George_W_Bush_00.jpg",
+    "face": 0,
+    "box": [
+      42,
+      40,
+      125,
+      125
+    ],
+    "name": "George_W_Bush",
+    "score": 0.94
+  }
+]

@@ -1,0 +1,11 @@
+ioc_type,value,source,confidence,severity,tags,description,first_seen,reference_url
+url,http://credential-harvest.bid/account/update,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,http://evil-malware.xyz/loader.exe,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,http://maldoc-delivery.racing/invoice.doc,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,http://payload-staging.xyz/dropper.bin,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,http://phishing-bank.tk/login/verify.html,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,http://ransomware-pay.work/payment/bc1q...,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,https://darknet-market.tk/marketplace,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,https://exfil-data.top/upload.php,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,https://exploit-kit.loan/exploit.php?cve=2024-xxx,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,
+url,https://malware-c2.top/command?token=abc123,sample_feed,0.8,high,malicious-url,Known malicious URL,2026-06-22T04:33:42Z,

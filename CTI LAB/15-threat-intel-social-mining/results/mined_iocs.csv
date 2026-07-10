@@ -1,0 +1,44 @@
+Type,Value,Source,Context
+ip,185.130.5.27,twitter,New #phishing campaign targeting banking customers. C2 serve
+domain,evil-malware.xyz,twitter,New #phishing campaign targeting banking customers. C2 serve
+domain,exploit-kit.loan,twitter,Alert: CVE-2024-3094 exploit detected in the wild. Payload h
+url,http://exploit-kit.loan/exploit.php,twitter,Alert: CVE-2024-3094 exploit detected in the wild. Payload h
+cve,cve-2024-3094,twitter,Alert: CVE-2024-3094 exploit detected in the wild. Payload h
+ip,91.121.87.34,reddit,r/netsec - Found a new malware sample. MD5: e1112134b6dcc8f5
+md5,e1112134b6dcc8f54d7f7c1b9c5f1e3a,reddit,r/netsec - Found a new malware sample. MD5: e1112134b6dcc8f5
+ip,89.248.165.80,twitter,Ransomware group using double extortion. Check for connectio
+ip,45.142.212.77,twitter,Ransomware group using double extortion. Check for connectio
+ip,138.197.62.204,blog,Analysis of recent supply chain attack: initial access via C
+ip,192.241.214.181,blog,Analysis of recent supply chain attack: initial access via C
+cve,cve-2023-46604,blog,Analysis of recent supply chain attack: initial access via C
+domain,steal-login.ml,twitter,New IoC feed: phishing-bank.tk targeting major banks. Steals
+domain,phishing-bank.tk,twitter,New IoC feed: phishing-bank.tk targeting major banks. Steals
+ip,5.188.62.14,reddit,r/blueteamsec - Anyone seeing traffic to 5.188.62.14:8443? L
+sha256,a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2,reddit,r/blueteamsec - Anyone seeing traffic to 5.188.62.14:8443? L
+domain,payload-staging.xyz,twitter,CVE-2021-44228 (Log4Shell) still being exploited. New campai
+url,http://payload-staging.xyz/dropper.bin,twitter,CVE-2021-44228 (Log4Shell) still being exploited. New campai
+cve,cve-2021-44228,twitter,CVE-2021-44228 (Log4Shell) still being exploited. New campai
+ip,194.26.29.113,blog,APT group using watering hole attacks. Compromised sites red
+domain,maldoc-delivery.racing,blog,APT group using watering hole attacks. Compromised sites red
+ip,45.33.32.156,twitter,Credential stuffing attack targeting financial sector. Login
+ip,182.253.106.80,twitter,Credential stuffing attack targeting financial sector. Login
+ip,103.253.42.100,twitter,Credential stuffing attack targeting financial sector. Login
+domain,exfil-data.top,reddit,r/malware - New stealer variant exfiltrates to exfil-data.to
+md5,f2a3245c7d8e9f0a1b2c3d4e5f6a7b8c,reddit,r/malware - New stealer variant exfiltrates to exfil-data.to
+ip,68.183.191.110,twitter,CVE-2023-34362 (MOVEit Transfer) exploitation continues. Che
+ip,167.71.5.83,twitter,CVE-2023-34362 (MOVEit Transfer) exploitation continues. Che
+cve,cve-2023-34362,twitter,CVE-2023-34362 (MOVEit Transfer) exploitation continues. Che
+domain,darknet-market.tk,blog,Darknet marketplace advertising stolen credentials. Market d
+domain,free-prize-win.cf,twitter,New phishing kit discovered. Uses open redirect on legit sit
+url,http://free-prize-win.cf/redirect.php,twitter,New phishing kit discovered. Uses open redirect on legit sit
+ip,159.89.209.50,reddit,r/cybersecurity - Botnet controller at 159.89.209.50 using c
+domain,download-virus.ga,reddit,r/cybersecurity - Botnet controller at 159.89.209.50 using c
+md5,c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8,twitter,Warning: CVE-2022-30190 (Follina) being used in targeted att
+cve,cve-2022-30190,twitter,Warning: CVE-2022-30190 (Follina) being used in targeted att
+domain,ransomware-pay.work,blog,Analysis of recent ransomware: encrypts files and appends .e
+ip,104.248.50.85,twitter,Watering hole attack on tech news site. Malicious script loa
+domain,credential-harvest.bid,twitter,Watering hole attack on tech news site. Malicious script loa
+ip,31.220.59.11,reddit,r/netsec - Anyone seeing scanning activity from 31.220.59.11
+ip,165.227.88.157,twitter,Multiple CVE-2023-23397 (Outlook elevation) attacks detected
+domain,botnet-ctrl.download,twitter,Multiple CVE-2023-23397 (Outlook elevation) attacks detected
+cve,cve-2023-23397,twitter,Multiple CVE-2023-23397 (Outlook elevation) attacks detected

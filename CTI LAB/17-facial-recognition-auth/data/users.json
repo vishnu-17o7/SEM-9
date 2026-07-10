@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "user_id": "3231eac427e7",
+      "name": "Alice Johnson",
+      "role": "Admin",
+      "email": "alice@company.com",
+      "embedding_path": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\17-facial-recognition-auth\\data\\faces\\Alice_Johnson\\embedding.npy",
+      "embedding_b64": "UTUGvgqGKrvGoFW9D/H7vSfj8j2SBCS9O0KGvVkcuD17ldy9Y1vkvSjdLTw0UZQ9rbVvPTM25rz1mKu9SYYJPjuGjj5X66k9fHYqPG2Nfz37iQe9rtVLPOLTDb1vLF28ZAVAPOVtxDzBiMG8YygTPkYbTrxTf209u2a8Pbc85j0Wf+u9glonPYSfgT3gGPo8wozYvGw87D0N1Fa91kYBPajnibyuo389bXyTPbWMAb5UUw++SrCWvH/t9rwiOwI90mZrPe/lyL2Zc4i9V8dVu+KuaD7QRgC+VhUEPDWEND0zUIw9U8ONO2J1YrxGbb88lcXvO26jPDtVbYA901OivfUdqbxTn749bbpWO0a/krzGQ5m9yjq6vJfsmDxfRa08Ko9zPY70KT3UC/09r3JIvS6vMT7tIbs91oKKPY+TCL6evdM99SRMvvtBK7vl2KO+7faIvPIg8Tygo5C70jhavee6+bz2IF2+4z49PJl4d70+pXo9I30LPmjhAj6Qy+C9iA+ZvfT65zmJC5U9uz84vVmhsbyJyoE7G+4SvcTWJrxb/We86suGvLQJhbzgG8w8nseCvRRGUr6Bhza9I+eQPajGYrwm5dy9iLyJPJD2kT0BERO+vDYIvkNPvb0zE8e9QYMbPvslv71Eu5U9MteAPagcdD07itk87N6FvUBlOL0="
+    },
+    {
+      "user_id": "c54fbefe4f2b",
+      "name": "Bob Smith",
+      "role": "Engineer",
+      "email": "bob@company.com",
+      "embedding_path": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\17-facial-recognition-auth\\data\\faces\\Bob_Smith\\embedding.npy",
+      "embedding_b64": "MjLgPMXbED3kOpq9Z+SiPXMHmj2sArI9lY1QPW/3C74O8Ok9bSI/va8HPzx0y9m9g6p2PVRDqL0WKiI+jwRfPkMiMz68kBE9TQ/UuwdGjT1O8Zw8B6k8vZyFCr6FeL09j7FGvWs7LD2Zzyg95O99vao8Aj4URQS9E8v0PHBZvT1CcQQ8XJTbvbgswb3oWd09yAUKPe33QD2DAhi+V1YevYouNT6tjhE9x5tKPj9Jo7ydkGG9jIHzvZMPTr1KkSC9a2CxPX6KY73BmWC++mtOPRzUVj1uAQs9IMcAvXMUqz1CrIY9UCAgPnlDp73jjby9VWSXPcqoFr0IN1280Wa9vTnRqj2/Rmu9KZaEvSLY8L3Nx6g9bFvJPZyqhj25DYw907rQvCMod74sLFw9bMEzvTOEEL6Y7/Q8D/euPdNy7TwtSAe+s+QvPYuxgz3mMPG9VxwMPRwZkLwBN/g8HujBPS+Ntjyv4OA8y5juvDU1ez0HBEW67XM+vbIyUj3omxK9kGIUPZPau7sG/BW+feLevDlEN70azHq91wbqvZ/9tj2nOvA9qA/PPSEyS72eo409iZzHvK/ywr3bEaW8UGA+vAAc7z3DITU+ofWoPfHPjT0tIzY9iI9FPo7zlzy3Jf48u5kUvsxynLzrDPK8EQBHvcM3Qr2ABJQ9OQUBvmyJ1b0="
+    },
+    {
+      "user_id": "047d63a47b2c",
+      "name": "Carol Davis",
+      "role": "HR",
+      "email": "carol@company.com",
+      "embedding_path": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\17-facial-recognition-auth\\data\\faces\\Carol_Davis\\embedding.npy",
+      "embedding_b64": "WiWYOyENPD3YTLu93XGCPe9WHb1hARW+vaBzvcclYT3L8fk8M87Xvba0aD2fYQS86uIfPWXy+Tzcj9m9FgYEPSpGZL1KeBE+3gmIPcDTijvv3ri9VsujO2eRcDzLXeO9vxJRPlRPFD34Ix8+P0nRvTPRGT7M9P+9mPN0vYUJTD3MdJA7sL1dvj7tz71Qkp09H1VEPsMNrD0lyM+8t8yVPR0d170BzT89kmr9vSlTYboNp0S8HdmWPcrp47xlD+I92AGUvFtTnT2b75M9PBstviT4YTshOVg7EXWSvYD3hjzx3gi++zNRPXC/Pz3IBOI8leJoPriHBD0jB8s7e7eJvW2I3zyH4bS9vjDvPb+ac70pbW48FSM7PsLy2j1JjLY8sMIBPl8spLswj5U9g8blOg5Jqr2H1yE9fcevPbcuAr3TVc693axGvRzIX77bkmS9tzrKvSwtPj7DeFS9yhYRvmPHoz2dzoO8gECSOxnqjTxGdp086dcMvb6Msz1e0EQ9LH86vTb9gLxlm7G91knTPILXij0XxnQ9YDpnPfxtPrwYeBQ+udubvFXzNDuc5vy8K4j0O+7wtLx3GD8+eS0gPdxBHr6gMyO9tywFvnR7pT11QgE+qKcpvQ7GZj2iGJ68lnwZPd7nIj7qcAO9YOrnvegVhz1fTEI9cXF9PYILwT0="
+    },
+    {
+      "user_id": "c2d257899cbf",
+      "name": "Dan Wilson",
+      "role": "Finance",
+      "email": "dan@company.com",
+      "embedding_path": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\17-facial-recognition-auth\\data\\faces\\Dan_Wilson\\embedding.npy",
+      "embedding_b64": "kjEGPhUGST5CBtU9os2bPcJNpDx1PNu9XNG7PaHQ5T2I8yy9meuWPICKPb7hzrC8i5e6vNc9gz3bpag98qyLvJv8AL5yhYi9p3rUPWTppj0+cQ698GY3vAFJuj22rr682NROPVIn1z3wyCy6uFiYvc1OwL0EFsS9/jInvivZmL0Mwr49ri7GPFG4Iz0G5hQ90xsHPSIG7T1G9107pkyzvpwnKD6R4LG9RQGlPY+GD74k6wo8v5MIPsAoEb1rHlQ841fFPQrs/r1P4SS+JIqLPdZlsT1gC9m9F3HIPPMex729bRO9P1JAPHZ2GrxD6pi9wCpYvcBLJr6wZpu8ZCuvPQgggL3LFjg8gl3svJMLhjwcNfi9xcntvQExBr77YZI72X+lPSF5t73jzKi7Owm2PV6iFj5bfcS9bFuSvYDCjL29vXa98zVNvoHVq7xVi7c9A24AvTdHLTxuwLM9EEv9PaFcL726QCG9O78oPel0K70QwgS9Ij4hvMoAB7014lm9FEcoPULDsz2QD1M96CdnvHFktzyDEqI6H05Puww32bzeDvu9CXDnvHgfID60si++9hv4vfPO0DobLUA9ePVSuVBsiL0Iruk9dHauPTtmmDxx30K94199Pd52nryipfW7f3RGvV7roz0M/008Ku8Dvt35mD0q0jY9+ICtO186kj0="
+    },
+    {
+      "user_id": "99c8d5b4167d",
+      "name": "Eve Martin",
+      "role": "Exec",
+      "email": "eve@company.com",
+      "embedding_path": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\17-facial-recognition-auth\\data\\faces\\Eve_Martin\\embedding.npy",
+      "embedding_b64": "l6YWPK9S4735uIS94udxugYFBz5K69C6vMQTuwfDE77Rsy6+X7eDPIHGez1xKvo9KZY0veSrBz7PRWQ9ook4PrriJ72oqhq9rm7vvSyt6DxTbBE+1Mg/PS+e4L1b/ok+Zqm7uhRzm71/Eom9yOHYvTa7gr3XxYC93xdfujjOmD3iJra9psEVPeTJHDuMza29ahVFu9VVlr0J8Wk7aYTVPWunt712Axk+JbpzPuUEDD38ZLw87sJQPco7A70qKWE9ROCXvdEOUz54XVQ9nh/jvYjaI7tEXh29JtMkPIbfd71oTE89Z8zrPAzF5r0+NnO+Rq9CvZwRTD3lrFQ7yM2HPWuP1r3bAPa949KHvMiCgTyjuYo9kE3FvfPqtL36VMC8Dcp1vYICQj2wYKu8TeRGvVBDYj3lFJQ8fKmFPWhqQz0Jz9I9vLsaPHh8ajxEP7a9Pk2dPRV//rxHQoQ9JhJlvY5Pn72gCbU87QE+vh6g1D3HzqQ9Gk/VPXLc6L0LA4y9RHgfPv6Y1D3G60Q90/+PPZQGwb1eOK490UMUPg60qb1d8pw8ZHl7vUUc8b0FJhg9ntzxPWX0tb34B4y9v8ciPf/IAr5o+Ae+kjWkPZTWSb0Nw8w9p5c7PQKldL0L+ag87W8XPb+A+bwfHWe7G7RuvLg/5b21W6K9vOUQPZK8Wz0="
+    }
+  ],
+  "total": 5
+}

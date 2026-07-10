@@ -1,0 +1,19 @@
+{
+  "final_test_accuracy": 0.767,
+  "epochs": 1,
+  "history": {
+    "train_loss": [
+      1.1468940263271332
+    ],
+    "train_acc": [
+      0.6004
+    ],
+    "val_loss": [
+      0.6656953907012939
+    ],
+    "val_acc": [
+      0.767
+    ]
+  },
+  "training_seconds": 6.9
+}

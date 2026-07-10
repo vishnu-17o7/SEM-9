@@ -1,0 +1,16 @@
+{
+  "window_dimensions": [
+    800,
+    600
+  ],
+  "rectangle_dimensions": [
+    100,
+    60
+  ],
+  "transformations_applied": [
+    "translation",
+    "scaling",
+    "rotation",
+    "affine"
+  ]
+}

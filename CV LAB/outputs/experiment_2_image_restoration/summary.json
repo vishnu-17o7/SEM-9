@@ -1,0 +1,16 @@
+{
+  "reference": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CV LAB\\assets\\cache\\reference.jpg",
+  "damaged": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CV LAB\\assets\\cache\\damaged.jpg",
+  "shapes": {
+    "damaged": [
+      1264,
+      2416,
+      3
+    ],
+    "reference": [
+      1264,
+      2416,
+      3
+    ]
+  }
+}

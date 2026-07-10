@@ -1,0 +1,15 @@
+{
+  "accuracy": 0.996,
+  "n_classes": 127,
+  "n_train": 2998,
+  "n_test": 1000,
+  "classifier": "svm",
+  "history": {
+    "train_acc": [
+      1.0
+    ],
+    "val_acc": [
+      0.996
+    ]
+  }
+}

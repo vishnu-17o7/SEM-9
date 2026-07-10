@@ -1,0 +1,9 @@
+name,family,accuracy,precision,recall,f1,roc_auc,train_time_s,predict_time_s,notes
+MultinomialNB,base,0.964126,1.000000,0.731544,0.844961,0.979282,1.449,0.066,""
+ComplementNB,base,0.972197,0.893333,0.899329,0.896321,0.979282,0.202,0.031,""
+LogisticRegression,base,0.965919,1.000000,0.744966,0.853846,0.984750,0.813,0.027,""
+LinearSVC,base,0.982063,0.977778,0.885906,0.929577,0.987751,0.24,0.037,""
+RandomForest,base,0.973991,1.000000,0.805369,0.892193,0.985848,2.38,0.18,""
+GradientBoosting,base,0.953363,0.961905,0.677852,0.795276,0.953416,3.412,0.144,""
+SoftVoting,ensemble,0.983857,0.992481,0.885906,0.936170,0.987737,3.443,0.046,"ensemble of NB + CNB + LR + SVM/GBDT"
+Stacking,ensemble,0.983857,1.000000,0.879195,0.935714,0.984882,16.736,0.032,"ensemble of NB + CNB + LR + SVM/GBDT"

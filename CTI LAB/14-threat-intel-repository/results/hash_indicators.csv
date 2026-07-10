@@ -1,0 +1,7 @@
+ioc_type,value,source,confidence,severity,tags,description,first_seen,reference_url
+hash,a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,
+hash,b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,
+hash,c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,
+hash,d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,
+hash,e1112134b6dcc8f54d7f7c1b9c5f1e3a,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,
+hash,f2a3245c7d8e9f0a1b2c3d4e5f6a7b8c,sample_feed,0.9,high,malware-hash,Known malware hash,2026-06-22T04:33:42Z,

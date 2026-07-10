@@ -1,0 +1,258 @@
+{
+  "pairs": [
+    "colonnade",
+    "interior",
+    "street",
+    "foliage",
+    "geometry",
+    "texture",
+    "statue_of_liberty",
+    "sceneA",
+    "sceneB"
+  ],
+  "rows": [
+    {
+      "pair": "colonnade",
+      "detector": "SIFT",
+      "keypoints": 41,
+      "matches": 11,
+      "inliers": 9,
+      "ratio": 0.818,
+      "latency_ms": 195.52
+    },
+    {
+      "pair": "colonnade",
+      "detector": "AKAZE",
+      "keypoints": 299,
+      "matches": 118,
+      "inliers": 99,
+      "ratio": 0.839,
+      "latency_ms": 139.14
+    },
+    {
+      "pair": "colonnade",
+      "detector": "ORB",
+      "keypoints": 271,
+      "matches": 94,
+      "inliers": 86,
+      "ratio": 0.915,
+      "latency_ms": 2232.33
+    },
+    {
+      "pair": "interior",
+      "detector": "SIFT",
+      "keypoints": 4000,
+      "matches": 1256,
+      "inliers": 1146,
+      "ratio": 0.912,
+      "latency_ms": 267.19
+    },
+    {
+      "pair": "interior",
+      "detector": "AKAZE",
+      "keypoints": 3633,
+      "matches": 1492,
+      "inliers": 1471,
+      "ratio": 0.986,
+      "latency_ms": 221.99
+    },
+    {
+      "pair": "interior",
+      "detector": "ORB",
+      "keypoints": 4000,
+      "matches": 1423,
+      "inliers": 1355,
+      "ratio": 0.952,
+      "latency_ms": 92.95
+    },
+    {
+      "pair": "street",
+      "detector": "SIFT",
+      "keypoints": 179,
+      "matches": 56,
+      "inliers": 48,
+      "ratio": 0.857,
+      "latency_ms": 169.04
+    },
+    {
+      "pair": "street",
+      "detector": "AKAZE",
+      "keypoints": 200,
+      "matches": 89,
+      "inliers": 89,
+      "ratio": 1.0,
+      "latency_ms": 128.64
+    },
+    {
+      "pair": "street",
+      "detector": "ORB",
+      "keypoints": 377,
+      "matches": 133,
+      "inliers": 122,
+      "ratio": 0.917,
+      "latency_ms": 22.74
+    },
+    {
+      "pair": "foliage",
+      "detector": "SIFT",
+      "keypoints": 1700,
+      "matches": 562,
+      "inliers": 520,
+      "ratio": 0.925,
+      "latency_ms": 202.0
+    },
+    {
+      "pair": "foliage",
+      "detector": "AKAZE",
+      "keypoints": 1568,
+      "matches": 649,
+      "inliers": 644,
+      "ratio": 0.992,
+      "latency_ms": 146.62
+    },
+    {
+      "pair": "foliage",
+      "detector": "ORB",
+      "keypoints": 3824,
+      "matches": 1349,
+      "inliers": 1283,
+      "ratio": 0.951,
+      "latency_ms": 78.02
+    },
+    {
+      "pair": "geometry",
+      "detector": "SIFT",
+      "keypoints": 4000,
+      "matches": 1427,
+      "inliers": 1362,
+      "ratio": 0.954,
+      "latency_ms": 278.87
+    },
+    {
+      "pair": "geometry",
+      "detector": "AKAZE",
+      "keypoints": 4996,
+      "matches": 2077,
+      "inliers": 2039,
+      "ratio": 0.982,
+      "latency_ms": 213.12
+    },
+    {
+      "pair": "geometry",
+      "detector": "ORB",
+      "keypoints": 4000,
+      "matches": 1438,
+      "inliers": 1388,
+      "ratio": 0.965,
+      "latency_ms": 107.66
+    },
+    {
+      "pair": "texture",
+      "detector": "SIFT",
+      "keypoints": 948,
+      "matches": 312,
+      "inliers": 290,
+      "ratio": 0.929,
+      "latency_ms": 185.4
+    },
+    {
+      "pair": "texture",
+      "detector": "AKAZE",
+      "keypoints": 582,
+      "matches": 248,
+      "inliers": 246,
+      "ratio": 0.992,
+      "latency_ms": 145.02
+    },
+    {
+      "pair": "texture",
+      "detector": "ORB",
+      "keypoints": 2072,
+      "matches": 709,
+      "inliers": 690,
+      "ratio": 0.973,
+      "latency_ms": 41.13
+    },
+    {
+      "pair": "statue_of_liberty",
+      "detector": "SIFT",
+      "keypoints": 4000,
+      "matches": 1476,
+      "inliers": 1430,
+      "ratio": 0.969,
+      "latency_ms": 6527.97
+    },
+    {
+      "pair": "statue_of_liberty",
+      "detector": "AKAZE",
+      "keypoints": 28391,
+      "matches": 12428,
+      "inliers": 12297,
+      "ratio": 0.989,
+      "latency_ms": 5522.28
+    },
+    {
+      "pair": "statue_of_liberty",
+      "detector": "ORB",
+      "keypoints": 4000,
+      "matches": 1575,
+      "inliers": 1517,
+      "ratio": 0.963,
+      "latency_ms": 370.24
+    },
+    {
+      "pair": "sceneA",
+      "detector": "SIFT",
+      "keypoints": 2423,
+      "matches": 200,
+      "inliers": 6,
+      "ratio": 0.03,
+      "latency_ms": 330.77
+    },
+    {
+      "pair": "sceneA",
+      "detector": "AKAZE",
+      "keypoints": 3289,
+      "matches": 169,
+      "inliers": 4,
+      "ratio": 0.024,
+      "latency_ms": 260.44
+    },
+    {
+      "pair": "sceneA",
+      "detector": "ORB",
+      "keypoints": 3428,
+      "matches": 459,
+      "inliers": 2,
+      "ratio": 0.004,
+      "latency_ms": 159.61
+    },
+    {
+      "pair": "sceneB",
+      "detector": "SIFT",
+      "keypoints": 763,
+      "matches": 58,
+      "inliers": 6,
+      "ratio": 0.103,
+      "latency_ms": 305.25
+    },
+    {
+      "pair": "sceneB",
+      "detector": "AKAZE",
+      "keypoints": 595,
+      "matches": 80,
+      "inliers": 6,
+      "ratio": 0.075,
+      "latency_ms": 217.73
+    },
+    {
+      "pair": "sceneB",
+      "detector": "ORB",
+      "keypoints": 2811,
+      "matches": 306,
+      "inliers": 8,
+      "ratio": 0.026,
+      "latency_ms": 153.73
+    }
+  ]
+}

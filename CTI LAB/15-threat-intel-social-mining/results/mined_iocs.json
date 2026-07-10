@@ -1,0 +1,311 @@
+{
+  "iocs": [
+    {
+      "ioc_type": "ip",
+      "value": "185.130.5.27",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New #phishing campaign targeting banking customers. C2 server at 185.130.5.27 using domain evil-malw"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "evil-malware.xyz",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New #phishing campaign targeting banking customers. C2 server at 185.130.5.27 using domain evil-malw"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "exploit-kit.loan",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Alert: CVE-2024-3094 exploit detected in the wild. Payload hosted at http://exploit-kit.loan/exploit"
+    },
+    {
+      "ioc_type": "url",
+      "value": "http://exploit-kit.loan/exploit.php",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Alert: CVE-2024-3094 exploit detected in the wild. Payload hosted at http://exploit-kit.loan/exploit"
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2024-3094",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Alert: CVE-2024-3094 exploit detected in the wild. Payload hosted at http://exploit-kit.loan/exploit"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "91.121.87.34",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/netsec - Found a new malware sample. MD5: e1112134b6dcc8f54d7f7c1b9c5f1e3a. Communicates with 91.1"
+    },
+    {
+      "ioc_type": "md5",
+      "value": "e1112134b6dcc8f54d7f7c1b9c5f1e3a",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/netsec - Found a new malware sample. MD5: e1112134b6dcc8f54d7f7c1b9c5f1e3a. Communicates with 91.1"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "89.248.165.80",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Ransomware group using double extortion. Check for connections to 45.142.212.77 or 89.248.165.80. #r"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "45.142.212.77",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Ransomware group using double extortion. Check for connections to 45.142.212.77 or 89.248.165.80. #r"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "138.197.62.204",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Analysis of recent supply chain attack: initial access via CVE-2023-46604, lateral movement through "
+    },
+    {
+      "ioc_type": "ip",
+      "value": "192.241.214.181",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Analysis of recent supply chain attack: initial access via CVE-2023-46604, lateral movement through "
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2023-46604",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Analysis of recent supply chain attack: initial access via CVE-2023-46604, lateral movement through "
+    },
+    {
+      "ioc_type": "domain",
+      "value": "steal-login.ml",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New IoC feed: phishing-bank.tk targeting major banks. Steals credentials via fake login pages. Also "
+    },
+    {
+      "ioc_type": "domain",
+      "value": "phishing-bank.tk",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New IoC feed: phishing-bank.tk targeting major banks. Steals credentials via fake login pages. Also "
+    },
+    {
+      "ioc_type": "ip",
+      "value": "5.188.62.14",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/blueteamsec - Anyone seeing traffic to 5.188.62.14:8443? Looks like Mirai variant C2. SHA256: a1b2"
+    },
+    {
+      "ioc_type": "sha256",
+      "value": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/blueteamsec - Anyone seeing traffic to 5.188.62.14:8443? Looks like Mirai variant C2. SHA256: a1b2"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "payload-staging.xyz",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2021-44228 (Log4Shell) still being exploited. New campaign detected targeting unpatched servers."
+    },
+    {
+      "ioc_type": "url",
+      "value": "http://payload-staging.xyz/dropper.bin",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2021-44228 (Log4Shell) still being exploited. New campaign detected targeting unpatched servers."
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2021-44228",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2021-44228 (Log4Shell) still being exploited. New campaign detected targeting unpatched servers."
+    },
+    {
+      "ioc_type": "ip",
+      "value": "194.26.29.113",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "APT group using watering hole attacks. Compromised sites redirect to 194.26.29.113 which serves mali"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "maldoc-delivery.racing",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "APT group using watering hole attacks. Compromised sites redirect to 194.26.29.113 which serves mali"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "45.33.32.156",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Credential stuffing attack targeting financial sector. Login attempts from distributed IPs including"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "182.253.106.80",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Credential stuffing attack targeting financial sector. Login attempts from distributed IPs including"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "103.253.42.100",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Credential stuffing attack targeting financial sector. Login attempts from distributed IPs including"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "exfil-data.top",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/malware - New stealer variant exfiltrates to exfil-data.top via HTTPS. MD5: f2a3245c7d8e9f0a1b2c3d"
+    },
+    {
+      "ioc_type": "md5",
+      "value": "f2a3245c7d8e9f0a1b2c3d4e5f6a7b8c",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/malware - New stealer variant exfiltrates to exfil-data.top via HTTPS. MD5: f2a3245c7d8e9f0a1b2c3d"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "68.183.191.110",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2023-34362 (MOVEit Transfer) exploitation continues. Check for outbound connections to 167.71.5."
+    },
+    {
+      "ioc_type": "ip",
+      "value": "167.71.5.83",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2023-34362 (MOVEit Transfer) exploitation continues. Check for outbound connections to 167.71.5."
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2023-34362",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "CVE-2023-34362 (MOVEit Transfer) exploitation continues. Check for outbound connections to 167.71.5."
+    },
+    {
+      "ioc_type": "domain",
+      "value": "darknet-market.tk",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Darknet marketplace advertising stolen credentials. Market domain: darknet-market.tk. Bitcoin wallet"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "free-prize-win.cf",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New phishing kit discovered. Uses open redirect on legit sites to bypass filters. Delivers payload f"
+    },
+    {
+      "ioc_type": "url",
+      "value": "http://free-prize-win.cf/redirect.php",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "New phishing kit discovered. Uses open redirect on legit sites to bypass filters. Delivers payload f"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "159.89.209.50",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/cybersecurity - Botnet controller at 159.89.209.50 using custom protocol on port 7777. Also C2 at "
+    },
+    {
+      "ioc_type": "domain",
+      "value": "download-virus.ga",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/cybersecurity - Botnet controller at 159.89.209.50 using custom protocol on port 7777. Also C2 at "
+    },
+    {
+      "ioc_type": "md5",
+      "value": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Warning: CVE-2022-30190 (Follina) being used in targeted attacks. Macro document delivered via email"
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2022-30190",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Warning: CVE-2022-30190 (Follina) being used in targeted attacks. Macro document delivered via email"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "ransomware-pay.work",
+      "source": "blog",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Analysis of recent ransomware: encrypts files and appends .encrypted extension. Communication with C"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "104.248.50.85",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Watering hole attack on tech news site. Malicious script loads from 104.248.50.85/js/analytics.js. A"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "credential-harvest.bid",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Watering hole attack on tech news site. Malicious script loads from 104.248.50.85/js/analytics.js. A"
+    },
+    {
+      "ioc_type": "ip",
+      "value": "31.220.59.11",
+      "source": "reddit",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "r/netsec - Anyone seeing scanning activity from 31.220.59.11? Port scanning for vulnerable Exchange "
+    },
+    {
+      "ioc_type": "ip",
+      "value": "165.227.88.157",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Multiple CVE-2023-23397 (Outlook elevation) attacks detected. Attackers sending specially crafted em"
+    },
+    {
+      "ioc_type": "domain",
+      "value": "botnet-ctrl.download",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Multiple CVE-2023-23397 (Outlook elevation) attacks detected. Attackers sending specially crafted em"
+    },
+    {
+      "ioc_type": "cve",
+      "value": "cve-2023-23397",
+      "source": "twitter",
+      "extracted_at": "2026-07-01T03:49:08Z",
+      "context": "Multiple CVE-2023-23397 (Outlook elevation) attacks detected. Attackers sending specially crafted em"
+    }
+  ],
+  "total": 43,
+  "sources": {
+    "twitter": 11,
+    "reddit": 5,
+    "blog": 4
+  }
+}

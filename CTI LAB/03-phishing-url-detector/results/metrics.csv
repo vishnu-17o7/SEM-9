@@ -1,0 +1,8 @@
+Model,Family,Accuracy,Precision,Recall,F1,ROC-AUC,Train_Time_s,Predict_Time_s,Notes
+LogisticRegression,LogisticRegression,0.783,0.7676,0.8101,0.7883,0.8568,0.372,0.006,
+RandomForest,RandomForestClassifier,0.8967,0.9153,0.8736,0.894,0.9642,2.043,0.149,
+GradientBoosting,GradientBoostingClassifier,0.9016,0.9166,0.883,0.8995,0.9663,39.573,0.089,
+SVM_RBF,SVC,0.8931,0.914,0.8672,0.89,0.9595,406.547,22.921,
+KNN,KNeighborsClassifier,0.8945,0.9067,0.8789,0.8926,0.9502,0.044,7.422,
+GaussianNB,GaussianNB,0.5633,0.9034,0.1392,0.2412,0.832,0.076,0.017,
+VotingEnsemble,ensemble,0.9037,0.9195,0.8843,0.9016,0.9688,45.164,1.115,"Soft-vote of GradientBoosting, RandomForest, KNN"

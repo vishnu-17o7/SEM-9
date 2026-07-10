@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing URL Detection — Model Comparison Report</title>
+<style>
+:root {
+    --bg: #0f0f1a;
+    --card: #1a1a2e;
+    --card-hover: #222240;
+    --border: #2a2a4a;
+    --text: #e0e0e0;
+    --text-dim: #8888aa;
+    --accent: #00d4aa;
+    --accent2: #7c3aed;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --warn: #f59e0b;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; padding: 2rem;
+}
+h1 { font-size: 2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+h1 small { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; color: var(--accent); }
+.subtitle { color: var(--text-dim); margin-bottom: 1.5rem; }
+.card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;
+}
+.card table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.card th, .card td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+.card th { color: var(--text-dim); font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+.card tr:hover td { background: var(--card-hover); }
+.badge {
+    display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+    font-size: 0.75rem; font-weight: 600;
+}
+.badge-best { background: #065f4622; color: var(--accent); border: 1px solid var(--accent); }
+.badge-warn { background: #f59e0b22; color: var(--warn); border: 1px solid var(--warn); }
+.flex-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.stat { flex: 1; min-width: 120px; text-align: center; padding: 0.75rem; }
+.stat-value { font-size: 1.75rem; font-weight: 700; }
+.stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } body { padding: 1rem; } }
+.chart-container { text-align: center; }
+.chart-container img { max-width: 100%; border-radius: 8px; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable::after { content: ' ↕'; opacity: 0.3; }
+th.sortable.sorted-asc::after { content: ' ↑'; opacity: 1; }
+th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
+</style>
+</head>
+<body>
+
+<h1>🕵️ Phishing URL Detection <small>Model Comparison Report</small></h1>
+<p class="subtitle">
+    URL-based feature extraction · 7 classifiers evaluated ·
+    
+    Dataset: synthetic phishing + legitimate URLs
+</p>
+
+<!-- Summary stats -->
+<div class="card">
+    <div class="flex-row">
+        <div class="stat">
+            <div class="stat-value" style="color:var(--accent);">0.9995</div>
+            <div class="stat-label">Best F1 Score</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" style="color:var(--accent2);">0.9995</div>
+            <div class="stat-label">Best ROC-AUC</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" style="color:var(--warn);">35.2s</div>
+            <div class="stat-label">Total Train Time</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">all models</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" style="color:var(--success);">7</div>
+            <div class="stat-label">Models Compared</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression, RandomForest, GradientBoosting, SVM_RBF, KNN, GaussianNB, VotingEnsemble</div>
+        </div>
+    </div>
+</div>
+
+<!-- Model comparison table -->
+<div class="card">
+    <h2>📊 Model Comparison</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th class="sortable">Accuracy</th>
+                <th class="sortable">Precision</th>
+                <th class="sortable">Recall</th>
+                <th class="sortable">F1</th>
+                <th class="sortable">ROC-AUC</th>
+                <th>Train Time</th>
+                <th>Confusion Matrix</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td><strong>LogisticRegression</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">LogisticRegression</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9989 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 </td>
+            <td>0.071s</td>
+            <td><img src="cm_LogisticRegression.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>SVM_RBF</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">SVC</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9989 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>0.9997 </td>
+            <td>7.864s</td>
+            <td><img src="cm_SVM_RBF.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>KNN</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">KNeighborsClassifier</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9989 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 </td>
+            <td>0.053s</td>
+            <td><img src="cm_KNN.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>VotingEnsemble</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">ensemble</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9989 <span class="badge badge-best">BEST</span></td>
+            <td>0.9995 <span class="badge badge-best">BEST</span></td>
+            <td>0.9997 </td>
+            <td>7.477s</td>
+            <td><img src="cm_VotingEnsemble.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>RandomForest</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">RandomForestClassifier</span></td>
+            <td>0.9993 </td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9987 </td>
+            <td>0.9993 </td>
+            <td>0.9999 <span class="badge badge-best">BEST</span></td>
+            <td>0.798s</td>
+            <td><img src="cm_RandomForest.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>GradientBoosting</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">GradientBoostingClassifier</span></td>
+            <td>0.9993 </td>
+            <td>0.9997 </td>
+            <td>0.9989 <span class="badge badge-best">BEST</span></td>
+            <td>0.9993 </td>
+            <td>0.9999 <span class="badge badge-best">BEST</span></td>
+            <td>18.872s</td>
+            <td><img src="cm_GradientBoosting.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        <tr>
+            <td><strong>GaussianNB</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">GaussianNB</span></td>
+            <td>0.9988 </td>
+            <td>1.0000 <span class="badge badge-best">BEST</span></td>
+            <td>0.9976 </td>
+            <td>0.9988 </td>
+            <td>0.9993 </td>
+            <td>0.054s</td>
+            <td><img src="cm_GaussianNB.png" style="width:160px;border-radius:6px;" /></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Charts -->
+<div class="grid-2">
+    <div class="card chart-container">
+        <h2>F1 Score</h2>
+        <img src="f1_chart.png" alt="f1_chart.png" />
+    </div>
+    <div class="card chart-container">
+        <h2>ROC-AUC</h2>
+        <img src="roc_auc_chart.png" alt="roc_auc_chart.png" />
+    </div>
+    <div class="card chart-container">
+        <h2>Accuracy</h2>
+        <img src="accuracy_chart.png" alt="accuracy_chart.png" />
+    </div>
+    <div class="card chart-container">
+        <h2>Precision</h2>
+        <img src="precision_chart.png" alt="precision_chart.png" />
+    </div>
+    <div class="card chart-container">
+        <h2>Recall</h2>
+        <img src="recall_chart.png" alt="recall_chart.png" />
+    </div>
+    <div class="card chart-container">
+        <h2>ROC Curves</h2>
+        <img src="roc_curves.png" alt="roc_curves.png" />
+    </div>
+</div>
+
+<!-- Confusion matrices -->
+<div class="card">
+    <h2>🔲 Confusion Matrices</h2>
+    <div class="grid-2">
+        <div class="chart-container"><img src="cm_GaussianNB.png" alt="cm_GaussianNB.png" /></div><div class="chart-container"><img src="cm_GradientBoosting.png" alt="cm_GradientBoosting.png" /></div><div class="chart-container"><img src="cm_KNN.png" alt="cm_KNN.png" /></div><div class="chart-container"><img src="cm_LogisticRegression.png" alt="cm_LogisticRegression.png" /></div><div class="chart-container"><img src="cm_RandomForest.png" alt="cm_RandomForest.png" /></div><div class="chart-container"><img src="cm_SVM_RBF.png" alt="cm_SVM_RBF.png" /></div><div class="chart-container"><img src="cm_VotingEnsemble.png" alt="cm_VotingEnsemble.png" /></div>
+    </div>
+</div>
+
+<!-- Feature importance -->
+
+
+<!-- How it works -->
+<div class="card">
+    <h2>🔬 How It Works</h2>
+    <p style="color:var(--text-dim);margin-bottom:0.5rem;">
+        28 features are extracted from each URL, capturing structural patterns
+        that distinguish phishing from legitimate websites:
+    </p>
+    <div class="grid-2">
+        <div>
+            <strong style="color:var(--accent);">Length-based</strong>
+            <ul style="color:var(--text-dim);font-size:0.85rem;padding-left:1.25rem;">
+                <li>URL length, path length, domain length</li>
+                <li>Digit ratio, special character ratio</li>
+                <li>URL entropy (randomness measure)</li>
+            </ul>
+            <strong style="color:var(--accent2);margin-top:0.5rem;display:block;">Structural</strong>
+            <ul style="color:var(--text-dim);font-size:0.85rem;padding-left:1.25rem;">
+                <li>Number of dots, hyphens, slashes, @ symbols</li>
+                <li>Number of subdomains, path depth</li>
+                <li>Presence of IP address, port, HTTPS</li>
+            </ul>
+        </div>
+        <div>
+            <strong style="color:var(--accent);">Content-based</strong>
+            <ul style="color:var(--text-dim);font-size:0.85rem;padding-left:1.25rem;">
+                <li>Suspicious keywords (login, verify, secure...)</li>
+                <li>URL shortener detection</li>
+                <li>Double-slash redirect patterns</li>
+            </ul>
+            <strong style="color:var(--accent2);margin-top:0.5rem;display:block;">Domain-based</strong>
+            <ul style="color:var(--text-dim);font-size:0.85rem;padding-left:1.25rem;">
+                <li>TLD length, has-www flag</li>
+                <li>Domain-based features</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+        const table = th.closest('table');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const idx = Array.from(th.parentNode.children).indexOf(th);
+        const desc = th.classList.contains('sorted-asc');
+        th.classList.toggle('sorted-asc', !desc);
+        th.classList.toggle('sorted-desc', desc);
+        rows.sort((a, b) => {
+            let va = a.children[idx].textContent.trim();
+            let vb = b.children[idx].textContent.trim();
+            let na = parseFloat(va), nb = parseFloat(vb);
+            if (!isNaN(na) && !isNaN(nb)) { va = na; vb = nb; }
+            if (va < vb) return desc ? 1 : -1;
+            if (va > vb) return desc ? -1 : 1;
+            return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+    });
+});
+</script>
+
+</body>
+</html>

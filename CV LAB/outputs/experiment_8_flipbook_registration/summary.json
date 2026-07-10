@@ -1,0 +1,22 @@
+{
+  "n_frames": 12,
+  "inlier_counts": [
+    0,
+    272,
+    205,
+    512,
+    263,
+    231,
+    535,
+    246,
+    221,
+    429,
+    264,
+    221
+  ],
+  "outputs": [
+    "contact_sheet.png",
+    "flipbook.gif",
+    "flipbook.mp4"
+  ]
+}

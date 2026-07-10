@@ -1,0 +1,13 @@
+ioc_type,value,source,confidence,severity,tags,description,first_seen,reference_url
+cve,CVE-2017-0144,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2017-0144,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2017-0144
+cve,CVE-2020-1472,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2020-1472,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2020-1472
+cve,CVE-2021-26855,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2021-26855,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2021-26855
+cve,CVE-2021-44228,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2021-44228,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2021-44228
+cve,CVE-2022-26134,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2022-26134,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2022-26134
+cve,CVE-2022-30190,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2022-30190,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2022-30190
+cve,CVE-2023-23397,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2023-23397,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2023-23397
+cve,CVE-2023-32784,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2023-32784,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2023-32784
+cve,CVE-2023-34362,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2023-34362,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2023-34362
+cve,CVE-2023-46604,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2023-46604,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2023-46604
+cve,CVE-2024-1709,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2024-1709,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2024-1709
+cve,CVE-2024-3094,nvd_feed,1.0,critical,cve,Known vulnerability: CVE-2024-3094,2026-06-22T04:33:42Z,https://nvd.nist.gov/vuln/detail/CVE-2024-3094
