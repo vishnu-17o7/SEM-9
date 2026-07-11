@@ -1,86 +1,121 @@
 {
-  "RuleBased": {
-    "name": "RuleBased",
-    "accuracy": 0.9799,
-    "precision": 0.9837,
-    "recall": 0.9311,
-    "f1": 0.9567,
-    "train_time_s": 0,
-    "predict_time_s": 0.003,
-    "confusion_matrix": [
-      [
-        104706,
-        508
-      ],
-      [
-        2272,
-        30695
-      ]
+  "dataset": {
+    "generated_at": "2026-07-10T04:27:39.004651+00:00",
+    "datasets": [
+      {
+        "name": "CICIDS2017",
+        "role": "Labelled web brute-force evaluation and supervised comparison",
+        "official_url": "https://www.unb.ca/cic/datasets/ids-2017.html",
+        "local_file": "data\\real\\cicids2017_web_bruteforce_flows.csv",
+        "raw_file": "data\\real\\Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv.parquet",
+        "counts": {
+          "benign": 30000,
+          "web_brute_force": 1507
+        },
+        "limitations": "Network-flow labels, not application login outcomes. Protocol and destination port are retained as proxy context; no user-agent, country, or credential-success field exists."
+      },
+      {
+        "name": "LANL Unified Host and Network Dataset (2017)",
+        "role": "Optional de-identified enterprise authentication baseline",
+        "official_url": "https://csr.lanl.gov/data/2017/",
+        "local_file": "data\\real\\lanl_authentication_events.csv",
+        "counts": {},
+        "status": "awaiting registered source download",
+        "limitations": "Official daily files require registration. It supplies real enterprise host-event authentication data but does not provide credential-stuffing labels."
+      }
     ],
-    "detection_count": 31203,
-    "false_positive_rate": 0.0048
+    "training_note": "Metrics are reported against CICIDS2017 web brute-force labels. They are an intrusion detection benchmark, not a claim of real-world web credential-stuffing accuracy."
   },
-  "IsolationForest": {
-    "name": "IsolationForest",
-    "accuracy": 0.7333,
-    "precision": 0.4445,
-    "recall": 0.4722,
-    "f1": 0.4579,
-    "train_time_s": 4.689,
-    "predict_time_s": 0.896,
-    "confusion_matrix": [
-      [
-        85762,
-        19452
-      ],
-      [
-        17401,
-        15566
-      ]
-    ],
-    "detection_count": 35018,
-    "false_positive_rate": 0.1849
+  "evaluation": {
+    "sample_count": 31464,
+    "attack_count": 1507,
+    "split": "Stratified 80/20 split with fixed random seed 42.",
+    "feature_note": "Native CICIDS2017 flow attributes: destination_port, flow_duration, total_fwd_packets, total_backward_packets, total_fwd_bytes, total_backward_bytes, flow_bytes_per_second, flow_packets_per_second, syn_flag_count, ack_flag_count, fwd_iat_mean, bwd_iat_mean."
   },
-  "RandomForest": {
-    "name": "RandomForest",
-    "accuracy": 0.9845,
-    "precision": 0.9943,
-    "recall": 0.9402,
-    "f1": 0.9665,
-    "train_time_s": 16.75,
-    "predict_time_s": 0.18,
-    "confusion_matrix": [
-      [
-        105037,
-        177
+  "detectors": {
+    "RuleBased": {
+      "name": "RuleBased",
+      "accuracy": 0.9517,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "train_time_s": 0.0,
+      "predict_time_s": 0.001,
+      "confusion_matrix": [
+        [
+          5989,
+          3
+        ],
+        [
+          301,
+          0
+        ]
       ],
-      [
-        1971,
-        30996
-      ]
-    ],
-    "detection_count": 31173,
-    "false_positive_rate": 0.0017
-  },
-  "LOF": {
-    "name": "LOF",
-    "accuracy": 0.5336,
-    "precision": 0.0489,
-    "recall": 0.0534,
-    "f1": 0.0511,
-    "train_time_s": 0,
-    "predict_time_s": 3.441,
-    "confusion_matrix": [
-      [
-        10421,
-        4881
+      "detection_count": 3,
+      "false_positive_rate": 0.0005
+    },
+    "IsolationForest": {
+      "name": "IsolationForest",
+      "accuracy": 0.9066,
+      "precision": 0.0233,
+      "recall": 0.0233,
+      "f1": 0.0233,
+      "train_time_s": 0.558,
+      "predict_time_s": 0.041,
+      "confusion_matrix": [
+        [
+          5698,
+          294
+        ],
+        [
+          294,
+          7
+        ]
       ],
-      [
-        4447,
-        251
-      ]
-    ],
-    "detection_count": 5132,
-    "false_positive_rate": 0.319
+      "detection_count": 301,
+      "false_positive_rate": 0.0491
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "accuracy": 0.9965,
+      "precision": 0.9429,
+      "recall": 0.9867,
+      "f1": 0.9643,
+      "train_time_s": 1.005,
+      "predict_time_s": 0.117,
+      "confusion_matrix": [
+        [
+          5974,
+          18
+        ],
+        [
+          4,
+          297
+        ]
+      ],
+      "detection_count": 315,
+      "false_positive_rate": 0.003
+    },
+    "LOF": {
+      "name": "LOF",
+      "accuracy": 0.9026,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "train_time_s": 2.499,
+      "predict_time_s": 0.65,
+      "confusion_matrix": [
+        [
+          5680,
+          312
+        ],
+        [
+          301,
+          0
+        ]
+      ],
+      "detection_count": 312,
+      "false_positive_rate": 0.0521
+    }
   }
 }

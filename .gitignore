@@ -57,3 +57,4 @@ tmp/
 -p/
 9/
 *.webm
+.playwright-cli/

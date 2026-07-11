@@ -1,0 +1,86 @@
+{
+  "GMM": {
+    "name": "GMM",
+    "accuracy": 0.9505,
+    "precision": 0.1102,
+    "recall": 0.5294,
+    "f1": 0.1824,
+    "roc_auc": 0.8788,
+    "train_time_s": 6.022,
+    "predict_time_s": 0.004,
+    "confusion_matrix": [
+      [
+        4620,
+        218
+      ],
+      [
+        24,
+        27
+      ]
+    ],
+    "anomaly_count": 245
+  },
+  "PCA_Mahalanobis": {
+    "name": "PCA_Mahalanobis",
+    "accuracy": 0.9464,
+    "precision": 0.0694,
+    "recall": 0.3333,
+    "f1": 0.1149,
+    "roc_auc": 0.7698,
+    "train_time_s": 2.818,
+    "predict_time_s": 0.003,
+    "confusion_matrix": [
+      [
+        4610,
+        228
+      ],
+      [
+        34,
+        17
+      ]
+    ],
+    "anomaly_count": 245
+  },
+  "IsolationForest": {
+    "name": "IsolationForest",
+    "accuracy": 0.935,
+    "precision": 0.0762,
+    "recall": 0.4706,
+    "f1": 0.1311,
+    "roc_auc": 0.85,
+    "train_time_s": 0.387,
+    "predict_time_s": 0.037,
+    "confusion_matrix": [
+      [
+        4547,
+        291
+      ],
+      [
+        27,
+        24
+      ]
+    ],
+    "anomaly_count": 315
+  },
+  "Autoencoder": {
+    "name": "Autoencoder",
+    "accuracy": 0.9497,
+    "precision": 0.102,
+    "recall": 0.4902,
+    "f1": 0.1689,
+    "roc_auc": 0.7869,
+    "train_time_s": 10.721,
+    "predict_time_s": 0.006,
+    "confusion_matrix": [
+      [
+        4618,
+        220
+      ],
+      [
+        26,
+        25
+      ]
+    ],
+    "anomaly_count": 245
+  }
+}

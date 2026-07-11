@@ -4,12 +4,12 @@ Usage:
     python run.py <command> [options]
 
 Commands:
-    data      Generate synthetic login logs
+    data      Download and prepare real-source CICIDS2017 events
     train     Train detection models
     report    Generate HTML report
     classify  Detect credential stuffing (CLI)
     web       Launch web UI (port 5006)
-    all       Run full pipeline (data + train + report)
+    all       Run full real-source pipeline (data + train + report)
     steps     List available commands
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ DIR = Path(__file__).parent
 PY = sys.executable
 
 COMMANDS: dict[str, list[list[str]]] = {
-    "data": [["generate_login_logs.py"]],
+    "data": [["prepare_real_data.py"]],
     "train": [["detect_stuffing.py"]],
     "report": [["report.py"]],
 }

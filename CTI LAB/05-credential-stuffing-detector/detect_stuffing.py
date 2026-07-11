@@ -1,41 +1,40 @@
-"""
-Credential stuffing detection — anomaly detection + supervised comparison.
-
-Models: Rule-based, IsolationForest, RandomForest, LocalOutlierFactor
-Dataset: Generated from generate_login_logs.py (690k+ entries)
-
-Reference: Wiefling et al., ACM TOPS 2022 (RBA on large-scale SSO)
-"""
+"""Train CTI 05 flow detectors on the prepared CICIDS2017 web-attack subset."""
+from __future__ import annotations
 
 import json
 import time
-import warnings
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import IsolationForest, RandomForestClassifier
-from sklearn.neighbors import LocalOutlierFactor
-from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score,
-    confusion_matrix, classification_report,
-)
-from sklearn.preprocessing import StandardScaler
 from joblib import dump
+from sklearn.ensemble import IsolationForest, RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import LocalOutlierFactor
+from sklearn.preprocessing import StandardScaler
 
-warnings.filterwarnings("ignore")
 
 DATA_DIR = Path(__file__).parent / "data"
+FLOW_DATA_PATH = DATA_DIR / "real" / "cicids2017_web_bruteforce_flows.csv"
+MANIFEST_PATH = DATA_DIR / "real" / "dataset_manifest.json"
 RESULTS_DIR = Path(__file__).parent / "results"
-METRICS_JSON = RESULTS_DIR / "metrics.json"
-PREDICTIONS_DIR = RESULTS_DIR / "predictions"
+METRICS_PATH = RESULTS_DIR / "metrics.json"
 MODEL_DIR = RESULTS_DIR / "models"
-TIME_WINDOW_MINUTES = 5
+PREDICTIONS_DIR = RESULTS_DIR / "predictions"
+FLOW_FEATURES = [
+    "destination_port", "flow_duration", "total_fwd_packets", "total_backward_packets",
+    "total_fwd_bytes", "total_backward_bytes", "flow_bytes_per_second",
+    "flow_packets_per_second", "syn_flag_count", "ack_flag_count", "fwd_iat_mean",
+    "bwd_iat_mean",
+]
 
 
 @dataclass
 class DetectorResult:
+    """Serializable evaluation result for one detector."""
+
     name: str
     accuracy: float
     precision: float
@@ -48,249 +47,109 @@ class DetectorResult:
     false_positive_rate: float
 
 
-def engineer_features(df):
-    """Extract time-windowed and per-user features from login logs."""
-    df = df.copy()
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
-
-    # Sort by timestamp
-    df = df.sort_values("timestamp").reset_index(drop=True)
-
-    # ── Per-5-minute window features ──────────────────────────────────────
-    df["window"] = df["timestamp"].dt.floor(f"{TIME_WINDOW_MINUTES}min")
-
-    window_agg = df.groupby("window").agg(
-        login_count=("success", "count"),
-        failure_count=("success", lambda x: (x == 0).sum()),
-        unique_ips=("source_ip", "nunique"),
-        unique_uas=("user_agent", "nunique"),
-        unique_users=("username", "nunique"),
-        unique_countries=("geo_country", "nunique"),
-    ).reset_index()
-    window_agg["failure_rate"] = window_agg["failure_count"] / window_agg["login_count"].clip(lower=1)
-
-    # IP entropy per window
-    ip_entropy = df.groupby("window")["source_ip"].apply(
-        lambda x: -sum((v / len(x)) * np.log2(v / len(x)) for v in x.value_counts().values)
-    ).reset_index(name="ip_entropy")
-
-    window_agg = window_agg.merge(ip_entropy, on="window")
-
-    # ── Per-user features ─────────────────────────────────────────────────
-    user_agg = df.groupby("username").agg(
-        user_total_logins=("success", "count"),
-        user_failures=("success", lambda x: (x == 0).sum()),
-        user_unique_ips=("source_ip", "nunique"),
-        user_unique_countries=("geo_country", "nunique"),
-    ).reset_index()
-    user_agg["user_failure_rate"] = user_agg["user_failures"] / user_agg["user_total_logins"].clip(lower=1)
-
-    # Merge window features into original df, then add user features
-    df = df.merge(window_agg, on="window", how="left")
-    df = df.merge(user_agg, on="username", how="left")
-
-    # ── Velocity features ─────────────────────────────────────────────────
-    df_sorted = df.sort_values(["username", "timestamp"])
-    df_sorted["prev_timestamp"] = df_sorted.groupby("username")["timestamp"].shift(1)
-    df_sorted["time_since_last"] = (
-        df_sorted["timestamp"] - df_sorted["prev_timestamp"]
-    ).dt.total_seconds().fillna(300)
-
-    # Attempts per second in current window (per user)
-    df_sorted["attempts_per_second"] = 1.0 / df_sorted["time_since_last"].clip(lower=0.1)
-
-    df = df_sorted
-
-    # ── Feature columns ───────────────────────────────────────────────────
-    feature_cols = [
-        "login_count", "failure_count", "failure_rate",
-        "unique_ips", "unique_uas", "unique_users", "unique_countries",
-        "ip_entropy", "user_failure_rate", "user_unique_ips",
-        "user_unique_countries", "time_since_last", "attempts_per_second",
-    ]
-
-    # Fill NaN values
-    for col in feature_cols:
-        if col in df.columns:
-            df[col] = df[col].fillna(0)
-
-    return df, feature_cols
+def rule_based_detector(frame: pd.DataFrame) -> np.ndarray:
+    """Flag suspiciously rapid TCP flows using labels only for later evaluation."""
+    return (
+        (frame["syn_flag_count"] >= 1)
+        & (frame["flow_packets_per_second"] > 1_000)
+        & (frame["total_fwd_packets"] >= 5)
+    ).astype(int).to_numpy()
 
 
-def rule_based_detector(df):
-    """Simple threshold-based detection rules."""
-    conditions = (
-        (df["failure_rate"] > 0.7) &
-        (df["unique_ips"] >= 3) &
-        (df["attempts_per_second"] > 2)
-    )
-    return conditions.astype(int).values
-
-
-def evaluate_detector(name, y_true, y_pred, train_time=0, predict_time=0):
-    """Compute detection metrics."""
-    # Handle potential issues
-    cm = confusion_matrix(y_true, y_pred).tolist() if len(np.unique(y_true)) > 1 else \
-        [[len(y_true[y_true == 0]), 0], [0, len(y_true[y_true == 1])]]
-
-    fp = cm[0][1] if len(cm) > 0 and len(cm[0]) > 1 else 0
-    tn = cm[0][0] if len(cm) > 0 and len(cm[0]) > 0 else 0
-    fpr = fp / max(fp + tn, 1)
-
+def evaluate(name: str, actual: np.ndarray, predicted: np.ndarray, train_time: float = 0.0, predict_time: float = 0.0) -> DetectorResult:
+    """Calculate normal-versus-web-brute-force binary metrics."""
+    matrix = confusion_matrix(actual, predicted, labels=[0, 1])
+    false_positive_rate = matrix[0, 1] / max(matrix[0].sum(), 1)
     return DetectorResult(
         name=name,
-        accuracy=round(accuracy_score(y_true, y_pred), 4),
-        precision=round(precision_score(y_true, y_pred, zero_division=0), 4),
-        recall=round(recall_score(y_true, y_pred, zero_division=0), 4),
-        f1=round(f1_score(y_true, y_pred, zero_division=0), 4),
+        accuracy=round(accuracy_score(actual, predicted), 4),
+        precision=round(precision_score(actual, predicted, zero_division=0), 4),
+        recall=round(recall_score(actual, predicted, zero_division=0), 4),
+        f1=round(f1_score(actual, predicted, zero_division=0), 4),
         train_time_s=round(train_time, 3),
         predict_time_s=round(predict_time, 3),
-        confusion_matrix=cm,
-        detection_count=int(y_pred.sum()),
-        false_positive_rate=round(fpr, 4),
+        confusion_matrix=matrix.tolist(),
+        detection_count=int(predicted.sum()),
+        false_positive_rate=round(false_positive_rate, 4),
     )
 
 
-def main():
-    DATA_DIR.mkdir(exist_ok=True)
-    RESULTS_DIR.mkdir(exist_ok=True)
-    PREDICTIONS_DIR.mkdir(exist_ok=True)
-    MODEL_DIR.mkdir(exist_ok=True)
+def save_metrics(results: list[DetectorResult], sample_count: int, attack_count: int) -> None:
+    """Persist results and exact dataset context for report generation."""
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    payload = {
+        "dataset": manifest,
+        "evaluation": {
+            "sample_count": sample_count,
+            "attack_count": attack_count,
+            "split": "Stratified 80/20 split with fixed random seed 42.",
+            "feature_note": "Native CICIDS2017 flow attributes: " + ", ".join(FLOW_FEATURES) + ".",
+        },
+        "detectors": {result.name: asdict(result) for result in results},
+    }
+    METRICS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
-    print("=" * 60)
-    print("  Credential Stuffing Detection — Model Comparison")
-    print("=" * 60)
 
-    # Load data
-    csv_path = DATA_DIR / "login_logs.csv"
-    if not csv_path.exists():
-        print("  No login_logs.csv found. Run generate_login_logs.py first.")
+def main() -> None:
+    """Train and evaluate models using the local labelled-flow data."""
+    if not FLOW_DATA_PATH.exists() or not MANIFEST_PATH.exists():
+        print("No prepared labelled-flow dataset found. Run 'python run.py data' first.")
         return
 
-    df = pd.read_csv(csv_path)
-    print(f"\n  Loaded {len(df)} login entries")
-
-    # Engineer features
-    df, feature_cols = engineer_features(df)
-    print(f"  Engineered {len(feature_cols)} features")
-
-    X = df[feature_cols].values.astype(np.float64)
-    y = df["is_attack"].values.astype(np.int64)
-
-    # Remove any rows with NaN/Inf
-    mask = np.isfinite(X).all(axis=1)
-    X = X[mask]
-    y = y[mask]
-    print(f"  After cleaning: {len(X)} samples, {X.shape[1]} features")
-    print(f"  Attack rate: {y.mean():.1%}")
-
-    # Train/test split (temporal — use first 80% for training)
-    split_idx = int(len(X) * 0.8)
-    X_train, X_test = X[:split_idx], X[split_idx:]
-    y_train, y_test = y[:split_idx], y[split_idx:]
-
-    # Scale features
+    RESULTS_DIR.mkdir(exist_ok=True)
+    MODEL_DIR.mkdir(exist_ok=True)
+    PREDICTIONS_DIR.mkdir(exist_ok=True)
+    frame = pd.read_csv(FLOW_DATA_PATH)
+    frame[FLOW_FEATURES] = frame[FLOW_FEATURES].replace([np.inf, -np.inf], np.nan).fillna(0)
+    features = frame[FLOW_FEATURES].to_numpy(dtype=np.float64)
+    labels = frame["is_attack"].to_numpy(dtype=np.int64)
+    train_x, test_x, train_y, test_y, train_frame, test_frame = train_test_split(
+        features, labels, frame, test_size=0.2, random_state=42, stratify=labels,
+    )
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
+    train_scaled = scaler.fit_transform(train_x)
+    test_scaled = scaler.transform(test_x)
+    contamination = max(0.005, min(float(train_y.mean()), 0.25))
+    results: list[DetectorResult] = []
 
-    results = []
+    started = time.perf_counter()
+    rule_prediction = rule_based_detector(test_frame)
+    results.append(evaluate("RuleBased", test_y, rule_prediction, predict_time=time.perf_counter() - started))
 
-    # ── 1. Rule-based ─────────────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
-    print("  Rule-Based Detector...")
-    t0 = time.perf_counter()
-    # Rules apply to the data beyond split_idx
-    rule_pred = rule_based_detector(df.iloc[split_idx:])
-    pred_time = time.perf_counter() - t0
-    result = evaluate_detector("RuleBased", y_test, rule_pred, predict_time=pred_time)
-    results.append(result)
-    print(f"  F1: {result.f1:.4f}  Prec: {result.precision:.4f}  Rec: {result.recall:.4f}")
+    started = time.perf_counter()
+    isolation = IsolationForest(contamination=contamination, random_state=42, n_jobs=-1)
+    isolation.fit(train_scaled[train_y == 0])
+    isolation_train = time.perf_counter() - started
+    started = time.perf_counter()
+    isolation_prediction = (isolation.predict(test_scaled) == -1).astype(int)
+    results.append(evaluate("IsolationForest", test_y, isolation_prediction, isolation_train, time.perf_counter() - started))
+    dump({"model": isolation, "scaler": scaler, "features": FLOW_FEATURES}, MODEL_DIR / "IsolationForest.joblib")
+    np.savez(PREDICTIONS_DIR / "IsolationForest.npz", y_true=test_y, y_pred=isolation_prediction)
 
-    # ── 2. IsolationForest ────────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
-    print("  IsolationForest...")
-    t0 = time.perf_counter()
-    # Use actual attack rate as contamination
-    contam = max(0.01, y_train.mean())
-    iso = IsolationForest(contamination=contam, random_state=42, n_jobs=-1)
-    iso.fit(X_train_scaled)
-    train_time = time.perf_counter() - t0
+    started = time.perf_counter()
+    forest = RandomForestClassifier(n_estimators=200, max_depth=16, class_weight="balanced", random_state=42, n_jobs=-1)
+    forest.fit(train_scaled, train_y)
+    forest_train = time.perf_counter() - started
+    started = time.perf_counter()
+    forest_prediction = forest.predict(test_scaled)
+    results.append(evaluate("RandomForest", test_y, forest_prediction, forest_train, time.perf_counter() - started))
+    dump({"model": forest, "scaler": scaler, "features": FLOW_FEATURES}, MODEL_DIR / "RandomForest.joblib")
+    np.savez(PREDICTIONS_DIR / "RandomForest.npz", y_true=test_y, y_pred=forest_prediction)
 
-    t0 = time.perf_counter()
-    iso_pred = iso.predict(X_test_scaled)
-    pred_time = time.perf_counter() - t0
-    iso_pred = (iso_pred == -1).astype(int)
+    started = time.perf_counter()
+    lof = LocalOutlierFactor(n_neighbors=20, contamination=contamination, novelty=True)
+    lof.fit(train_scaled[train_y == 0])
+    lof_train = time.perf_counter() - started
+    started = time.perf_counter()
+    lof_prediction = (lof.predict(test_scaled) == -1).astype(int)
+    results.append(evaluate("LOF", test_y, lof_prediction, lof_train, time.perf_counter() - started))
+    dump({"model": lof, "scaler": scaler, "features": FLOW_FEATURES}, MODEL_DIR / "LOF.joblib")
+    np.savez(PREDICTIONS_DIR / "LOF.npz", y_true=test_y, y_pred=lof_prediction)
 
-    result = evaluate_detector("IsolationForest", y_test, iso_pred, train_time, pred_time)
-    results.append(result)
-    dump({"model": iso, "scaler": scaler, "features": feature_cols},
-         MODEL_DIR / "IsolationForest.joblib")
-    print(f"  F1: {result.f1:.4f}  Prec: {result.precision:.4f}  Rec: {result.recall:.4f}")
-    np.savez(PREDICTIONS_DIR / "IsolationForest.npz", y_true=y_test, y_pred=iso_pred)
-
-    # ── 3. RandomForest (supervised) ─────────────────────────────────────
-    print(f"\n  {'─' * 50}")
-    print("  RandomForest (supervised)...")
-    t0 = time.perf_counter()
-    rf = RandomForestClassifier(n_estimators=100, max_depth=15, random_state=42, n_jobs=-1)
-    rf.fit(X_train_scaled, y_train)
-    train_time = time.perf_counter() - t0
-
-    t0 = time.perf_counter()
-    rf_pred = rf.predict(X_test_scaled)
-    pred_time = time.perf_counter() - t0
-
-    result = evaluate_detector("RandomForest", y_test, rf_pred, train_time, pred_time)
-    results.append(result)
-    dump({"model": rf, "scaler": scaler, "features": feature_cols},
-         MODEL_DIR / "RandomForest.joblib")
-    print(f"  F1: {result.f1:.4f}  Prec: {result.precision:.4f}  Rec: {result.recall:.4f}")
-    np.savez(PREDICTIONS_DIR / "RandomForest.npz", y_true=y_test, y_pred=rf_pred)
-
-    # ── 4. LocalOutlierFactor ─────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
-    print("  LocalOutlierFactor...")
-    # Subsample for LOF since it's O(n²)
-    sample_n = min(20000, len(X_test_scaled))
-    idx = np.random.default_rng(42).choice(len(X_test_scaled), sample_n, replace=False)
-    X_sub = X_test_scaled[idx]
-    y_sub = y_test[idx]
-    t0 = time.perf_counter()
-    lof = LocalOutlierFactor(n_neighbors=20, contamination=contam, novelty=False)
-    lof_pred = lof.fit_predict(X_sub)
-    pred_time = time.perf_counter() - t0
-    lof_pred = (lof_pred == -1).astype(int)
-
-    result = evaluate_detector("LOF", y_sub, lof_pred, predict_time=pred_time)
-    results.append(result)
-    print(f"  F1: {result.f1:.4f}  Prec: {result.precision:.4f}  Rec: {result.recall:.4f}")
-    np.savez(PREDICTIONS_DIR / "LOF.npz", y_true=y_sub, y_pred=lof_pred)
-
-    # Save metrics
-    print(f"\n  {'─' * 50}")
-    print("  Saving results...")
-
-    metrics_dict = {}
-    for r in results:
-        d = asdict(r)
-        d["confusion_matrix"] = r.confusion_matrix
-        metrics_dict[r.name] = d
-    with open(METRICS_JSON, "w") as f:
-        json.dump(metrics_dict, f, indent=2)
-    print(f"  {METRICS_JSON}")
-
-    # Summary
-    print(f"\n  {'=' * 50}")
-    print(f"  {'Detector':20s} {'F1':8s} {'Precision':10s} {'Recall':8s} {'FPR':8s}")
-    print(f"  {'─' * 50}")
-    for r in sorted(results, key=lambda x: x.f1, reverse=True):
-        print(f"  {r.name:20s} {r.f1:.4f}  {r.precision:.4f}     {r.recall:.4f}     {r.false_positive_rate:.4f}")
-
-    # Per-class report for the best supervised model
-    print(f"\n  Classification Report (RandomForest):")
-    print(classification_report(y_test, rf_pred, target_names=["Normal", "Attack"], zero_division=0))
-    print()
+    save_metrics(results, len(labels), int(labels.sum()))
+    print(f"  Evaluated {len(labels):,} labelled CICIDS2017 flows ({labels.sum():,} web brute-force flows).")
+    for result in sorted(results, key=lambda item: item.f1, reverse=True):
+        print(f"  {result.name:16s} F1={result.f1:.4f} Precision={result.precision:.4f} Recall={result.recall:.4f}")
 
 
 if __name__ == "__main__":

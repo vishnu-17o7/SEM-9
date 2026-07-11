@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-07-10T04:27:39.004651+00:00",
+  "datasets": [
+    {
+      "name": "CICIDS2017",
+      "role": "Labelled web brute-force evaluation and supervised comparison",
+      "official_url": "https://www.unb.ca/cic/datasets/ids-2017.html",
+      "local_file": "data\\real\\cicids2017_web_bruteforce_flows.csv",
+      "raw_file": "data\\real\\Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv.parquet",
+      "counts": {
+        "benign": 30000,
+        "web_brute_force": 1507
+      },
+      "limitations": "Network-flow labels, not application login outcomes. Protocol and destination port are retained as proxy context; no user-agent, country, or credential-success field exists."
+    },
+    {
+      "name": "LANL Unified Host and Network Dataset (2017)",
+      "role": "Optional de-identified enterprise authentication baseline",
+      "official_url": "https://csr.lanl.gov/data/2017/",
+      "local_file": "data\\real\\lanl_authentication_events.csv",
+      "counts": {},
+      "status": "awaiting registered source download",
+      "limitations": "Official daily files require registration. It supplies real enterprise host-event authentication data but does not provide credential-stuffing labels."
+    }
+  ],
+  "training_note": "Metrics are reported against CICIDS2017 web brute-force labels. They are an intrusion detection benchmark, not a claim of real-world web credential-stuffing accuracy."
+}
