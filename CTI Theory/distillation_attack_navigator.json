@@ -1,0 +1,80 @@
+{
+  "version": "4.5",
+  "name": "Anthropic Distillation Campaigns - Constrained ATT&CK Analogies",
+  "domain": "enterprise-attack",
+  "description": "Analyst-created ATT&CK crosswalk for provider-reported API distillation campaigns. Entries are analogies with confidence caveats, not official MITRE or Anthropic mappings. See the report's MITRE ATLAS crosswalk for AI-native behavior.",
+  "filters": {
+    "platforms": ["SaaS"]
+  },
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "aggregateFunction": "average",
+    "showID": true,
+    "showName": true,
+    "showAggregateScores": false,
+    "countUnscored": false
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1583.006",
+      "tactic": "resource-development",
+      "score": 60,
+      "color": "#F4A261",
+      "comment": "MEDIUM confidence analogy. Anthropic reported use of commercial proxy services. ATT&CK normally frames acquired web services as operational infrastructure, often for C2 or exfiltration.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1136.003",
+      "tactic": "persistence",
+      "score": 85,
+      "color": "#2A9D8F",
+      "comment": "HIGH confidence analogy. Anthropic reported large-scale creation of service accounts. Cloud Account is semantically appropriate for SaaS account creation; the previous Local Account mapping was incorrect.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1078.004",
+      "tactic": "initial-access",
+      "score": 60,
+      "color": "#F4A261",
+      "comment": "MEDIUM confidence analogy. Requests used functioning accounts and API credentials, but public evidence describes fraudulent enrollment rather than compromise of an existing victim cloud tenant.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1090.002",
+      "tactic": "command-and-control",
+      "score": 35,
+      "color": "#E76F51",
+      "comment": "LOW confidence analogy. Commercial proxies reportedly obscured origin and coordinated access. ATT&CK defines External Proxy in a C2 context, which was not publicly demonstrated here.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1029",
+      "tactic": "exfiltration",
+      "score": 35,
+      "color": "#E76F51",
+      "comment": "LOW confidence analogy. The reported campaign automated output retrieval, but no compromised enterprise environment or conventional exfiltration path was publicly demonstrated.",
+      "enabled": true
+    }
+  ],
+  "gradient": {
+    "colors": ["#E76F51", "#F4A261", "#2A9D8F"],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [
+    {"label": "Low confidence analogy", "color": "#E76F51"},
+    {"label": "Medium confidence analogy", "color": "#F4A261"},
+    {"label": "High confidence analogy", "color": "#2A9D8F"}
+  ],
+  "metadata": [
+    {"name": "Assessment status", "value": "Provider-reported; underlying telemetry not public"},
+    {"name": "Updated", "value": "2026-07-11"}
+  ],
+  "links": [],
+  "showTacticRowBackground": false,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": false
+}
