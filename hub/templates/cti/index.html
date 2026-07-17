@@ -1,21 +1,34 @@
 {% extends "base.html" %}
-{% block title %}CTI Lab{% endblock %}
+{% block title %}CTI Lab — SEM 9 Hub{% endblock %}
 {% block content %}
-  <div class="page-header">
-    <h1 class="page-header__title">CTI Lab</h1>
-    <p class="page-header__desc">
-      18 cyber threat intelligence projects spanning spam detection, phishing analysis,
-      malware detection, network security, and biometric authentication.
-    </p>
-  </div>
-  <div class="project-grid">
-    {% for p in projects %}
-    <div class="project-card">
-      <div class="project-card__num">{{ p.num }}</div>
-      <div class="project-card__title">{{ p.title }}</div>
-      <div class="project-card__desc">{{ p.description[:120] }}{% if p.description|length > 120 %}&hellip;{% endif %}</div>
-      <a href="/cti/{{ p.id }}" class="project-card__link">View Project &rarr;</a>
+
+<div class="page-header">
+  <p class="page-header__eyebrow">Cyber Threat Intelligence</p>
+  <h1 class="page-header__title">CTI Lab</h1>
+  <p class="page-header__desc">
+    18 projects spanning spam detection, phishing analysis, malware detection,
+    network security, and biometric authentication.
+  </p>
+</div>
+
+<div class="catalog-grid">
+  {% for p in projects %}
+  <div class="catalog-card">
+    <div class="catalog-card__top">
+      <div class="catalog-card__num">{{ p.num }}</div>
+      <div class="catalog-card__badges">
+        {% if p.type == "web" %}
+        <span class="badge badge--web">Web UI</span>
+        {% else %}
+        <span class="badge badge--cli">CLI</span>
+        {% endif %}
+      </div>
     </div>
-    {% endfor %}
+    <div class="catalog-card__title">{{ p.title }}</div>
+    <div class="catalog-card__desc">{{ p.description[:150] }}{% if p.description|length > 150 %}&hellip;{% endif %}</div>
+    <a href="/cti/{{ p.id }}" class="catalog-card__action">View Project</a>
   </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

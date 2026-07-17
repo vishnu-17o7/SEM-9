@@ -1,34 +1,44 @@
 {% extends "base.html" %}
 {% block title %}CTI {{ project.num }} — {{ project.title }}{% endblock %}
 {% block content %}
-<div class="project-detail">
-  <div class="project-detail__num">CTI {{ project.num }}</div>
-  <h1 class="project-detail__title">{{ project.title }}</h1>
-  <div class="project-detail__meta">
-    <span>{% if project.type == "web" %}<span class="badge badge--web">Web UI</span>{% else %}<span class="badge badge--cli">CLI</span>{% endif %}</span>
-    {% if project.port %}<span>Port: {{ project.port }}</span>{% endif %}
-  </div>
-  <div class="project-detail__desc">
-    {{ project.description }}
-  </div>
 
-  <div class="project-detail__actions" style="display:flex;gap:0.75rem;align-items:center;margin:var(--space-lg) 0;">
-    {% if project.type == "web" and project.port %}
-    <a href="http://127.0.0.1:{{ project.port }}" target="_blank" class="btn btn--primary">Open Web UI &rarr;</a>
+<a href="/cti" class="back-link">Back to CTI Lab</a>
+
+<div class="detail-header">
+  <div class="detail-header__top">
+    <span class="detail-header__num">CTI {{ project.num }}</span>
+    {% if project.type == "web" %}
+    <span class="badge badge--web">Web UI</span>
+    {% else %}
+    <span class="badge badge--cli">CLI</span>
     {% endif %}
-    {% for script in project.scripts %}
-    <button class="btn btn--primary" data-project="{{ project.id }}" data-script="{{ script.path }}" {% if script.args %}data-args="{{ script.args }}"{% endif %} onclick="startRun(this)">{{ script.desc }} &rarr;</button>
-    {% endfor %}
+    {% if project.port %}
+    <span class="badge badge--cli" style="background:var(--color-paper-2);color:var(--color-muted);">Port {{ project.port }}</span>
+    {% endif %}
   </div>
-
-  {% if not project.scripts and not (project.type == "web" and project.port) %}
-  <p style="color:var(--color-muted);font-size:var(--text-sm);">Run via: <code>python run.py all</code></p>
-  {% endif %}
+  <h1 class="detail-header__title">{{ project.title }}</h1>
+  <div class="detail-header__desc">{{ project.description }}</div>
 </div>
+
+<div class="detail-header__meta" style="display:flex;flex-wrap:wrap;gap:var(--space-sm);align-items:center;margin-bottom:var(--space-lg);">
+  {% if project.type == "web" and project.port %}
+  <a href="http://127.0.0.1:{{ project.port }}" target="_blank" class="btn btn--primary">Open Web UI &rarr;</a>
+  {% endif %}
+  {% for script in project.scripts %}
+  <button class="btn btn--primary btn--mono" data-project="{{ project.id }}" data-script="{{ script.path }}" {% if script.args %}data-args="{{ script.args }}"{% endif %} onclick="startRun(this)">{{ script.desc }} &rarr;</button>
+  {% endfor %}
+</div>
+
+{% if not project.scripts and not (project.type == "web" and project.port) %}
+<p class="muted small" style="margin-bottom:var(--space-lg);">Run via: <code class="mono" style="background:var(--color-paper-2);padding:2px 6px;border-radius:3px;">python run.py all</code></p>
+{% endif %}
 
 {% if memories %}
 <div class="memories-section">
-  <h2 class="memories-section__title">Previous Runs</h2>
+  <div class="memories-section__head">
+    <h2 class="memories-section__title">Previous Runs</h2>
+    <span class="memories-section__count">{{ memories|length }}</span>
+  </div>
   <div class="memories-grid">
     {% for mem in memories %}
     <div class="memory-card">
@@ -50,9 +60,10 @@
 {% endif %}
 
 <div class="run-section">
-  <div class="run-controls">
-    <button class="btn btn--danger" onclick="stopRun('{{ project.id }}')">Clear Output</button>
+  <div class="run-controls" style="display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-sm);">
+    <button class="btn btn--danger btn--sm" onclick="stopRun('{{ project.id }}')">Clear Output</button>
   </div>
   <div id="output-{{ project.id }}" class="run-output"></div>
 </div>
+
 {% endblock %}

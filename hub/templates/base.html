@@ -4,28 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}SEM 9 Lab Hub{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/tokens.css">
     <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
-    <nav class="sidebar">
-      <a href="/" class="sidebar__header" style="text-decoration:none;">
-        <span class="sidebar__title">SEM 9 Hub</span>
-        <span class="sidebar__subtitle">CTI &middot; CV Labs</span>
-      </a>
-      <div class="sidebar__nav">
-        <div class="sidebar__category">CTI Lab</div>
-        <a href="/cti" class="sidebar__link {% if active == 'cti' %}sidebar__link--active{% endif %}">
-          Overview (18 projects)
-        </a>
-        <div class="sidebar__category">CV Lab</div>
-        <a href="/cv" class="sidebar__link {% if active == 'cv' %}sidebar__link--active{% endif %}">
-          Overview (12 experiments)
-        </a>
-      </div>
-    </nav>
+    <header class="nav-mast">
+      <p class="mast-line muted">SEM 9 · Lab Hub · 2026</p>
+      <a href="/" class="mast-name">SEM 9 Hub</a>
+      <nav class="mast-nav" aria-label="Primary">
+        <a href="/" class="mast-nav__link {% if active == 'home' %}mast-nav__link--active{% endif %}">Home</a>
+        <a href="/cti" class="mast-nav__link {% if active == 'cti' %}mast-nav__link--active{% endif %}">CTI Lab</a>
+        <a href="/cv" class="mast-nav__link {% if active == 'cv' %}mast-nav__link--active{% endif %}">CV Lab</a>
+      </nav>
+      <hr class="mast-rule double" aria-hidden="true">
+    </header>
+
     <main class="main">
       {% block content %}{% endblock %}
     </main>
+
+    <footer class="foot-mast">
+      <p class="foot-mast__wordmark">SEM 9 Hub</p>
+      <p class="foot-mast__tagline muted">A lab hub for CTI and CV coursework.</p>
+      <p class="foot-mast__links muted">
+        <a href="/">Home</a>
+        <a href="/cti">CTI Lab</a>
+        <a href="/cv">CV Lab</a>
+        <a href="https://github.com/vishnu">Source</a>
+      </p>
+    </footer>
+
     <script src="/static/script.js"></script>
   </body>
 </html>

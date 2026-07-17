@@ -1,30 +1,37 @@
 {% extends "base.html" %}
-{% block title %}CV Lab{% endblock %}
+{% block title %}CV Lab — SEM 9 Hub{% endblock %}
 {% block content %}
-  <div class="page-header">
-    <h1 class="page-header__title">CV Lab</h1>
-    <p class="page-header__desc">
-      12 computer vision experiments covering geometric transformations, image restoration,
-      feature detection, deep learning classification, object detection, and face recognition.
-      All experiments have native OpenCV live UIs — they must be run locally on your machine.
-    </p>
-  </div>
-  <div class="project-grid">
-    {% for e in experiments %}
-    <div class="project-card">
-      <div class="project-card__num">{{ e.num }}</div>
-      <div class="project-card__title">{{ e.title }}</div>
-      <div class="project-card__meta" style="display:flex;gap:var(--space-xs);flex-wrap:wrap;margin-bottom:var(--space-xs);">
-        {% if e.models %}
-        <span class="tech-badge tech-badge--sm">{{ e.models|length }} model{% if e.models|length > 1 %}s{% endif %}</span>
+
+<div class="page-header">
+  <p class="page-header__eyebrow">Computer Vision</p>
+  <h1 class="page-header__title">CV Lab</h1>
+  <p class="page-header__desc">
+    12 experiments covering geometric transformations, image restoration,
+    feature detection, deep learning classification, object detection, and face recognition.
+    All experiments have native OpenCV live UIs — they must be run locally on your machine.
+  </p>
+</div>
+
+<div class="catalog-grid">
+  {% for e in experiments %}
+  <div class="catalog-card">
+    <div class="catalog-card__top">
+      <div class="catalog-card__num">{{ e.num }}</div>
+      <div class="catalog-card__badges">
+        <span class="badge badge--cv">OpenCV</span>
+        {% if e.has_package %}
+        <span class="badge badge--web">Package</span>
         {% endif %}
-        {% if e.datasets and e.datasets|length > 0 %}
-        <span class="tech-badge tech-badge--sm">{{ e.datasets|length }} dataset{% if e.datasets|length > 1 %}s{% endif %}</span>
+        {% if e.models %}
+        <span class="badge badge--cli">{{ e.models|length }} models</span>
         {% endif %}
       </div>
-      <div class="project-card__desc">{{ e.description[:120] }}{% if e.description|length > 120 %}&hellip;{% endif %}</div>
-      <a href="/cv/{{ e.id }}" class="project-card__link">View Experiment &rarr;</a>
     </div>
-    {% endfor %}
+    <div class="catalog-card__title">{{ e.title }}</div>
+    <div class="catalog-card__desc">{{ e.description[:150] }}{% if e.description|length > 150 %}&hellip;{% endif %}</div>
+    <a href="/cv/{{ e.id }}" class="catalog-card__action">View Experiment</a>
   </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

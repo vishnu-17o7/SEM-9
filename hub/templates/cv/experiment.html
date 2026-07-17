@@ -1,22 +1,26 @@
 {% extends "base.html" %}
 {% block title %}CV {{ experiment.num }} — {{ experiment.title }}{% endblock %}
 {% block content %}
+
+<a href="/cv" class="back-link">Back to CV Lab</a>
+
 <div class="exp-topbar">
-  <div class="exp-topbar__stat">
-    <span class="exp-topbar__num">CV {{ experiment.num }}</span>
-    <span class="exp-topbar__badge {% if experiment.has_package %}exp-topbar__badge--pkg{% endif %}">{{ "OpenCV + Package" if experiment.has_package else "OpenCV Live UI" }}</span>
-  </div>
+  <div class="exp-topbar__num">CV {{ experiment.num }}</div>
   <div class="exp-topbar__actions">
     {% if experiment.run_script %}
-    <button class="btn-run" data-project="{{ experiment.id }}" data-script="{{ experiment.run_script }}" onclick="startRun(this)">Run Experiment</button>
+    <button class="btn btn--primary btn--mono" data-project="{{ experiment.id }}" data-script="{{ experiment.run_script }}" onclick="startRun(this)">
+      Run Experiment &rarr;
+    </button>
     {% endif %}
   </div>
 </div>
 
-<header class="exp-header">
+<div class="exp-header">
   <h1 class="exp-header__title">{{ experiment.title }}</h1>
-  <div class="exp-header__cmd"><code>{{ experiment.launch_cmd }}</code></div>
-</header>
+  <div class="exp-header__cmd">
+    <code>{{ experiment.launch_cmd }}</code>
+  </div>
+</div>
 
 <div class="exp-body">
   <div class="exp-body__desc">{{ experiment.description }}</div>
@@ -90,30 +94,33 @@
     </div>
   </div>
 
-{% if memories %}
-<div class="memories-section" style="margin-top:var(--space-xl);padding-top:var(--space-lg);border-top:1px solid var(--color-rule);">
-  <h2 class="memories-section__title">Previous Runs</h2>
-  <div class="memories-grid">
-    {% for mem in memories %}
-    <div class="memory-card">
-      <div class="memory-card__meta">
-        {% if mem.metadata and mem.metadata.get("exit_code") is not none %}
-          {% if mem.metadata.exit_code == 0 %}
-          <span class="memory-card__status memory-card__status--ok">OK</span>
-          {% else %}
-          <span class="memory-card__status memory-card__status--err">FAIL</span>
-          {% endif %}
-          <span class="memory-card__exit">exit {{ mem.metadata.exit_code }}</span>
-        {% endif %}
-      </div>
-      <div class="memory-card__title">{{ mem.content | truncate(120) if mem.get("content") else "" }}</div>
+  {% if memories %}
+  <div class="memories-section" style="margin-top:var(--space-2xl);padding-top:var(--space-lg);border-top:var(--rule-hair) solid var(--color-rule);">
+    <div class="memories-section__head">
+      <h2 class="memories-section__title">Previous Runs</h2>
+      <span class="memories-section__count">{{ memories|length }}</span>
     </div>
-    {% endfor %}
+    <div class="memories-grid">
+      {% for mem in memories %}
+      <div class="memory-card">
+        <div class="memory-card__meta">
+          {% if mem.metadata and mem.metadata.get("exit_code") is not none %}
+            {% if mem.metadata.exit_code == 0 %}
+            <span class="memory-card__status memory-card__status--ok">OK</span>
+            {% else %}
+            <span class="memory-card__status memory-card__status--err">FAIL</span>
+            {% endif %}
+            <span class="memory-card__exit">exit {{ mem.metadata.exit_code }}</span>
+          {% endif %}
+        </div>
+        <div class="memory-card__title">{{ mem.content | truncate(120) if mem.get("content") else "" }}</div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-  <!-- Lightbox overlay for full-size image preview -->
+  <!-- Lightbox -->
   <div id="lightbox" class="exp-lightbox" onclick="this.classList.remove('exp-lightbox--open')">
     <img id="lightbox-img" class="exp-lightbox__img" alt="Preview">
     <span class="exp-lightbox__close">&times;</span>
