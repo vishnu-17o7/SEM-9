@@ -1,3 +1,17 @@
 * text=auto
 "CV LAB/outputs/experiment_7_defect_detection/fasterrcnn_defect.pth" filter=lfs diff=lfs merge=lfs -text
 "CV LAB/outputs/test7/fasterrcnn_defect.pth" filter=lfs diff=lfs merge=lfs -text
+
+# Spatial Lab binary geodata, QGIS projects, and presentation exports.
+"Spatial Lab/**/*.gpkg" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.tif" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.tiff" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.mbtiles" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.geojson" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.kml" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.osm" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.osm.gz" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.qgz" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.pdf" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.png" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.jpg" filter=lfs diff=lfs merge=lfs -text

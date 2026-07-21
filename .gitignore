@@ -32,8 +32,15 @@ AGENTS.md
 *.out
 server.log
 
-# --- Spatial Lab (GeoPackages + GeoTIFFs, too large) ---
-Spatial Lab/
+# --- Spatial Lab (keep committed source and project data; ignore QGIS locks) ---
+Spatial Lab/**/.qgis/
+Spatial Lab/**/*.gpkg-shm
+Spatial Lab/**/*.gpkg-wal
+Spatial Lab/**/*.qgz~
+!Spatial Lab/Exercise 03 - Bengaluru Flood Mapping/archive/
+!Spatial Lab/Exercise 03 - Bengaluru Flood Mapping/archive/**
+!Spatial Lab/Exercise 03 - Bengaluru Flood Mapping/archive/python-cache/
+!Spatial Lab/Exercise 03 - Bengaluru Flood Mapping/archive/python-cache/*.pyc
 
 # --- Preloaded models (not user-trained) ---
 CV LAB/assets/models/yolov3.weights

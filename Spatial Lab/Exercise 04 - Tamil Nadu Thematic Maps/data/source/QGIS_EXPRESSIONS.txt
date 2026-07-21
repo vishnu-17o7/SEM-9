@@ -1,0 +1,8 @@
+District label:
+"district_id" || '  ' || "district_name"
+
+Total cases:
+"dengue_cases" + "malaria_cases" + "tb_cases"
+
+Incidence per 100,000:
+round(("total_cases" / "population") * 100000, 1)

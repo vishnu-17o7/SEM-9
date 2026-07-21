@@ -1,0 +1,10 @@
+field,type,description
+district_id,text,Sequential lab identifier TN-001 to TN-038
+district_name,text,District name from imported boundary layer
+join_key,text,Normalized uppercase join key
+population,integer,Synthetic practice population
+dengue_cases,integer,Synthetic dengue cases
+malaria_cases,integer,Synthetic malaria cases
+tb_cases,integer,Synthetic tuberculosis cases
+total_cases,integer,Sum of the three disease fields
+incidence_100k,decimal,"Synthetic total cases per 100,000 population"
