@@ -1,6 +1,6 @@
 # Spatial Lab
 
-This directory contains the four QGIS exercises, their source and processed spatial data, project files, and presentation outputs.
+This directory contains the QGIS exercises, their source and processed spatial data, project files, and presentation outputs.
 
 ## Exercises
 
@@ -8,6 +8,7 @@ This directory contains the four QGIS exercises, their source and processed spat
 2. **Exercise 02 - Campus Digitization** — digitize campus buildings, entrances, and walkways.
 3. **Exercise 03 - Bengaluru Flood Mapping** — combine drains, water bodies, infrastructure, buffers, and evacuation analysis.
 4. **Exercise 04 - Tamil Nadu Thematic Maps** — create incidence, pie-chart, bar-chart, graduated-symbol, and proportional-symbol maps.
+5. **Exercise 05 - Nilgiris Check-Dam Suitability** — compare TIN and IDW terrain models, derive drainage, and screen preliminary check-dam sites.
 
 Each exercise has a `project` directory containing the QGIS entry point. `data/source` contains input data, `data/processed` contains analysis-ready layers, and `outputs` contains exported results. Legacy and failed experiments are retained under `archive`.
 

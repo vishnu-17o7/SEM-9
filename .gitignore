@@ -24,9 +24,6 @@ env/
 .vscode/
 .factory/
 
-# --- Ignore AGENTS.md (project instructions) ---
-AGENTS.md
-
 # --- Logs and run artifacts ---
 *.log
 *.out
