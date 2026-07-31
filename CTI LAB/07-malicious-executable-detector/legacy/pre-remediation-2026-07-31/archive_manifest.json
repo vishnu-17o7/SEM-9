@@ -1,0 +1,82 @@
+{
+  "archived_at": "2026-07-31T05:15:35.513915+00:00",
+  "project": "07-malicious-executable-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\metrics.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.csv",
+      "sha256": "5165a9f4faa135bc76ad6bd27ed18f867c811a94e874a582edc87bee58e324a5"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "9721a309c22af9eed7a2a3099cdc9ce07d825a49895ca019a9f5490dcc9cd773"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "6c340e1e9e65a36f5299ba4002c0672ee7e874fc45d47d60560464b1dc68b632"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "1a44e5ea2d02c923e9385c6c6e51ad4f336c7a336af810b5a67b6d10e99f369a"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "93b5245c285abfa27ba3e3057b022943eedbfae0c1d007def0491847fa4924fc"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\models\\MLP.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\MLP.joblib",
+      "sha256": "b4763acd103b19554bc749fefca62ec566a8a51a36021df54c1eebc0754527b0"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "917debd96a800b1b2b2d4f8a68f9083abdeea2e346f6551c4e90f15a726c0506"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "0ea5cba6744b462da31924c163aea106ab1f00a28fb29712fcdf8e8dbbeeb6d6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "6bc16b604c6f9b085f71a14b82a08703fbf38d7ac62507b143769ea155d05ca1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "7b565e24fad22e3c391fba35712c04c0731e4d134143264f26c0d356a91dede4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\predictions\\MLP.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\MLP.npz",
+      "sha256": "9c990a34ecf34a3170e6a25f2956a07650c2a47b5dc8bc31d9dfb0495e322ce5"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "642ed471eaa0f692968cab7a1273ce180dabab700ac1e3a95728869159774310"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\results\\predictions\\VotingEnsemble.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\VotingEnsemble.npz",
+      "sha256": "ca407c24274ccb8f0d128d7b0a42f235e0886e569c075f9c26e8e3f693b344a3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\data\\pe_features.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\data\\pe_features.npz",
+      "sha256": "db73c215909770940e2e002d93f93590a367775572d4f87c4ffb4b4da466ffa8"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\data\\pe_features_preview.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\07-malicious-executable-detector\\legacy\\pre-remediation-2026-07-31\\data\\pe_features_preview.csv",
+      "sha256": "5b907ac5f742c58db9055128c3265a53a83307f4276e6b2069e696afec913879"
+    }
+  ]
+}

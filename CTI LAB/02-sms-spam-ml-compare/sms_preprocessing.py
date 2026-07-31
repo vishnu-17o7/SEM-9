@@ -12,6 +12,11 @@ from pathlib import Path
 
 import pandas as pd
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import deduplicate_frame
+
 DATA_DIR = Path(__file__).parent / "data"
 DATA_FILE = DATA_DIR / "SMSSpamCollection"
 ZIP_PATH = DATA_DIR / "smsspamcollection.zip"
@@ -50,19 +55,20 @@ def load_dataframe(force_download: bool = False) -> pd.DataFrame:
     df = pd.read_csv(path, sep="\t", header=None, names=["label", "message"])
     df["label"] = df["label"].map({"spam": 1, "ham": 0}).astype(int)
     df["clean_message"] = df["message"].apply(clean_text)
-    return df
+    cleaned, _ = deduplicate_frame(df, ["clean_message"], "label")
+    return cleaned
 
 
 def load_split(test_size: float = 0.2, random_state: int = 42):
-    """Return (X_train, X_test, y_train, y_test) with stratified split."""
-    from sklearn.model_selection import train_test_split
+    """Return a duplicate-free, deterministic stratified split."""
+    from sklearn.model_selection import StratifiedGroupKFold
 
     df = load_dataframe()
-    X_train, X_test, y_train, y_test = train_test_split(
-        df["clean_message"],
-        df["label"],
-        test_size=test_size,
-        random_state=random_state,
-        stratify=df["label"],
-    )
+    folds = max(2, round(1 / test_size))
+    splitter = StratifiedGroupKFold(n_splits=folds, shuffle=True, random_state=random_state)
+    train_idx, test_idx = next(splitter.split(df["clean_message"], df["label"], df["clean_message"]))
+    X_train = df.iloc[train_idx]["clean_message"]
+    X_test = df.iloc[test_idx]["clean_message"]
+    y_train = df.iloc[train_idx]["label"]
+    y_test = df.iloc[test_idx]["label"]
     return X_train, X_test, y_train, y_test

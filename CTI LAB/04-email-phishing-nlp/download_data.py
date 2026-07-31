@@ -98,6 +98,15 @@ def main():
     email_count = download_spamassassin()
     if email_count > 0:
         print(f"  Extracted ~{email_count} emails to {SA_DIR}")
+        import json
+        (DATA_DIR / "evaluation_context.json").write_text(json.dumps({
+            "mode": "real",
+            "name": "Apache SpamAssassin public corpus",
+            "source_url": "https://spamassassin.apache.org/old/publiccorpus/",
+            "license": "Apache SpamAssassin public corpus terms apply",
+            "citation": "Apache SpamAssassin public corpus",
+            "limitations": "Spam/ham labels are a phishing proxy, not a live enterprise phishing feed.",
+        }, indent=2), encoding="utf-8")
     else:
         print("  No emails extracted from SpamAssassin.")
 

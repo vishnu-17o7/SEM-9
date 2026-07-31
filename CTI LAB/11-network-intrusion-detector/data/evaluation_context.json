@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T06:27:07.136226+00:00",
+  "mode": "real",
+  "name": "NSL-KDD canonical train/test benchmark",
+  "source_url": "https://www.unb.ca/cic/datasets/nsl.html",
+  "license": "Dataset source terms apply",
+  "citation": "NSL-KDD",
+  "limitations": "Legacy benchmark; not a current enterprise network capture."
+}

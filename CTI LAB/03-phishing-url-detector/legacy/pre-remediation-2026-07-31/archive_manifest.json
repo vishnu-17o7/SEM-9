@@ -1,0 +1,142 @@
+{
+  "archived_at": "2026-07-31T05:15:34.950299+00:00",
+  "project": "03-phishing-url-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\accuracy_chart.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\accuracy_chart.png",
+      "sha256": "7bc8e62e7deb0e7ef04a15f6b0bc50b273166e204f1fb2aad5ffd8bac2c1319e"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_GaussianNB.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_GaussianNB.png",
+      "sha256": "2f030912e40ae7a2f13901ea93f4ae7b8d937168cacd99d1b610ebeaf62cdbfd"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_GradientBoosting.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_GradientBoosting.png",
+      "sha256": "c5e079a45f5789b13f3e961581986bc0875f05209ed66ec068e148e6f326b751"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_KNN.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_KNN.png",
+      "sha256": "e730d5b30de11a8664483c12a08484793475a6656c407dfba3f7c95cb0366d4e"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_LogisticRegression.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_LogisticRegression.png",
+      "sha256": "d93db20848fc0c749bb3acc319b2d3428e0a6f04324b7885a0fbee863c79e29c"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_RandomForest.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_RandomForest.png",
+      "sha256": "063a6adc6e0c4f18c857a55439a2fece814f835da4080e0a1969c6d3d822f6f7"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_SVM_RBF.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_SVM_RBF.png",
+      "sha256": "8341f9b2139f50d459d7c973ac5504da317f9430418d8a48cddd9358fb4ec339"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\cm_VotingEnsemble.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\cm_VotingEnsemble.png",
+      "sha256": "51255e459a46a848cec0f5ba7c7f96e91f894c402a9fb8d3832b532f3d620234"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\f1_chart.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\f1_chart.png",
+      "sha256": "572236a4a145663f9f7da6773e480c19a3fe73a05a812c819ad33b13ba789571"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\metrics.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.csv",
+      "sha256": "612c59a5648a704cbebb8c0ce44b02a8561ea8253ec72173674f68fcb087f81d"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "32fc3e2f117fec0a7a6f6698824aa24411fc51b36e1ea29ad2bc98c0cbeda068"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\precision_chart.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\precision_chart.png",
+      "sha256": "64ca919c6472cdd7d5f08b2d7d131b4910d84621a859dd773a682c846e6218bc"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\recall_chart.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\recall_chart.png",
+      "sha256": "8f1c79d7e29dc23f0ad33be5b7118e2602073b88643e7e23191da51877c9256b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "7fc6e4ed08b2da33f3aeabcf3fa37b93f7c63b375af6943034b75a8ea32f6688"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\roc_auc_chart.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\roc_auc_chart.png",
+      "sha256": "22bbb3768f602c352cde92a65cf15d4aafe9df4ea769166bc2c8eafbf12e53ac"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\roc_curves.png",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\roc_curves.png",
+      "sha256": "246d05c445def04d6e82b8a744fab5c1a46b7f9a7e8c858cd8546e530b847d37"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "5b2fe02251d68684d33fb3e0e9c63ef3e9fffe8dd98450db41e5bc3a3cdcf68f"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "d0162f89b959a05b8549e85cc14aff1284a2c4a6356d15092ee3ed3cc225e64b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "58bca46aacd2f529c7da0370a315dc1f32a8e3f22a9f6a30368b9bbb8252c29f"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "510145452ff470565483538b24d6960cca25699fec2cbc9aa2cf30b6efa7b7d9"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\GaussianNB.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GaussianNB.npz",
+      "sha256": "b032c5046dcd6c07e87d0b94cf391bcd8369acde84ef177066aba6162cec7cf3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "91455d315a93b2f378215766a2c31ed2f165629058bbdc78d9bbd07ee27152aa"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\KNN.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\KNN.npz",
+      "sha256": "d683942d1986b3e6f310d88f2a7d93d10dd2890016130fe4aeadaf9b92955140"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "99d8a5f3c11afa1419ca866f806ad2937f5167806ebaebe30db43612b4e3fb12"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "09be4aef5b1252989c2857b47814346fce04f8e0080aaa13961c7bc4d3bb3c6a"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\SVM_RBF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SVM_RBF.npz",
+      "sha256": "591ea7c87a4ff3771d3cc6174cc5940653c3417f84c2a4f04cd2bac839d34f2d"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\results\\predictions\\VotingEnsemble.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\03-phishing-url-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\VotingEnsemble.npz",
+      "sha256": "3100405eccd4880a3e6ef6026aa7fd128a69082e81a2c1235626f030536dfef4"
+    }
+  ]
+}

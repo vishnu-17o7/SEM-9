@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:18:24.338750+00:00",
+  "project": "07-malicious-executable-detector",
+  "dataset": {
+    "generated_at": "2026-07-31T06:16:15.404050+00:00",
+    "mode": "synthetic_fallback",
+    "name": "Synthetic PE feature benchmark",
+    "source_url": "https://github.com/elastic/ember",
+    "license": "Local synthetic generator; EMBER license applies only to official data.",
+    "citation": "EMBER: An Open Dataset for Training Static PE Malware Machine Learning Models",
+    "limitations": "Synthetic fallback is a controlled benchmark; official EMBER data must be supplied separately for real claims.",
+    "rows": 20000
+  },
+  "split": {
+    "strategy": "stratified 75/25 holdout; PCA fitted inside training pipelines",
+    "seed": 42,
+    "group_key": "sample_id",
+    "partitions": {
+      "train": 15000,
+      "test": 5000
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 1.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 1.0,
+    "class_imbalance_ratio": 1.8571428571428572
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 1.608,
+      "predict_time_s": 0.054,
+      "confusion_matrix": [
+        [
+          3250,
+          0
+        ],
+        [
+          0,
+          1750
+        ]
+      ],
+      "notes": ""
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 3.883,
+      "predict_time_s": 0.147,
+      "confusion_matrix": [
+        [
+          3250,
+          0
+        ],
+        [
+          0,
+          1750
+        ]
+      ],
+      "notes": ""
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 43.326,
+      "predict_time_s": 0.068,
+      "confusion_matrix": [
+        [
+          3250,
+          0
+        ],
+        [
+          0,
+          1750
+        ]
+      ],
+      "notes": ""
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 51.615,
+      "predict_time_s": 0.278,
+      "confusion_matrix": [
+        [
+          3250,
+          0
+        ],
+        [
+          0,
+          1750
+        ]
+      ],
+      "notes": "Soft-vote of LogisticRegression, RandomForest, GradientBoosting"
+    }
+  }
+}

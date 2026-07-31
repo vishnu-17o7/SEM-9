@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T07:03:34.446759+00:00",
+  "mode": "synthetic_fallback",
+  "name": "Scenario-based synthetic botnet traffic",
+  "source_url": "https://www.stratosphereips.org/datasets-ctu13",
+  "license": "Local synthetic generator; CTU-13 terms apply only to official data.",
+  "citation": "CTU-13",
+  "limitations": "Synthetic fallback with 50% normal-looking botnet hard negatives; oracle generator fields are excluded from model features."
+}

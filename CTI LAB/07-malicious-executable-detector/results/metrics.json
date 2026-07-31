@@ -1,0 +1,90 @@
+{
+  "LogisticRegression": {
+    "name": "LogisticRegression",
+    "family": "LogisticRegression",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 1.608,
+    "predict_time_s": 0.054,
+    "confusion_matrix": [
+      [
+        3250,
+        0
+      ],
+      [
+        0,
+        1750
+      ]
+    ],
+    "notes": ""
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "family": "RandomForestClassifier",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 3.883,
+    "predict_time_s": 0.147,
+    "confusion_matrix": [
+      [
+        3250,
+        0
+      ],
+      [
+        0,
+        1750
+      ]
+    ],
+    "notes": ""
+  },
+  "GradientBoosting": {
+    "name": "GradientBoosting",
+    "family": "GradientBoostingClassifier",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 43.326,
+    "predict_time_s": 0.068,
+    "confusion_matrix": [
+      [
+        3250,
+        0
+      ],
+      [
+        0,
+        1750
+      ]
+    ],
+    "notes": ""
+  },
+  "VotingEnsemble": {
+    "name": "VotingEnsemble",
+    "family": "ensemble",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 51.615,
+    "predict_time_s": 0.278,
+    "confusion_matrix": [
+      [
+        3250,
+        0
+      ],
+      [
+        0,
+        1750
+      ]
+    ],
+    "notes": "Soft-vote of LogisticRegression, RandomForest, GradientBoosting"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:30:12.697725+00:00",
+  "project": "11-network-intrusion-detector",
+  "dataset": {
+    "generated_at": "2026-07-31T06:27:07.136226+00:00",
+    "mode": "real",
+    "name": "NSL-KDD canonical train/test benchmark",
+    "source_url": "https://www.unb.ca/cic/datasets/nsl.html",
+    "license": "Dataset source terms apply",
+    "citation": "NSL-KDD",
+    "limitations": "NSL-KDD is a legacy benchmark and not a current enterprise network capture.",
+    "rows": 148517
+  },
+  "split": {
+    "strategy": "canonical NSL-KDD train/test partitions; OneHotEncoder fitted on train only",
+    "seed": 42,
+    "group_key": "canonical_partition",
+    "partitions": {
+      "train": 125973,
+      "test": 22544
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.7968,
+    "class_imbalance_ratio": 1.148609926658707
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 0.7534,
+      "precision": 0.9173,
+      "recall": 0.6229,
+      "f1": 0.742,
+      "roc_auc": 0.7804,
+      "train_time_s": 4.685,
+      "predict_time_s": 0.102,
+      "confusion_matrix": [
+        [
+          8990,
+          721
+        ],
+        [
+          4839,
+          7994
+        ]
+      ],
+      "per_category_f1": null
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 0.7776,
+      "precision": 0.969,
+      "recall": 0.6295,
+      "f1": 0.7632,
+      "roc_auc": 0.967,
+      "train_time_s": 6.092,
+      "predict_time_s": 0.218,
+      "confusion_matrix": [
+        [
+          9453,
+          258
+        ],
+        [
+          4755,
+          8078
+        ]
+      ],
+      "per_category_f1": null
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 0.7968,
+      "precision": 0.9698,
+      "recall": 0.6638,
+      "f1": 0.7881,
+      "roc_auc": 0.9434,
+      "train_time_s": 81.232,
+      "predict_time_s": 0.135,
+      "confusion_matrix": [
+        [
+          9446,
+          265
+        ],
+        [
+          4315,
+          8518
+        ]
+      ],
+      "per_category_f1": null
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 0.7968,
+      "precision": 0.9717,
+      "recall": 0.6624,
+      "f1": 0.7877,
+      "roc_auc": 0.9533,
+      "train_time_s": 81.041,
+      "predict_time_s": 81.451,
+      "confusion_matrix": [
+        [
+          9463,
+          248
+        ],
+        [
+          4333,
+          8500
+        ]
+      ],
+      "per_category_f1": null
+    }
+  }
+}

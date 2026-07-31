@@ -1,0 +1,62 @@
+{
+  "archived_at": "2026-07-31T05:15:35.948014+00:00",
+  "project": "11-network-intrusion-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "07b27eab8e33cafe4bc70f2d55ca4bc1ac2344bf91e060f8c916e1c586e9c68a"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "013e4867c6706fbf37b0ed88e49e1b350d4eb7d7c3b12d56b0221796d8bb0b17"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "757ee9678973bbcca896e76ce33addc08055c87f3f2d6c81fdb9551db1455c83"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\models\\KNN.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\KNN.joblib",
+      "sha256": "8805223c3aa4204071a488110f23e41fffcc49749e705b77a2e39901246b62e0"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "96e9a67d94bd79f62ab0ea450d231d3ba6f083e6d3a93ea62b9feea65e98e0c1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "dceae2267ba3ceea1db1608f254adfe0d0c31aab2396c7882d9b91e7c344a437"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "fb9ee9c7d8b7fff3d340db165d5f208a42c16c976e0af7d6b7ae0ccc933b3971"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "ebd61d8c728f7dd6ac2567f9c62eb1e1b37065666c81fb43bae4da9c0abe2be4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\predictions\\KNN.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\KNN.npz",
+      "sha256": "8a483430bd8abefec3e68066566d8beeb0a4af12470fee3c53176e7619d388e2"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "9615959556547436241315965d23bbc410c76e09c355d6354269b7cb6bbcd4ce"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\11-network-intrusion-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "d631027d2cc9ab1281b369dd0643b92c4b5f7804f51b40de12435ff08810b88f"
+    }
+  ]
+}

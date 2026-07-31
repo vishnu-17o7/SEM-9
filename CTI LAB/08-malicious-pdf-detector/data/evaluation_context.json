@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T06:18:39.557426+00:00",
+  "mode": "synthetic_fallback",
+  "name": "Synthetic PDF metadata benchmark",
+  "source_url": "https://www.unb.ca/cic/datasets/pdfmal-2022.html",
+  "license": "Local synthetic generator; official dataset terms apply only to official data.",
+  "citation": "CIC-Evasive-PDFMal2022",
+  "limitations": "Synthetic fallback; metrics do not establish real PDF malware generalization."
+}

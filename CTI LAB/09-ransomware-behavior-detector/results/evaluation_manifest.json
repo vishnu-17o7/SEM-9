@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:20:05.126694+00:00",
+  "project": "09-ransomware-behavior-detector",
+  "dataset": {
+    "generated_at": "2026-07-31T06:19:27.021924+00:00",
+    "mode": "synthetic_fallback",
+    "name": "Scenario-based synthetic Windows ransomware telemetry",
+    "source_url": "",
+    "license": "Local synthetic generator",
+    "citation": "",
+    "limitations": "Synthetic fallback; use real Windows telemetry before making operational claims.",
+    "rows": 20000
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold holdout by scenario_id",
+    "seed": 42,
+    "group_key": "scenario_id",
+    "partitions": {
+      "train": 15384,
+      "test": 4616
+    },
+    "train_groups": 10,
+    "test_groups": 3
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 1.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 1.0,
+    "class_imbalance_ratio": 5.666666666666667
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 0.079,
+      "predict_time_s": 0.004,
+      "confusion_matrix": [
+        [
+          3924,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 1.039,
+      "predict_time_s": 0.128,
+      "confusion_matrix": [
+        [
+          3924,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 10.712,
+      "predict_time_s": 0.007,
+      "confusion_matrix": [
+        [
+          3924,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "SVM_RBF": {
+      "name": "SVM_RBF",
+      "family": "SVC",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 4.491,
+      "predict_time_s": 0.281,
+      "confusion_matrix": [
+        [
+          3924,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 10.955,
+      "predict_time_s": 0.141,
+      "confusion_matrix": [
+        [
+          3924,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": "Soft-vote of LogisticRegression, RandomForest, GradientBoosting"
+    }
+  }
+}

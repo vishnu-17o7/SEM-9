@@ -1,0 +1,37 @@
+{
+  "archived_at": "2026-07-31T05:15:36.360302+00:00",
+  "project": "13-user-activity-anomaly-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "3166330b810f9e4f631ae48d744cbe7ec972138ccad24015973945cacc6c9a2b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "ee14f0b5ba10d8b4135016ec68026819b8ed3610336469b25fcda94e8d206943"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\results\\models\\Autoencoder.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\Autoencoder.joblib",
+      "sha256": "8d32e72db88c53091da732f609c6ca890d5c3412e4cd7c60e3a2cc3d20be11ef"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\results\\models\\IsolationForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\IsolationForest.joblib",
+      "sha256": "972185ad7fa4eb1a9b4dcdfec9ba111aa0696be348dde8bbf04879b0d04d8f51"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\results\\predictions\\IsolationForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\IsolationForest.npz",
+      "sha256": "567a9f9abe9e889531fe529afa9ffd5bc740c879b3cd9f88f070b56c199bdf68"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\data\\user_activity_logs.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\13-user-activity-anomaly-detector\\legacy\\pre-remediation-2026-07-31\\data\\user_activity_logs.csv",
+      "sha256": "f7f0d45839296ed3dd3a5917287f6469e211ba56a5a99e57547286fcf5c89bb2"
+    }
+  ]
+}

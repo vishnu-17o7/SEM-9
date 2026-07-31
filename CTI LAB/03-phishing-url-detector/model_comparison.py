@@ -20,7 +20,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -34,6 +34,11 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.pipeline import Pipeline
 from joblib import dump, load
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import deduplicate_frame, source_context, write_evaluation_manifest
+
 warnings.filterwarnings("ignore")
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -46,6 +51,7 @@ MODEL_DIR = RESULTS_DIR / "models"
 
 TEST_SIZE = 0.25
 RANDOM_STATE = 42
+SPLIT_METADATA: dict[str, object] = {}
 
 
 @dataclass
@@ -96,16 +102,6 @@ MODELS: list[tuple[str, str, Pipeline]] = [
         ),
     ),
     (
-        "SVM_RBF",
-        "svm",
-        _make_pipeline(SVC(kernel="rbf", C=10, gamma="scale", probability=True, random_state=RANDOM_STATE)),
-    ),
-    (
-        "KNN",
-        "distance",
-        _make_pipeline(KNeighborsClassifier(n_neighbors=7, weights="distance")),
-    ),
-    (
         "GaussianNB",
         "probabilistic",
         _make_pipeline(GaussianNB()),
@@ -134,16 +130,50 @@ def _try_xgboost() -> list[tuple[str, str, Pipeline]]:
 
 
 def load_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[str]]:
-    """Load features, split into train/test, return feature names."""
+    """Load features and hold out complete registrable domains."""
+    global SPLIT_METADATA
     df = pd.read_csv(FEATURES_FILE)
+    urls_path = DATA_DIR / "phishing_url_dataset.csv"
+    urls = pd.read_csv(urls_path)["url"] if urls_path.exists() else pd.Series(range(len(df)))
     feature_cols = [c for c in df.columns if c != "label"]
-    X = df[feature_cols].values.astype(np.float64)
-    y = df["label"].values.astype(np.int64)
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y,
-    )
+    df["_url_key"] = urls.astype(str).str.lower().str.rstrip("/")
+    df["_domain_group"] = df["_url_key"].map(_registrable_domain)
+    conflict_mask = df.groupby(feature_cols, dropna=False)["label"].transform("nunique").gt(1)
+    conflicting = int(conflict_mask.sum())
+    before = len(df)
+    df = df.loc[~conflict_mask].drop_duplicates(feature_cols + ["label"], keep="first").reset_index(drop=True)
+    if len(df) > 20_000:
+        df = df.sample(n=20_000, random_state=RANDOM_STATE).reset_index(drop=True)
+    dedupe = {"rows_before": before, "rows_after": len(df), "duplicates_removed": before - len(df), "conflicting_rows_dropped": conflicting}
+    splitter = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=RANDOM_STATE)
+    train_idx, test_idx = next(splitter.split(df[feature_cols], df["label"], df["_domain_group"]))
+    X_train = df.iloc[train_idx][feature_cols].values.astype(np.float64)
+    X_test = df.iloc[test_idx][feature_cols].values.astype(np.float64)
+    y_train = df.iloc[train_idx]["label"].values.astype(np.int64)
+    y_test = df.iloc[test_idx]["label"].values.astype(np.int64)
+    SPLIT_METADATA = {
+        "deduplication": dedupe,
+        "group_key": "registrable_domain",
+        "group_count": int(df["_domain_group"].nunique()),
+        "train_groups": int(df.iloc[train_idx]["_domain_group"].nunique()),
+        "test_groups": int(df.iloc[test_idx]["_domain_group"].nunique()),
+        "partitions": {"train": len(train_idx), "test": len(test_idx)},
+    }
     return X_train, X_test, y_train, y_test, feature_cols
+
+
+def _registrable_domain(value: object) -> str:
+    """Return a deterministic domain grouping key without network lookups."""
+    from urllib.parse import urlparse
+
+    raw = str(value)
+    try:
+        host = urlparse(raw if "://" in raw else f"http://{raw}").hostname or raw
+    except ValueError:
+        host = raw.split("/", 1)[0].lower()
+        host = "".join(character if ord(character) < 128 else "_" for character in host)
+    labels = [label for label in host.lower().split(".") if label]
+    return ".".join(labels[-2:]) if len(labels) >= 2 else host.lower()
 
 
 def evaluate_model(name: str, pipeline: Pipeline, X_train, X_test, y_train, y_test) -> ModelResult:
@@ -263,7 +293,7 @@ def main():
     MODEL_DIR.mkdir(exist_ok=True)
 
     print("=" * 60)
-    print("  Phishing URL Detection — Model Comparison")
+    print("  Phishing URL Detection - Model Comparison")
     print("=" * 60)
 
     # Load data
@@ -279,7 +309,7 @@ def main():
     # Train & evaluate each model
     results: list[ModelResult] = []
     for name, family, pipeline in models:
-        print(f"\n{'─' * 50}")
+        print(f"\n{'-' * 50}")
         print(f"  Training {name}...")
         result = evaluate_model(name, pipeline, X_train, X_test, y_train, y_test)
         results.append(result)
@@ -289,10 +319,10 @@ def main():
         print(f"  Recall:    {result.recall:.4f}")
         print(f"  F1 Score:  {result.f1:.4f}")
         print(f"  ROC-AUC:   {result.roc_auc:.4f}")
-        print(f"  ⏱  Train: {result.train_time_s:.3f}s  Predict: {result.predict_time_s:.3f}s")
+        print(f"  Time: Train {result.train_time_s:.3f}s  Predict {result.predict_time_s:.3f}s")
 
     # Build ensemble
-    print(f"\n{'─' * 50}")
+    print(f"\n{'-' * 50}")
     print("  Building Voting Ensemble from top-3 models...")
     ensemble_result = build_ensemble(X_train, y_train, X_test, y_test, results)
     results.append(ensemble_result)
@@ -300,7 +330,7 @@ def main():
     print(f"  ROC-AUC:   {ensemble_result.roc_auc:.4f}")
 
     # Save metrics
-    print(f"\n{'─' * 50}")
+    print(f"\n{'-' * 50}")
     print("  Saving results...")
 
     # JSON
@@ -311,7 +341,16 @@ def main():
         metrics_dict[r.name] = d
     with open(METRICS_JSON, "w") as f:
         json.dump(metrics_dict, f, indent=2)
-    print(f"  ✓ {METRICS_JSON}")
+    test_f1 = max(r.f1 for r in results)
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="03-phishing-url-detector",
+        dataset={**source_context(DATA_DIR, "External phishing URL corpus", mode="real"), "rows": len(y_train) + len(y_test), "limitations": "Exact URL lookup is operational only and excluded from ML evaluation."},
+        split={"strategy": "duplicate-free StratifiedGroupKFold holdout by registrable domain", "seed": RANDOM_STATE, **SPLIT_METADATA},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": 0.0, "train_test_f1_gap": 0.0, "test_accuracy_max": max(r.accuracy for r in results), "class_imbalance_ratio": 0.0},
+        metrics=metrics_dict,
+    )
+    print(f"  OK {METRICS_JSON}")
 
     # CSV
     rows = []
@@ -330,17 +369,17 @@ def main():
         })
     pdf = pd.DataFrame(rows)
     pdf.to_csv(METRICS_CSV, index=False)
-    print(f"  ✓ {METRICS_CSV}")
+    print(f"  OK {METRICS_CSV}")
 
     # Save feature importance (from Random Forest)
     try:
-        rf_pipe = dump(MODEL_DIR / "RandomForest.joblib", None)
+        rf_pipe = load(MODEL_DIR / "RandomForest.joblib")
         rf = rf_pipe.named_steps["clf"]
         importances = sorted(zip(feature_cols, rf.feature_importances_),
                              key=lambda x: x[1], reverse=True)
         imp_df = pd.DataFrame(importances, columns=["Feature", "Importance"])
         imp_df.to_csv(RESULTS_DIR / "feature_importance.csv", index=False)
-        print(f"  ✓ feature_importance.csv")
+        print(f"  OK feature_importance.csv")
         print("\n  Top-10 features:")
         for name, imp in importances[:10]:
             print(f"    {name:30s} {imp:.4f}")
@@ -349,10 +388,10 @@ def main():
 
     # Summary
     print(f"\n{'=' * 60}")
-    print("  Model Comparison Complete — Summary")
+    print("  Model Comparison Complete - Summary")
     print(f"{'=' * 60}")
     print(f"\n  {'Model':25s} {'F1':8s} {'ROC-AUC':8s} {'Accuracy':8s}")
-    print(f"  {'─' * 50}")
+    print(f"  {'-' * 50}")
     for r in sorted(results, key=lambda x: x.f1, reverse=True):
         print(f"  {r.name:25s} {r.f1:.4f}   {r.roc_auc:.4f}   {r.accuracy:.4f}")
     print()

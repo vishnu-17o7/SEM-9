@@ -1,0 +1,12 @@
+{
+  "archived_at": "2026-07-31T05:15:34.624892+00:00",
+  "project": "01-spam-ham-watcher",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\01-spam-ham-watcher\\spam_text_model.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\01-spam-ham-watcher\\legacy\\pre-remediation-2026-07-31\\spam_text_model.joblib",
+      "sha256": "8067d9eb5e509a68d3f205a04cf4dd049847862e0c48ebe2a6272bf0816be9e9"
+    }
+  ]
+}

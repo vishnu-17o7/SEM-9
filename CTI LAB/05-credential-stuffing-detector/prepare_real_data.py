@@ -114,6 +114,7 @@ def prepare_cicids_events(max_benign: int) -> tuple[pd.DataFrame, dict[str, int]
         name: pd.to_numeric(flows[normalized_column_name(flows, source_name)], errors="coerce")
         for name, source_name in flow_columns.items()
     })
+    prepared_flows["timestamp"] = pd.to_datetime(flows[timestamp], errors="coerce", utc=True).to_numpy()
     prepared_flows["is_attack"] = [0] * len(benign) + [1] * len(attacks)
     prepared_flows = prepared_flows.replace([np.inf, -np.inf], np.nan).dropna().reset_index(drop=True)
     prepared_flows.to_csv(CIC_FLOW_PATH, index=False)

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:37:06.874358+00:00",
+  "project": "13-user-activity-anomaly-detector",
+  "dataset": {
+    "mode": "synthetic_fallback",
+    "name": "Synthetic user activity logs",
+    "source_url": "",
+    "license": "Synthetic fallback generated locally",
+    "citation": "",
+    "limitations": "Synthetic activity sessions are a controlled anomaly-detection benchmark.",
+    "rows": 22946
+  },
+  "split": {
+    "strategy": "chronological 60/20/20 session split; baselines from training period; thresholds from validation period",
+    "seed": 42,
+    "group_key": "session_id,user_id",
+    "partitions": {
+      "train": 13767,
+      "validation": 4589,
+      "test": 4590
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.9802,
+    "class_imbalance_ratio": 8.869247311827957
+  },
+  "metrics": {
+    "IsolationForest": {
+      "name": "IsolationForest",
+      "accuracy": 0.9776,
+      "precision": 0.9792,
+      "recall": 0.7983,
+      "f1": 0.8795,
+      "roc_auc": 0.9987,
+      "train_time_s": 0.483,
+      "predict_time_s": 0.116,
+      "confusion_matrix": [
+        [
+          4111,
+          8
+        ],
+        [
+          95,
+          376
+        ]
+      ],
+      "anomaly_count": 384
+    },
+    "PCA_Mahalanobis": {
+      "name": "PCA_Mahalanobis",
+      "accuracy": 0.9802,
+      "precision": 1.0,
+      "recall": 0.8068,
+      "f1": 0.8931,
+      "roc_auc": 1.0,
+      "train_time_s": 7.061,
+      "predict_time_s": 0.005,
+      "confusion_matrix": [
+        [
+          4119,
+          0
+        ],
+        [
+          91,
+          380
+        ]
+      ],
+      "anomaly_count": 380
+    },
+    "Autoencoder": {
+      "name": "Autoencoder",
+      "accuracy": 0.9275,
+      "precision": 0.6865,
+      "recall": 0.5393,
+      "f1": 0.604,
+      "roc_auc": 0.9363,
+      "train_time_s": 7.725,
+      "predict_time_s": 0.006,
+      "confusion_matrix": [
+        [
+          4003,
+          116
+        ],
+        [
+          217,
+          254
+        ]
+      ],
+      "anomaly_count": 370
+    }
+  }
+}

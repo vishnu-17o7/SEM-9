@@ -1,0 +1,87 @@
+{
+  "archived_at": "2026-07-31T05:15:35.101299+00:00",
+  "project": "05-credential-stuffing-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "e9b04f0defece32f5bf8fdf2f14825a86f6f29e28e7e3fa6a7af855c64b00655"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "d37525104aafd4c7e676618b3a01399db9173d40a0a422c833d0d8d06a44fd37"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\models\\IsolationForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\IsolationForest.joblib",
+      "sha256": "825196b68b3c64314a816a5c13459ab860c6b7c88dc3e30f5ff30c5724927ad6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\models\\LOF.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LOF.joblib",
+      "sha256": "9c92fb93e0ef2203388c9850af672b5cadce7d7dfb02a6cd22e84f268f299f11"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\models\\OneClassSVM.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\OneClassSVM.joblib",
+      "sha256": "ed28c514730c0d06ca1f41d8aab89c4acfe8d47276901cee4ece846807f57739"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "3876b72ac2c29fdae697853a929455df097a949b7063a2f9edca0cb8bdeb5dc0"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\IsolationForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\IsolationForest.npz",
+      "sha256": "3377644e1f7712148ce53f7e8350cd66167aa4f851c970092b092b68b033c1b4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\isolation_forest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\isolation_forest.joblib",
+      "sha256": "a4646b79f34641079b8cd6dc4495d1ea03c43bad08c4b9fb62ec8f18beafc182"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\isolation_forest_predictions.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\isolation_forest_predictions.npz",
+      "sha256": "aa3b60084c6f1183e1384fa5537a9ad89ae85b45c06d635288931aa1d2a272fe"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\local_outlier_factor_predictions.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\local_outlier_factor_predictions.npz",
+      "sha256": "8d60411c17bbc44494ad96efb48e6c54f8d181599bb36acfc7a58d08291420e0"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\LOF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LOF.npz",
+      "sha256": "4d47d2c3acc24b7ff94c98b0b5a8d2601d1b7b9766d2736dc1afa206232097e3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\OneClassSVM.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\OneClassSVM.npz",
+      "sha256": "79803133b4d169a924292b6c9b1c5228f35158a52ae0e295b7427dc2fe249080"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\oneclass_svm.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\oneclass_svm.joblib",
+      "sha256": "69fd8d09d5003aaa245c5c5a0df36d805c44ff19a36b5e09c265b8fce23bf579"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\oneclass_svm_predictions.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\oneclass_svm_predictions.npz",
+      "sha256": "805486147c1b2d8babc800697aeccd1d205178959a3597b7e153a443fd22eeea"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "f4ccccf6d2396a9695094429562f643099089348e22a17932f0ad2b5c88ca0fe"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\results\\predictions\\rule_based_predictions.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\05-credential-stuffing-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\rule_based_predictions.npz",
+      "sha256": "722aea6ac7900c5901cc20128f7b876d9418006875df50f29f7f5815adacd6f2"
+    }
+  ]
+}

@@ -54,6 +54,19 @@ Research - Explainable Privacy Preserving Multi Agent Healthcare/
 
 # --- CTI Theory / CV Theory (notes) ---
 
+# --- CTI generated ML artifacts (keep code, reports, manifests, and metrics) ---
+CTI LAB/**/results/models/
+CTI LAB/**/results/predictions/
+CTI LAB/**/data/*.npz
+CTI LAB/**/data/*.parquet
+CTI LAB/**/data/*.tar
+CTI LAB/**/data/*.tar.*
+CTI LAB/**/legacy/**/data/
+CTI LAB/**/legacy/**/results/models/
+CTI LAB/**/legacy/**/results/predictions/
+!CTI LAB/**/data/evaluation_context.json
+!CTI LAB/**/data/**/dataset_manifest.json
+
 
 # --- Root-level junk ---
 tmp/

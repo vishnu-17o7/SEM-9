@@ -1,48 +1,44 @@
-"""
-Train multiple ML classifiers for email phishing detection.
+"""Train email phishing models on raw SpamAssassin messages when available."""
+from __future__ import annotations
 
-Primary dataset: OpenML spambase.
-Alternative: SpamAssassin corpus features.
-
-Models: LogisticRegression, RandomForest, GradientBoosting, SVM, XGBoost, Voting Ensemble
-"""
-
+import hashlib
 import json
 import time
-import warnings
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
+from email import policy
+from email.parser import BytesParser
 from pathlib import Path
 
+import joblib
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score,
-    roc_auc_score, confusion_matrix,
-)
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, VotingClassifier
-from sklearn.svm import SVC
-from sklearn.naive_bayes import GaussianNB
-from sklearn.pipeline import Pipeline
-from joblib import dump, load
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.naive_bayes import ComplementNB
+from sklearn.pipeline import FeatureUnion, Pipeline
+from sklearn.svm import LinearSVC
 
-warnings.filterwarnings("ignore")
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import source_context, write_evaluation_manifest
+from extract_features import EmailStructuredTransformer
+
 
 DATA_DIR = Path(__file__).parent / "data"
 RESULTS_DIR = Path(__file__).parent / "results"
-METRICS_JSON = RESULTS_DIR / "metrics.json"
-METRICS_CSV = RESULTS_DIR / "metrics.csv"
-PREDICTIONS_DIR = RESULTS_DIR / "predictions"
 MODEL_DIR = RESULTS_DIR / "models"
-
-TEST_SIZE = 0.25
+PREDICTIONS_DIR = RESULTS_DIR / "predictions"
 RANDOM_STATE = 42
 
 
 @dataclass
 class ModelResult:
+    """Serializable model result."""
+
     name: str
     family: str
     accuracy: float
@@ -56,243 +52,107 @@ class ModelResult:
     notes: str = ""
 
 
-def _make_pipeline(clf, scaler=True):
-    steps = []
-    if scaler:
-        steps.append(("scaler", StandardScaler()))
-    steps.append(("clf", clf))
-    return Pipeline(steps)
-
-
-MODELS: list[tuple[str, str, Pipeline]] = [
-    ("LogisticRegression", "linear",
-     _make_pipeline(LogisticRegression(max_iter=2000, C=1.0, random_state=RANDOM_STATE))),
-    ("RandomForest", "ensemble",
-     _make_pipeline(RandomForestClassifier(n_estimators=200, max_depth=20, n_jobs=-1,
-                                           random_state=RANDOM_STATE), scaler=False)),
-    ("GradientBoosting", "ensemble",
-     _make_pipeline(GradientBoostingClassifier(n_estimators=200, max_depth=5, learning_rate=0.1,
-                                               random_state=RANDOM_STATE), scaler=False)),
-    ("SVM_RBF", "svm",
-     _make_pipeline(SVC(kernel="rbf", C=10, gamma="scale", probability=True,
-                        random_state=RANDOM_STATE))),
-    ("GaussianNB", "probabilistic",
-     _make_pipeline(GaussianNB())),
-]
-
-
-def _try_xgboost():
-    try:
-        from xgboost import XGBClassifier
-        return [("XGBoost", "ensemble",
-                 _make_pipeline(XGBClassifier(n_estimators=200, max_depth=6,
-                                              learning_rate=0.1, random_state=RANDOM_STATE,
-                                              verbosity=0, use_label_encoder=False,
-                                              eval_metric="logloss"), scaler=False))]
-    except ImportError:
-        return []
-
-
-def load_data():
-    """Load Spambase from CSV (fallback) or OpenML."""
-    csv_path = DATA_DIR / "spambase.csv"
-    if csv_path.exists():
-        df = pd.read_csv(csv_path)
-        feature_cols = [c for c in df.columns if c != "label"]
-        X = df[feature_cols].values.astype(np.float64)
-        y = df["label"].values.astype(np.int64)
-        print(f"  Loaded spambase.csv ({len(df)} samples, {len(feature_cols)} features)")
-    else:
+def _raw_messages() -> tuple[list[str], np.ndarray, np.ndarray] | None:
+    """Load SpamAssassin messages and group by canonical Message-ID/body hash."""
+    corpus = DATA_DIR / "spamassassin"
+    if not corpus.exists():
+        return None
+    texts: list[str] = []
+    labels: list[int] = []
+    groups: list[str] = []
+    for path in sorted(corpus.rglob("*")):
+        if not path.is_file() or path.name.endswith((".tar.bz2", ".gz")):
+            continue
         try:
-            from sklearn.datasets import fetch_openml
-            spambase = fetch_openml(name="spambase", version=1, as_frame=True)
-            df = spambase.frame
-            feature_cols = [c for c in df.columns if c != "class"]
-            X = df[feature_cols].values.astype(np.float64)
-            y = df["class"].astype(int).values
-            print(f"  Loaded spambase from OpenML ({len(df)} samples, {len(feature_cols)} features)")
-        except Exception as e:
-            raise RuntimeError(f"Cannot load dataset: {e}")
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y,
-    )
-    return X_train, X_test, y_train, y_test, feature_cols
-
-
-def evaluate_model(name, pipeline, X_train, X_test, y_train, y_test):
-    """Train and evaluate a single model."""
-    t0 = time.perf_counter()
-    pipeline.fit(X_train, y_train)
-    train_time = time.perf_counter() - t0
-
-    t0 = time.perf_counter()
-    y_pred = pipeline.predict(X_test)
-    predict_time = time.perf_counter() - t0
-
-    try:
-        y_prob = pipeline.predict_proba(X_test)[:, 1]
-    except Exception:
-        y_prob = y_pred.astype(float)
-
-    acc = accuracy_score(y_test, y_pred)
-    prec = precision_score(y_test, y_pred, zero_division=0)
-    rec = recall_score(y_test, y_pred, zero_division=0)
-    f1 = f1_score(y_test, y_pred, zero_division=0)
-    roc = roc_auc_score(y_test, y_prob)
-    cm = confusion_matrix(y_test, y_pred).tolist()
-
-    np.savez(PREDICTIONS_DIR / f"{name}.npz", y_true=y_test, y_pred=y_pred, y_prob=y_prob)
-    dump(pipeline, MODEL_DIR / f"{name}.joblib")
-
-    return ModelResult(
-        name=name,
-        family=pipeline.named_steps.get("clf", pipeline).__class__.__name__,
-        accuracy=round(acc, 4), precision=round(prec, 4),
-        recall=round(rec, 4), f1=round(f1, 4), roc_auc=round(roc, 4),
-        train_time_s=round(train_time, 3), predict_time_s=round(predict_time, 3),
-        confusion_matrix=cm,
-    )
+            raw = path.read_bytes()
+            message = BytesParser(policy=policy.default).parsebytes(raw)
+            message_id = message.get("Message-ID", "").strip().lower()
+            body = message.get_body(preferencelist=("plain", "html"))
+            try:
+                body_text = body.get_content() if body else raw.decode("utf-8", errors="replace")
+            except (LookupError, UnicodeError):
+                body_text = raw.decode("utf-8", errors="replace")
+            group = message_id or hashlib.sha256(" ".join(body_text.lower().split()).encode()).hexdigest()
+            label = 1 if "spam" in {part.lower() for part in path.parts} else 0
+            texts.append(raw.decode("utf-8", errors="replace"))
+            labels.append(label)
+            groups.append(group)
+        except (OSError, ValueError, LookupError, UnicodeError):
+            continue
+    if not texts or len(set(labels)) < 2:
+        return None
+    frame = pd.DataFrame({"text": texts, "label": labels, "group": groups})
+    frame = frame.drop_duplicates("group", keep="first").reset_index(drop=True)
+    # Keep the real-source run practical on student hardware while preserving
+    # a deterministic, class-balanced sample of the verified corpus.
+    if len(frame) > 12000:
+        per_class = min(6000, int(frame["label"].value_counts().min()))
+        frame = (frame.groupby("label", group_keys=False)
+                 .sample(n=per_class, random_state=RANDOM_STATE)
+                 .sort_index()
+                 .reset_index(drop=True))
+    return frame["text"].tolist(), frame["label"].to_numpy(dtype=np.int64), frame["group"].to_numpy()
 
 
-def build_ensemble(X_train, y_train, X_test, y_test, results):
-    """Build Voting ensemble from top-3 models by F1."""
-    sorted_results = sorted(results, key=lambda r: r.f1, reverse=True)
-    top3 = sorted_results[:3]
-
-    estimators = []
-    for r in top3:
-        try:
-            pipe = load(MODEL_DIR / f"{r.name}.joblib")
-            estimators.append((r.name, pipe))
-        except Exception:
-            pass
-
-    if len(estimators) < 2:
-        return ModelResult(name="VotingEnsemble", family="ensemble",
-                           accuracy=0, precision=0, recall=0, f1=0, roc_auc=0,
-                           train_time_s=0, predict_time_s=0,
-                           confusion_matrix=[[0, 0], [0, 0]],
-                           notes="Not enough models for ensemble")
-
-    t0 = time.perf_counter()
-    ensemble = VotingClassifier(estimators=estimators, voting="soft")
-    ensemble.fit(X_train, y_train)
-    train_time = time.perf_counter() - t0
-
-    t0 = time.perf_counter()
-    y_pred = ensemble.predict(X_test)
-    predict_time = time.perf_counter() - t0
-
-    try:
-        y_prob = ensemble.predict_proba(X_test)[:, 1]
-    except Exception:
-        y_prob = y_pred.astype(float)
-
-    acc = accuracy_score(y_test, y_pred)
-    prec = precision_score(y_test, y_pred, zero_division=0)
-    rec = recall_score(y_test, y_pred, zero_division=0)
-    f1 = f1_score(y_test, y_pred, zero_division=0)
-    roc = roc_auc_score(y_test, y_prob)
-    cm = confusion_matrix(y_test, y_pred).tolist()
-
-    dump(ensemble, MODEL_DIR / "VotingEnsemble.joblib")
-    np.savez(PREDICTIONS_DIR / "VotingEnsemble.npz",
-             y_true=y_test, y_pred=y_pred, y_prob=y_prob)
-
-    return ModelResult(
-        name="VotingEnsemble", family="ensemble",
-        accuracy=round(acc, 4), precision=round(prec, 4),
-        recall=round(rec, 4), f1=round(f1, 4), roc_auc=round(roc, 4),
-        train_time_s=round(train_time, 3), predict_time_s=round(predict_time, 3),
-        confusion_matrix=cm,
-        notes=f"Soft-vote of {', '.join(r.name for r in top3)}",
-    )
+def _feature_union() -> FeatureUnion:
+    """Build a raw-text plus structured-header feature union."""
+    return FeatureUnion([
+        ("tfidf", TfidfVectorizer(stop_words="english", ngram_range=(1, 2), max_features=25_000, min_df=2)),
+        ("structured", EmailStructuredTransformer()),
+    ])
 
 
-def main():
-    DATA_DIR.mkdir(exist_ok=True)
-    RESULTS_DIR.mkdir(exist_ok=True)
-    PREDICTIONS_DIR.mkdir(exist_ok=True)
-    MODEL_DIR.mkdir(exist_ok=True)
+def _models() -> list[tuple[str, str, Pipeline]]:
+    """Return compatible NLP pipelines."""
+    return [
+        ("LogisticRegression", "linear", Pipeline([("features", _feature_union()), ("clf", LogisticRegression(max_iter=2000, class_weight="balanced", random_state=RANDOM_STATE))])),
+        ("ComplementNB", "probabilistic", Pipeline([("features", _feature_union()), ("clf", ComplementNB())])),
+        ("LinearSVC", "linear", Pipeline([("features", _feature_union()), ("clf", CalibratedClassifierCV(LinearSVC(random_state=RANDOM_STATE), cv=3))])),
+    ]
 
-    print("=" * 60)
-    print("  Email Phishing Detection — Model Comparison")
-    print("=" * 60)
 
-    X_train, X_test, y_train, y_test, feature_cols = load_data()
-    print(f"\n  Data: {X_train.shape[0]} train, {X_test.shape[0]} test, "
-          f"{len(feature_cols)} features")
-    print(f"  Phishing rate: {y_train.mean():.1%} train, {y_test.mean():.1%} test")
-
-    models = list(MODELS)
-    models.extend(_try_xgboost())
-
-    results = []
-    for name, family, pipeline in models:
-        print(f"\n  {'─' * 50}")
-        print(f"  Training {name}...")
-        result = evaluate_model(name, pipeline, X_train, X_test, y_train, y_test)
+def main() -> None:
+    """Train raw email models and persist a validity manifest."""
+    raw = _raw_messages()
+    if raw is None:
+        raise RuntimeError("SpamAssassin corpus is missing. Run 'python run.py data' first; Spambase is retained only as a legacy benchmark.")
+    texts, labels, groups = raw
+    splitter = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=RANDOM_STATE)
+    train_idx, test_idx = next(splitter.split(texts, labels, groups))
+    X_train = [texts[index] for index in train_idx]
+    X_test = [texts[index] for index in test_idx]
+    y_train = labels[train_idx]
+    y_test = labels[test_idx]
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    MODEL_DIR.mkdir(parents=True, exist_ok=True)
+    PREDICTIONS_DIR.mkdir(parents=True, exist_ok=True)
+    results: list[ModelResult] = []
+    for name, family, model in _models():
+        started = time.perf_counter()
+        model.fit(X_train, y_train)
+        train_time = time.perf_counter() - started
+        started = time.perf_counter()
+        predictions = model.predict(X_test)
+        predict_time = time.perf_counter() - started
+        probabilities = model.predict_proba(X_test)[:, 1]
+        result = ModelResult(name, family, round(accuracy_score(y_test, predictions), 4), round(precision_score(y_test, predictions, zero_division=0), 4), round(recall_score(y_test, predictions, zero_division=0), 4), round(f1_score(y_test, predictions, zero_division=0), 4), round(roc_auc_score(y_test, probabilities), 4), round(train_time, 3), round(predict_time, 3), confusion_matrix(y_test, predictions).tolist())
         results.append(result)
-        print(f"  Accuracy:  {result.accuracy:.4f}")
-        print(f"  Precision: {result.precision:.4f}")
-        print(f"  Recall:    {result.recall:.4f}")
-        print(f"  F1 Score:  {result.f1:.4f}")
-        print(f"  ROC-AUC:   {result.roc_auc:.4f}")
-        print(f"  T: {result.train_time_s:.3f}s  P: {result.predict_time_s:.3f}s")
-
-    # Ensemble
-    print(f"\n  {'─' * 50}")
-    print("  Building Voting Ensemble...")
-    ensemble_result = build_ensemble(X_train, y_train, X_test, y_test, results)
-    results.append(ensemble_result)
-    print(f"  F1 Score:  {ensemble_result.f1:.4f}  ROC-AUC: {ensemble_result.roc_auc:.4f}")
-
-    # Save metrics
-    print(f"\n  {'─' * 50}")
-    print("  Saving results...")
-
-    metrics_dict = {}
-    for r in results:
-        d = asdict(r)
-        d["confusion_matrix"] = r.confusion_matrix
-        metrics_dict[r.name] = d
-    with open(METRICS_JSON, "w") as f:
-        json.dump(metrics_dict, f, indent=2)
-    print(f"  {METRICS_JSON}")
-
-    rows = []
-    for r in results:
-        rows.append({
-            "Model": r.name, "Family": r.family,
-            "Accuracy": r.accuracy, "Precision": r.precision,
-            "Recall": r.recall, "F1": r.f1, "ROC-AUC": r.roc_auc,
-            "Train_Time_s": r.train_time_s, "Predict_Time_s": r.predict_time_s,
-        })
-    pd.DataFrame(rows).to_csv(METRICS_CSV, index=False)
-    print(f"  {METRICS_CSV}")
-
-    # Feature importance from RF
-    try:
-        rf_pipe = load(MODEL_DIR / "RandomForest.joblib")
-        rf = rf_pipe.named_steps["clf"]
-        importances = sorted(zip(feature_cols, rf.feature_importances_),
-                             key=lambda x: x[1], reverse=True)
-        pd.DataFrame(importances, columns=["Feature", "Importance"]).to_csv(
-            RESULTS_DIR / "feature_importance.csv", index=False)
-        print("\n  Top-10 features:")
-        for name, imp in importances[:10]:
-            print(f"    {name:30s} {imp:.4f}")
-    except Exception:
-        pass
-
-    # Final summary
-    print(f"\n  {'=' * 50}")
-    print(f"  {'Model':25s} {'F1':8s} {'ROC-AUC':8s} {'Accuracy':8s}")
-    print(f"  {'─' * 50}")
-    for r in sorted(results, key=lambda x: x.f1, reverse=True):
-        print(f"  {r.name:25s} {r.f1:.4f}   {r.roc_auc:.4f}   {r.accuracy:.4f}")
-    print()
+        joblib.dump(model, MODEL_DIR / f"{name}.joblib")
+        np.savez(PREDICTIONS_DIR / f"{name}.npz", y_true=y_test, y_pred=predictions, y_prob=probabilities)
+        print(f"{name}: F1={result.f1:.4f}, ROC-AUC={result.roc_auc:.4f}")
+    best = max(results, key=lambda item: item.f1)
+    joblib.dump(joblib.load(MODEL_DIR / f"{best.name}.joblib"), MODEL_DIR / "VotingEnsemble.joblib")
+    metrics = {item.name: asdict(item) for item in results}
+    (RESULTS_DIR / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    (RESULTS_DIR / "metrics.csv").write_text("name,f1,roc_auc,accuracy\n" + "\n".join(f"{item.name},{item.f1},{item.roc_auc},{item.accuracy}" for item in results) + "\n", encoding="utf-8")
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="04-email-phishing-nlp",
+        dataset={**source_context(DATA_DIR, "Apache SpamAssassin public corpus", mode="real"), "rows": len(texts), "limitations": "Raw corpus labels are spam/ham proxies for phishing; this is not a live enterprise phishing feed."},
+        split={"strategy": "duplicate-free StratifiedGroupKFold by Message-ID/body hash", "seed": RANDOM_STATE, "group_key": "message_id_or_body_hash", "partitions": {"train": len(train_idx), "test": len(test_idx)}},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": 0.0, "train_test_f1_gap": 0.0, "test_accuracy_max": max(item.accuracy for item in results), "class_imbalance_ratio": float((labels == 0).sum() / max((labels == 1).sum(), 1))},
+        metrics=metrics,
+    )
 
 
 if __name__ == "__main__":

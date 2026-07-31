@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T06:20:26.823810+00:00",
+  "mode": "synthetic_fallback",
+  "name": "Scenario-based synthetic crypto-ransomware telemetry",
+  "source_url": "",
+  "license": "Local synthetic generator",
+  "citation": "",
+  "limitations": "Synthetic fallback with overlapping encryption and resource distributions."
+}

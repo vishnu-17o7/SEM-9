@@ -18,6 +18,11 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
 from tqdm import tqdm
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -182,6 +187,14 @@ def main():
     df["label"] = y[:1000].astype(int)
     df.to_csv(DATA_DIR / "pe_features_preview.csv", index=False)
     print(f"  Preview CSV: {DATA_DIR / 'pe_features_preview.csv'}")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback",
+        "name": "Synthetic PE feature benchmark",
+        "source_url": "https://github.com/elastic/ember",
+        "license": "Local synthetic generator; EMBER license applies only to official data.",
+        "citation": "EMBER: An Open Dataset for Training Static PE Malware Machine Learning Models",
+        "limitations": "Synthetic fallback; metrics do not establish real malware generalization.",
+    })
 
 
 if __name__ == "__main__":

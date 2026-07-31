@@ -1,0 +1,65 @@
+{
+  "IsolationForest": {
+    "name": "IsolationForest",
+    "accuracy": 0.9776,
+    "precision": 0.9792,
+    "recall": 0.7983,
+    "f1": 0.8795,
+    "roc_auc": 0.9987,
+    "train_time_s": 0.483,
+    "predict_time_s": 0.116,
+    "confusion_matrix": [
+      [
+        4111,
+        8
+      ],
+      [
+        95,
+        376
+      ]
+    ],
+    "anomaly_count": 384
+  },
+  "PCA_Mahalanobis": {
+    "name": "PCA_Mahalanobis",
+    "accuracy": 0.9802,
+    "precision": 1.0,
+    "recall": 0.8068,
+    "f1": 0.8931,
+    "roc_auc": 1.0,
+    "train_time_s": 7.061,
+    "predict_time_s": 0.005,
+    "confusion_matrix": [
+      [
+        4119,
+        0
+      ],
+      [
+        91,
+        380
+      ]
+    ],
+    "anomaly_count": 380
+  },
+  "Autoencoder": {
+    "name": "Autoencoder",
+    "accuracy": 0.9275,
+    "precision": 0.6865,
+    "recall": 0.5393,
+    "f1": 0.604,
+    "roc_auc": 0.9363,
+    "train_time_s": 7.725,
+    "predict_time_s": 0.006,
+    "confusion_matrix": [
+      [
+        4003,
+        116
+      ],
+      [
+        217,
+        254
+      ]
+    ],
+    "anomaly_count": 370
+  }
+}

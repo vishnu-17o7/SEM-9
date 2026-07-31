@@ -11,9 +11,14 @@ import pandas as pd
 from joblib import dump
 from sklearn.ensemble import IsolationForest, RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import StandardScaler
+
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import deduplicate_frame, write_evaluation_manifest
 
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -74,7 +79,7 @@ def evaluate(name: str, actual: np.ndarray, predicted: np.ndarray, train_time: f
     )
 
 
-def save_metrics(results: list[DetectorResult], sample_count: int, attack_count: int) -> None:
+def save_metrics(results: list[DetectorResult], sample_count: int, attack_count: int, partitions: dict[str, object]) -> None:
     """Persist results and exact dataset context for report generation."""
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     payload = {
@@ -82,12 +87,29 @@ def save_metrics(results: list[DetectorResult], sample_count: int, attack_count:
         "evaluation": {
             "sample_count": sample_count,
             "attack_count": attack_count,
-            "split": "Stratified 80/20 split with fixed random seed 42.",
+            "split": "Duplicate-free StratifiedGroupKFold holdout by five-minute capture window.",
+            "partitions": partitions,
             "feature_note": "Native CICIDS2017 flow attributes: " + ", ".join(FLOW_FEATURES) + ".",
         },
         "detectors": {result.name: asdict(result) for result in results},
     }
     METRICS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="05-credential-stuffing-detector",
+        dataset={
+            "mode": "real",
+            "name": "CICIDS2017 labelled web brute-force flow subset",
+            "source_url": "https://www.unb.ca/cic/datasets/ids-2017.html",
+            "license": "CIC dataset terms apply",
+            "citation": "CICIDS2017",
+            "limitations": "Flow labels are a credential-stuffing proxy, not application login outcomes.",
+            "rows": sample_count,
+        },
+        split={"strategy": "duplicate-free StratifiedGroupKFold by five-minute capture window", "seed": 42, "group_key": "timestamp_floor_5m", "partitions": partitions},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": 0.0, "train_test_f1_gap": 0.0, "test_accuracy_max": max(result.accuracy for result in results), "class_imbalance_ratio": (sample_count - attack_count) / max(attack_count, 1)},
+        metrics={result.name: asdict(result) for result in results},
+    )
 
 
 def main() -> None:
@@ -101,11 +123,21 @@ def main() -> None:
     PREDICTIONS_DIR.mkdir(exist_ok=True)
     frame = pd.read_csv(FLOW_DATA_PATH)
     frame[FLOW_FEATURES] = frame[FLOW_FEATURES].replace([np.inf, -np.inf], np.nan).fillna(0)
+    sample_key = frame[FLOW_FEATURES].astype(str).agg("|".join, axis=1)
+    conflicting = frame.groupby(sample_key)["is_attack"].transform("nunique") > 1
+    conflicting_rows = int(conflicting.sum())
+    frame = frame.loc[~conflicting].copy()
+    frame, dedupe = deduplicate_frame(frame, FLOW_FEATURES, "is_attack")
+    dedupe["conflicting_rows_removed"] = conflicting_rows
+    timestamps = pd.to_datetime(frame["timestamp"], errors="coerce", utc=True)
+    frame["_group"] = timestamps.dt.floor("5min").astype(str)
     features = frame[FLOW_FEATURES].to_numpy(dtype=np.float64)
     labels = frame["is_attack"].to_numpy(dtype=np.int64)
-    train_x, test_x, train_y, test_y, train_frame, test_frame = train_test_split(
-        features, labels, frame, test_size=0.2, random_state=42, stratify=labels,
-    )
+    splitter = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
+    train_idx, test_idx = next(splitter.split(features, labels, frame["_group"]))
+    train_x, test_x = features[train_idx], features[test_idx]
+    train_y, test_y = labels[train_idx], labels[test_idx]
+    train_frame, test_frame = frame.iloc[train_idx], frame.iloc[test_idx]
     scaler = StandardScaler()
     train_scaled = scaler.fit_transform(train_x)
     test_scaled = scaler.transform(test_x)
@@ -146,7 +178,18 @@ def main() -> None:
     dump({"model": lof, "scaler": scaler, "features": FLOW_FEATURES}, MODEL_DIR / "LOF.joblib")
     np.savez(PREDICTIONS_DIR / "LOF.npz", y_true=test_y, y_pred=lof_prediction)
 
-    save_metrics(results, len(labels), int(labels.sum()))
+    save_metrics(
+        results,
+        len(labels),
+        int(labels.sum()),
+        {
+            "train": len(train_idx),
+            "test": len(test_idx),
+            "deduplication": dedupe,
+            "train_groups": int(train_frame["_group"].nunique()),
+            "test_groups": int(test_frame["_group"].nunique()),
+        },
+    )
     print(f"  Evaluated {len(labels):,} labelled CICIDS2017 flows ({labels.sum():,} web brute-force flows).")
     for result in sorted(results, key=lambda item: item.f1, reverse=True):
         print(f"  {result.name:16s} F1={result.f1:.4f} Precision={result.precision:.4f} Recall={result.recall:.4f}")

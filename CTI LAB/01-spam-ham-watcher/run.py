@@ -21,7 +21,9 @@ DIR = Path(__file__).parent
 PY = sys.executable
 
 COMMANDS: dict[str, list[list[str]]] = {
+    "data": [["train_text_model.py", "--data-only"]],
     "train": [["train_text_model.py"]],
+    "report": [["report.py"]],
 }
 
 EXTRA_COMMANDS: dict[str, str] = {
@@ -50,7 +52,9 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Spam/Ham Watcher -- unified runner")
     parser.add_argument("command", nargs="?", default="steps",
-                        help="train | classify | watch | web | all | steps")
+                        help="data | train | report | audit | classify | watch | web | all | steps")
+    parser.add_argument("--source", choices=["auto", "real", "synthetic"], default="auto")
+    parser.add_argument("--input", type=Path, help="Optional local dataset or source archive")
     parser.add_argument("cmd_args", nargs="*", help="Extra args for classify/watch/web")
     args = parser.parse_args()
 
@@ -64,11 +68,20 @@ def main() -> None:
         return
 
     if cmd == "all":
-        steps: list[list[str]] = []
-        for step_list in COMMANDS.values():
-            steps.extend(step_list)
+        steps: list[list[str]] = [["train_text_model.py", "--data-only", "--source", args.source], ["train_text_model.py"]]
         run_scripts(steps)
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "evaluation_guard.py"), "--project", str(DIR)]])
+        run_scripts([["report.py"]])
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "report_badge.py"), "--project", str(DIR)]])
         print("\n  [OK] Pipeline complete!")
+        return
+
+    if cmd == "audit":
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "evaluation_guard.py"), "--project", str(DIR)]])
+        return
+
+    if cmd == "data":
+        run_scripts([["train_text_model.py", "--data-only", "--source", args.source]])
         return
 
     if cmd in COMMANDS:

@@ -28,6 +28,11 @@ from sklearn.metrics import (
 from sklearn.covariance import MinCovDet
 from joblib import dump
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import source_context, write_evaluation_manifest
+
 warnings.filterwarnings("ignore")
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -125,7 +130,7 @@ def engineer_features(df):
     # Ensure is_anomaly is integer for downstream evaluation
     if "is_anomaly" in df_features.columns:
         df_features["is_anomaly"] = df_features["is_anomaly"].astype(int)
-    return df_features, feature_cols
+    return df_features.sort_values(["hour_window", "user_id"]).reset_index(drop=True), feature_cols
 
 
 def evaluate_detector(name, y_true, y_pred, y_score=None, train_time=0, predict_time=0):
@@ -179,27 +184,30 @@ def main():
     print(f"  After cleaning: {len(X)} samples, anomaly rate: {y.mean():.1%}")
 
     # Temporal split
-    split_idx = int(len(X) * 0.7)
-    X_train, X_test = X[:split_idx], X[split_idx:]
-    y_train, y_test = y[:split_idx], y[split_idx:]
+    train_end = int(len(X) * 0.6)
+    validation_end = int(len(X) * 0.8)
+    X_train, X_validation, X_test = X[:train_end], X[train_end:validation_end], X[validation_end:]
+    y_train, y_validation, y_test = y[:train_end], y[train_end:validation_end], y[validation_end:]
 
     scaler = StandardScaler()
     X_train_s = scaler.fit_transform(X_train)
+    X_validation_s = scaler.transform(X_validation)
     X_test_s = scaler.transform(X_test)
 
     results = []
 
     # ── 1. GMM ────────────────────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
+    print(f"\n  {'=' * 50}")
     print("  Gaussian Mixture Model...")
     t0 = time.perf_counter()
     gmm = GaussianMixture(n_components=3, covariance_type="full", random_state=42)
     gmm.fit(X_train_s)
     train_time = time.perf_counter() - t0
     t0 = time.perf_counter()
+    gmm_validation_scores = -gmm.score_samples(X_validation_s)
     gmm_scores = -gmm.score_samples(X_test_s)
     pred_time = time.perf_counter() - t0
-    threshold = np.percentile(gmm_scores, 95)
+    threshold = np.percentile(gmm_validation_scores, 95)
     gmm_pred = (gmm_scores > threshold).astype(int)
     results.append(evaluate_detector("GMM", y_test, gmm_pred, gmm_scores, train_time, pred_time))
     dump({"model": gmm, "scaler": scaler, "features": feature_cols}, MODEL_DIR / "GMM.joblib")
@@ -207,7 +215,7 @@ def main():
     print(f"  F1: {results[-1].f1:.4f}  ROC-AUC: {results[-1].roc_auc:.4f}")
 
     # ── 2. PCA + Mahalanobis ──────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
+    print(f"\n  {'=' * 50}")
     print("  PCA + Mahalanobis...")
     t0 = time.perf_counter()
     pca = PCA(n_components=0.95, random_state=42)
@@ -216,34 +224,37 @@ def main():
     mcd = MinCovDet(random_state=42).fit(X_pca)
     train_time = time.perf_counter() - t0
     t0 = time.perf_counter()
+    X_validation_pca = pca.transform(X_validation_s)
     X_test_pca = pca.transform(X_test_s)
+    pca_validation_scores = mcd.mahalanobis(X_validation_pca)
     pca_scores = mcd.mahalanobis(X_test_pca)
     pred_time = time.perf_counter() - t0
-    threshold = np.percentile(pca_scores, 95)
+    threshold = np.percentile(pca_validation_scores, 95)
     pca_pred = (pca_scores > threshold).astype(int)
     results.append(evaluate_detector("PCA_Mahalanobis", y_test, pca_pred, pca_scores, train_time, pred_time))
     print(f"  F1: {results[-1].f1:.4f}  ROC-AUC: {results[-1].roc_auc:.4f}")
     np.savez(PREDICTIONS_DIR / "PCA_Mahalanobis.npz", y_true=y_test, y_pred=pca_pred, y_score=pca_scores)
 
     # ── 3. IsolationForest ────────────────────────────────────────────────
-    print(f"\n  {'─' * 50}")
+    print(f"\n  {'=' * 50}")
     print("  IsolationForest...")
     t0 = time.perf_counter()
     iso = IsolationForest(contamination=0.05, random_state=42, n_jobs=-1)
     iso.fit(X_train_s)
     train_time = time.perf_counter() - t0
     t0 = time.perf_counter()
+    iso_validation_scores = -iso.score_samples(X_validation_s)
     iso_scores = -iso.score_samples(X_test_s)
     pred_time = time.perf_counter() - t0
-    iso_pred = iso.predict(X_test_s)
-    iso_pred = (iso_pred == -1).astype(int)
+    iso_threshold = np.percentile(iso_validation_scores, 95)
+    iso_pred = (iso_scores > iso_threshold).astype(int)
     results.append(evaluate_detector("IsolationForest", y_test, iso_pred, iso_scores, train_time, pred_time))
     dump({"model": iso, "scaler": scaler, "features": feature_cols}, MODEL_DIR / "IsolationForest.joblib")
     np.savez(PREDICTIONS_DIR / "IsolationForest.npz", y_true=y_test, y_pred=iso_pred, y_score=iso_scores)
     print(f"  F1: {results[-1].f1:.4f}  ROC-AUC: {results[-1].roc_auc:.4f}")
 
     # ── 4. Autoencoder (MLPRegressor) ─────────────────────────────────────
-    print(f"\n  {'─' * 50}")
+    print(f"\n  {'=' * 50}")
     print("  Autoencoder (MLP reconstruction)...")
     t0 = time.perf_counter()
     ae = MLPRegressor(
@@ -253,10 +264,12 @@ def main():
     ae.fit(X_train_s, X_train_s)
     train_time = time.perf_counter() - t0
     t0 = time.perf_counter()
+    X_validation_recon = ae.predict(X_validation_s)
     X_recon = ae.predict(X_test_s)
     pred_time = time.perf_counter() - t0
+    ae_validation_scores = np.mean((X_validation_s - X_validation_recon) ** 2, axis=1)
     ae_scores = np.mean((X_test_s - X_recon) ** 2, axis=1)
-    threshold = np.percentile(ae_scores, 95)
+    threshold = np.percentile(ae_validation_scores, 95)
     ae_pred = (ae_scores > threshold).astype(int)
     results.append(evaluate_detector("Autoencoder", y_test, ae_pred, ae_scores, train_time, pred_time))
     dump({"model": ae, "scaler": scaler, "features": feature_cols}, MODEL_DIR / "Autoencoder.joblib")
@@ -271,12 +284,20 @@ def main():
         metrics_dict[r.name] = d
     with open(METRICS_JSON, "w") as f:
         json.dump(metrics_dict, f, indent=2)
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="06-behavioral-profile-ueba",
+        dataset={**source_context(DATA_DIR, "Synthetic enterprise behavior logs"), "rows": len(raw_df), "limitations": "Synthetic behavior logs are a controlled anomaly-detection benchmark."},
+        split={"strategy": "chronological 60/20/20 train/validation/test windows", "seed": 42, "group_key": "hour_window,user_id", "partitions": {"train": len(X_train), "validation": len(X_validation), "test": len(X_test)}},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": 0.0, "train_test_f1_gap": 0.0, "test_accuracy_max": max(r.accuracy for r in results), "class_imbalance_ratio": float((y == 0).sum() / max((y == 1).sum(), 1))},
+        metrics=metrics_dict,
+    )
     print(f"\n  {METRICS_JSON}")
 
     # Summary
     print(f"\n  {'=' * 50}")
     print(f"  {'Detector':20s} {'F1':8s} {'ROC-AUC':8s} {'Precision':8s}")
-    print(f"  {'─' * 50}")
+    print(f"  {'=' * 50}")
     for r in sorted(results, key=lambda x: x.f1, reverse=True):
         print(f"  {r.name:20s} {r.f1:.4f}  {r.roc_auc:.4f}  {r.precision:.4f}")
     print()

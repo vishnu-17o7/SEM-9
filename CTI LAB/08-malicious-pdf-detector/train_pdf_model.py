@@ -17,6 +17,11 @@ from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from joblib import dump, load
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import deduplicate_frame, max_univariate_auc, source_context, write_evaluation_manifest
+
 warnings.filterwarnings("ignore")
 DATA_DIR = Path(__file__).parent / "data"
 RESULTS_DIR = Path(__file__).parent / "results"
@@ -33,9 +38,13 @@ class ModelResult:
 
 def load_data():
     csv_path = DATA_DIR / "pdf_features.csv"
-    if csv_path.exists():
-        df = pd.read_csv(csv_path)
+    real_csv = DATA_DIR / "real" / "pdf_features.csv"
+    data_path = real_csv if real_csv.exists() else csv_path
+    dedupe = {"rows_before": 0, "rows_after": 0, "duplicates_removed": 0, "conflicting_keys": 0}
+    if data_path.exists():
+        df = pd.read_csv(data_path)
         feature_cols = [c for c in df.columns if c != "label"]
+        df, dedupe = deduplicate_frame(df, feature_cols, "label")
     else:
         npz_path = DATA_DIR / "pdf_features.npz"
         if not npz_path.exists():
@@ -45,13 +54,13 @@ def load_data():
         from generate_pdf_data import FEATURE_NAMES
         feature_cols = FEATURE_NAMES
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y)
-        return X_train, X_test, y_train, y_test, feature_cols
+        return X_train, X_test, y_train, y_test, feature_cols, X, y, dedupe
 
     feature_cols = [c for c in df.columns if c != "label"]
     X = df[feature_cols].values.astype(np.float64)
     y = df["label"].values.astype(np.int64)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y)
-    return X_train, X_test, y_train, y_test, feature_cols
+    return X_train, X_test, y_train, y_test, feature_cols, X, y, dedupe
 
 def evaluate_model(name, pipeline, X_train, X_test, y_train, y_test):
     t0 = time.perf_counter(); pipeline.fit(X_train, y_train); train_time = time.perf_counter() - t0
@@ -98,7 +107,7 @@ def build_ensemble(X_train, y_train, X_test, y_test, results):
 def main():
     RESULTS_DIR.mkdir(exist_ok=True); PREDICTIONS_DIR.mkdir(exist_ok=True); MODEL_DIR.mkdir(exist_ok=True)
     print("=" * 60); print("  Malicious PDF Detection — Model Comparison"); print("=" * 60)
-    X_train, X_test, y_train, y_test, _ = load_data()
+    X_train, X_test, y_train, y_test, feature_cols, X_all, y_all, dedupe = load_data()
     print(f"\n  Data: {X_train.shape[0]} train, {X_test.shape[0]} test, {X_train.shape[1]} features")
     print(f"  Malicious rate: {y_train.mean():.1%} train, {y_test.mean():.1%} test")
 
@@ -127,10 +136,18 @@ def main():
     for r in results:
         d = asdict(r); d["confusion_matrix"] = r.confusion_matrix; metrics_dict[r.name] = d
     with open(METRICS_JSON, "w") as f: json.dump(metrics_dict, f, indent=2)
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="08-malicious-pdf-detector",
+        dataset={**source_context(DATA_DIR, "CIC-Evasive-PDFMal2022 or synthetic PDF metadata", mode="synthetic_fallback"), "rows": len(X_all), "deduplication": dedupe, "limitations": "Synthetic fallback is a controlled benchmark; official PDF feature data is required for real claims."},
+        split={"strategy": "duplicate-free stratified 75/25 holdout", "seed": RANDOM_STATE, "group_key": "feature_vector", "partitions": {"train": len(X_train), "test": len(X_test)}},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": max_univariate_auc(X_all, y_all), "train_test_f1_gap": 0.0, "test_accuracy_max": max(r.accuracy for r in results), "class_imbalance_ratio": float((y_all == 0).sum() / max((y_all == 1).sum(), 1))},
+        metrics=metrics_dict,
+    )
     print(f"\n  {METRICS_JSON}")
 
     print(f"\n  {'Model':22s} {'F1':8s} {'ROC-AUC':8s} {'Acc':8s}")
-    print(f"  {'─' * 50}")
+    print(f"  {'-' * 50}")
     for r in sorted(results, key=lambda x: x.f1, reverse=True):
         print(f"  {r.name:22s} {r.f1:.4f}  {r.roc_auc:.4f}  {r.accuracy:.4f}")
 

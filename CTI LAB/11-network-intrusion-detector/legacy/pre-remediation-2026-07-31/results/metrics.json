@@ -1,0 +1,112 @@
+{
+  "LogisticRegression": {
+    "name": "LogisticRegression",
+    "family": "LogisticRegression",
+    "accuracy": 0.7539,
+    "precision": 0.9252,
+    "recall": 0.6175,
+    "f1": 0.7407,
+    "roc_auc": 0.8714,
+    "train_time_s": 1.539,
+    "predict_time_s": 0.009,
+    "confusion_matrix": [
+      [
+        9070,
+        641
+      ],
+      [
+        4908,
+        7925
+      ]
+    ],
+    "per_category_f1": null
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "family": "RandomForestClassifier",
+    "accuracy": 0.7735,
+    "precision": 0.9668,
+    "recall": 0.6235,
+    "f1": 0.7581,
+    "roc_auc": 0.9707,
+    "train_time_s": 5.988,
+    "predict_time_s": 0.116,
+    "confusion_matrix": [
+      [
+        9436,
+        275
+      ],
+      [
+        4831,
+        8002
+      ]
+    ],
+    "per_category_f1": null
+  },
+  "GradientBoosting": {
+    "name": "GradientBoosting",
+    "family": "GradientBoostingClassifier",
+    "accuracy": 0.7689,
+    "precision": 0.9649,
+    "recall": 0.6164,
+    "f1": 0.7522,
+    "roc_auc": 0.9636,
+    "train_time_s": 123.657,
+    "predict_time_s": 0.15,
+    "confusion_matrix": [
+      [
+        9423,
+        288
+      ],
+      [
+        4923,
+        7910
+      ]
+    ],
+    "per_category_f1": null
+  },
+  "KNN": {
+    "name": "KNN",
+    "family": "KNeighborsClassifier",
+    "accuracy": 0.7676,
+    "precision": 0.9716,
+    "recall": 0.6095,
+    "f1": 0.7491,
+    "roc_auc": 0.8229,
+    "train_time_s": 0.181,
+    "predict_time_s": 18.211,
+    "confusion_matrix": [
+      [
+        9482,
+        229
+      ],
+      [
+        5011,
+        7822
+      ]
+    ],
+    "per_category_f1": null
+  },
+  "VotingEnsemble": {
+    "name": "VotingEnsemble",
+    "family": "ensemble",
+    "accuracy": 0.7697,
+    "precision": 0.9652,
+    "recall": 0.6176,
+    "f1": 0.7532,
+    "roc_auc": 0.9722,
+    "train_time_s": 134.193,
+    "predict_time_s": 139.076,
+    "confusion_matrix": [
+      [
+        9425,
+        286
+      ],
+      [
+        4907,
+        7926
+      ]
+    ],
+    "per_category_f1": null
+  }
+}

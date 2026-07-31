@@ -14,6 +14,11 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
 from tqdm import tqdm
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -170,6 +175,14 @@ def main():
     print(f"\n  Total: {len(df)} samples, {len(FEATURE_NAMES)} features")
     print(f"  Malicious ratio: {sum(labels) / len(labels):.1%}")
     print(f"  Saved to {out_path}")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback",
+        "name": "Synthetic PDF metadata benchmark",
+        "source_url": "https://www.unb.ca/cic/datasets/pdfmal-2022.html",
+        "license": "Local synthetic generator; official dataset terms apply only to official data.",
+        "citation": "CIC-Evasive-PDFMal2022",
+        "limitations": "Synthetic fallback; metrics do not establish real PDF malware generalization.",
+    })
 
     # Also save as npz
     X = df[FEATURE_NAMES].values.astype(np.float64)

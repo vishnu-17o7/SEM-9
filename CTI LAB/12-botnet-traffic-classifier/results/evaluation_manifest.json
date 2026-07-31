@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T07:04:17.245591+00:00",
+  "project": "12-botnet-traffic-classifier",
+  "dataset": {
+    "generated_at": "2026-07-31T07:03:34.446759+00:00",
+    "mode": "synthetic_fallback",
+    "name": "Scenario-based synthetic botnet traffic",
+    "source_url": "https://www.stratosphereips.org/datasets-ctu13",
+    "license": "Local synthetic generator; CTU-13 terms apply only to official data.",
+    "citation": "CTU-13",
+    "limitations": "Synthetic fallback; c2_communication_score and irc_message_count are excluded as generator-only oracle fields.",
+    "rows": 20000
+  },
+  "split": {
+    "strategy": "StratifiedGroupKFold holdout by scenario_id",
+    "seed": 42,
+    "group_key": "scenario_id",
+    "partitions": {
+      "train": 15384,
+      "test": 4616
+    },
+    "train_groups": 10,
+    "test_groups": 3
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.684602578125,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.8993,
+    "class_imbalance_ratio": 4.0
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 0.8897,
+      "precision": 0.9929,
+      "recall": 0.4518,
+      "f1": 0.621,
+      "roc_auc": 0.7507,
+      "train_time_s": 0.071,
+      "predict_time_s": 0.004,
+      "confusion_matrix": [
+        [
+          3690,
+          3
+        ],
+        [
+          506,
+          417
+        ]
+      ],
+      "notes": ""
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 0.8993,
+      "precision": 1.0,
+      "recall": 0.4962,
+      "f1": 0.6633,
+      "roc_auc": 0.7462,
+      "train_time_s": 3.07,
+      "predict_time_s": 0.128,
+      "confusion_matrix": [
+        [
+          3693,
+          0
+        ],
+        [
+          465,
+          458
+        ]
+      ],
+      "notes": ""
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 0.898,
+      "precision": 0.9934,
+      "recall": 0.493,
+      "f1": 0.6589,
+      "roc_auc": 0.7475,
+      "train_time_s": 15.338,
+      "predict_time_s": 0.008,
+      "confusion_matrix": [
+        [
+          3690,
+          3
+        ],
+        [
+          468,
+          455
+        ]
+      ],
+      "notes": ""
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 0.8982,
+      "precision": 0.9956,
+      "recall": 0.493,
+      "f1": 0.6594,
+      "roc_auc": 0.7496,
+      "train_time_s": 17.088,
+      "predict_time_s": 17.201,
+      "confusion_matrix": [
+        [
+          3691,
+          2
+        ],
+        [
+          468,
+          455
+        ]
+      ],
+      "notes": ""
+    }
+  }
+}

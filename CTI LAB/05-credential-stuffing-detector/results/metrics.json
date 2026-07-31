@@ -1,6 +1,6 @@
 {
   "dataset": {
-    "generated_at": "2026-07-10T04:27:39.004651+00:00",
+    "generated_at": "2026-07-31T06:06:11.966700+00:00",
     "datasets": [
       {
         "name": "CICIDS2017",
@@ -27,15 +27,28 @@
     "training_note": "Metrics are reported against CICIDS2017 web brute-force labels. They are an intrusion detection benchmark, not a claim of real-world web credential-stuffing accuracy."
   },
   "evaluation": {
-    "sample_count": 31464,
-    "attack_count": 1507,
-    "split": "Stratified 80/20 split with fixed random seed 42.",
+    "sample_count": 30406,
+    "attack_count": 1423,
+    "split": "Duplicate-free StratifiedGroupKFold holdout by five-minute capture window.",
+    "partitions": {
+      "train": 24360,
+      "test": 6046,
+      "deduplication": {
+        "rows_before": 31455,
+        "rows_after": 30406,
+        "duplicates_removed": 1049,
+        "conflicting_keys": 0,
+        "conflicting_rows_removed": 9
+      },
+      "train_groups": 11,
+      "test_groups": 3
+    },
     "feature_note": "Native CICIDS2017 flow attributes: destination_port, flow_duration, total_fwd_packets, total_backward_packets, total_fwd_bytes, total_backward_bytes, flow_bytes_per_second, flow_packets_per_second, syn_flag_count, ack_flag_count, fwd_iat_mean, bwd_iat_mean."
   },
   "detectors": {
     "RuleBased": {
       "name": "RuleBased",
-      "accuracy": 0.9517,
+      "accuracy": 0.9395,
       "precision": 0.0,
       "recall": 0.0,
       "f1": 0.0,
@@ -43,79 +56,79 @@
       "predict_time_s": 0.001,
       "confusion_matrix": [
         [
-          5989,
-          3
+          5680,
+          2
         ],
         [
-          301,
+          364,
           0
         ]
       ],
-      "detection_count": 3,
-      "false_positive_rate": 0.0005
+      "detection_count": 2,
+      "false_positive_rate": 0.0004
     },
     "IsolationForest": {
       "name": "IsolationForest",
-      "accuracy": 0.9066,
-      "precision": 0.0233,
-      "recall": 0.0233,
-      "f1": 0.0233,
-      "train_time_s": 0.558,
-      "predict_time_s": 0.041,
+      "accuracy": 0.9074,
+      "precision": 0.0776,
+      "recall": 0.0495,
+      "f1": 0.0604,
+      "train_time_s": 0.562,
+      "predict_time_s": 0.053,
       "confusion_matrix": [
         [
-          5698,
-          294
+          5468,
+          214
         ],
         [
-          294,
-          7
+          346,
+          18
         ]
       ],
-      "detection_count": 301,
-      "false_positive_rate": 0.0491
+      "detection_count": 232,
+      "false_positive_rate": 0.0377
     },
     "RandomForest": {
       "name": "RandomForest",
-      "accuracy": 0.9965,
-      "precision": 0.9429,
-      "recall": 0.9867,
-      "f1": 0.9643,
-      "train_time_s": 1.005,
-      "predict_time_s": 0.117,
+      "accuracy": 0.9974,
+      "precision": 0.9603,
+      "recall": 0.9973,
+      "f1": 0.9784,
+      "train_time_s": 1.07,
+      "predict_time_s": 0.116,
       "confusion_matrix": [
         [
-          5974,
-          18
+          5667,
+          15
         ],
         [
-          4,
-          297
+          1,
+          363
         ]
       ],
-      "detection_count": 315,
-      "false_positive_rate": 0.003
+      "detection_count": 378,
+      "false_positive_rate": 0.0026
     },
     "LOF": {
       "name": "LOF",
-      "accuracy": 0.9026,
+      "accuracy": 0.896,
       "precision": 0.0,
       "recall": 0.0,
       "f1": 0.0,
-      "train_time_s": 2.499,
-      "predict_time_s": 0.65,
+      "train_time_s": 3.059,
+      "predict_time_s": 0.625,
       "confusion_matrix": [
         [
-          5680,
-          312
+          5417,
+          265
         ],
         [
-          301,
+          364,
           0
         ]
       ],
-      "detection_count": 312,
-      "false_positive_rate": 0.0521
+      "detection_count": 265,
+      "false_positive_rate": 0.0466
     }
   }
 }

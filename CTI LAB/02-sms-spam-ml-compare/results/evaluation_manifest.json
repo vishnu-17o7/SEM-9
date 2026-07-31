@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:41:53.312250+00:00",
+  "project": "02-sms-spam-ml-compare",
+  "dataset": {
+    "mode": "real",
+    "name": "UCI SMS Spam Collection",
+    "source_url": "",
+    "license": "Synthetic fallback generated locally",
+    "citation": "",
+    "limitations": "Synthetic fallback; metrics do not establish real-world generalization.",
+    "rows": 5092
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold holdout by normalized message",
+    "seed": 42,
+    "partitions": {
+      "train": 4073,
+      "test": 1019
+    },
+    "group_key": "clean_message"
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.9862610402355251,
+    "class_imbalance_ratio": 7.574736842105263
+  },
+  "metrics": [
+    {
+      "name": "MultinomialNB",
+      "family": "base",
+      "accuracy": 0.9627085377821394,
+      "precision": 1.0,
+      "recall": 0.680672268907563,
+      "f1": 0.81,
+      "roc_auc": 0.9740242763772176,
+      "train_time_s": 0.27,
+      "predict_time_s": 0.031,
+      "confusion_matrix": [
+        [
+          900,
+          0
+        ],
+        [
+          38,
+          81
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "ComplementNB",
+      "family": "base",
+      "accuracy": 0.97252208047105,
+      "precision": 0.8956521739130435,
+      "recall": 0.865546218487395,
+      "f1": 0.8803418803418803,
+      "roc_auc": 0.9740242763772176,
+      "train_time_s": 0.239,
+      "predict_time_s": 0.036,
+      "confusion_matrix": [
+        [
+          888,
+          12
+        ],
+        [
+          16,
+          103
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "LogisticRegression",
+      "family": "base",
+      "accuracy": 0.9617271835132483,
+      "precision": 1.0,
+      "recall": 0.6722689075630253,
+      "f1": 0.8040201005025126,
+      "roc_auc": 0.9852941176470588,
+      "train_time_s": 0.325,
+      "predict_time_s": 0.038,
+      "confusion_matrix": [
+        [
+          900,
+          0
+        ],
+        [
+          39,
+          80
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "LinearSVC",
+      "family": "base",
+      "accuracy": 0.9862610402355251,
+      "precision": 1.0,
+      "recall": 0.8823529411764706,
+      "f1": 0.9375,
+      "roc_auc": 0.9861531279178338,
+      "train_time_s": 0.301,
+      "predict_time_s": 0.056,
+      "confusion_matrix": [
+        [
+          900,
+          0
+        ],
+        [
+          14,
+          105
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "RandomForest",
+      "family": "base",
+      "accuracy": 0.9735034347399412,
+      "precision": 0.9893617021276596,
+      "recall": 0.7815126050420168,
+      "f1": 0.8732394366197183,
+      "roc_auc": 0.9906535947712418,
+      "train_time_s": 1.984,
+      "predict_time_s": 0.217,
+      "confusion_matrix": [
+        [
+          899,
+          1
+        ],
+        [
+          26,
+          93
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "GradientBoosting",
+      "family": "base",
+      "accuracy": 0.957801766437684,
+      "precision": 0.9523809523809523,
+      "recall": 0.6722689075630253,
+      "f1": 0.7881773399014779,
+      "roc_auc": 0.9595845004668534,
+      "train_time_s": 4.148,
+      "predict_time_s": 0.044,
+      "confusion_matrix": [
+        [
+          896,
+          4
+        ],
+        [
+          39,
+          80
+        ]
+      ],
+      "notes": "",
+      "estimator": ""
+    },
+    {
+      "name": "SoftVoting",
+      "family": "ensemble",
+      "accuracy": 0.9823356231599607,
+      "precision": 1.0,
+      "recall": 0.8487394957983193,
+      "f1": 0.9181818181818182,
+      "roc_auc": 0.9828758169934642,
+      "train_time_s": 5.492,
+      "predict_time_s": 0.059,
+      "confusion_matrix": [
+        [
+          900,
+          0
+        ],
+        [
+          18,
+          101
+        ]
+      ],
+      "notes": "ensemble of NB + CNB + LR + SVM/GBDT",
+      "estimator": ""
+    },
+    {
+      "name": "Stacking",
+      "family": "ensemble",
+      "accuracy": 0.9823356231599607,
+      "precision": 0.9902912621359223,
+      "recall": 0.8571428571428571,
+      "f1": 0.918918918918919,
+      "roc_auc": 0.9797852474323062,
+      "train_time_s": 28.181,
+      "predict_time_s": 0.058,
+      "confusion_matrix": [
+        [
+          899,
+          1
+        ],
+        [
+          17,
+          102
+        ]
+      ],
+      "notes": "ensemble of NB + CNB + LR + SVM/GBDT",
+      "estimator": ""
+    }
+  ]
+}

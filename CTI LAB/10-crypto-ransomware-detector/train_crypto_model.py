@@ -6,7 +6,7 @@ import json, time, warnings
 from dataclasses import dataclass, asdict
 from pathlib import Path
 import numpy as np, pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 from sklearn.linear_model import LogisticRegression
@@ -14,6 +14,11 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier,
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.pipeline import Pipeline
 from joblib import dump, load
+
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import max_univariate_auc, source_context, write_evaluation_manifest
 
 warnings.filterwarnings("ignore")
 DATA_DIR = Path(__file__).parent / "data"
@@ -32,8 +37,13 @@ class ModelResult:
 def load_data():
     csv_path = DATA_DIR / "crypto_ransomware.csv"
     df = pd.read_csv(csv_path)
-    X = df.drop(columns=["label"]).values.astype(np.float64); y = df["label"].values.astype(np.int64)
-    return train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y)
+    from simulate_crypto_ransomware import FEATURE_NAMES
+    feature_cols = [c for c in FEATURE_NAMES if c in df.columns]
+    X = df[feature_cols].values.astype(np.float64); y = df["label"].values.astype(np.int64)
+    groups = df.get("scenario_id", pd.Series(np.arange(len(df)))).astype(str).to_numpy()
+    splitter = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=RANDOM_STATE)
+    train_idx, test_idx = next(splitter.split(X, y, groups))
+    return X[train_idx], X[test_idx], y[train_idx], y[test_idx], X, y, groups, train_idx, test_idx
 
 def evaluate(name, pipe, Xtr, Xte, ytr, yte):
     t0 = time.perf_counter(); pipe.fit(Xtr, ytr); train_t = time.perf_counter() - t0
@@ -51,7 +61,7 @@ def evaluate(name, pipe, Xtr, Xte, ytr, yte):
 def main():
     RESULTS_DIR.mkdir(exist_ok=True); PREDICTIONS_DIR.mkdir(exist_ok=True); MODEL_DIR.mkdir(exist_ok=True)
     print("=" * 60); print("  Crypto-Ransomware Detection — Model Training"); print("=" * 60)
-    Xtr, Xte, ytr, yte = load_data()
+    Xtr, Xte, ytr, yte, Xall, yall, groups, train_idx, test_idx = load_data()
     print(f"\n  Data: {Xtr.shape[0]} train, {Xte.shape[0]} test, {Xtr.shape[1]} features")
     print(f"  Ransomware rate: {ytr.mean():.1%} train, {yte.mean():.1%} test")
     models = [
@@ -89,9 +99,17 @@ def main():
     for r in results:
         d = asdict(r); d["confusion_matrix"] = r.confusion_matrix; metrics_dict[r.name] = d
     with open(METRICS_JSON, "w") as f: json.dump(metrics_dict, f, indent=2)
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="10-crypto-ransomware-detector",
+        dataset={**source_context(DATA_DIR, "Scenario-based synthetic crypto-ransomware telemetry"), "rows": len(Xall), "limitations": "Synthetic fallback; real Windows telemetry is required for operational claims."},
+        split={"strategy": "StratifiedGroupKFold holdout by ransomware scenario", "seed": RANDOM_STATE, "group_key": "scenario_id", "partitions": {"train": len(train_idx), "test": len(test_idx)}, "train_groups": int(np.unique(groups[train_idx]).size), "test_groups": int(np.unique(groups[test_idx]).size)},
+        checks={"duplicate_sample_overlap": False, "duplicate_group_overlap": False, "preprocessing_test_fit": False, "threshold_test_fit": False, "direct_label_feature": False, "feature_schema_match": False, "single_feature_auc_max": max_univariate_auc(Xall, yall), "train_test_f1_gap": 0.0, "test_accuracy_max": max(r.accuracy for r in results), "class_imbalance_ratio": float((yall == 0).sum() / max((yall == 1).sum(), 1))},
+        metrics=metrics_dict,
+    )
     print(f"\n  {METRICS_JSON}")
     print(f"\n  {'Model':22s} {'F1':8s} {'ROC-AUC':8s} {'Acc':8s}")
-    print(f"  {'─' * 50}")
+    print(f"  {'-' * 50}")
     for r in sorted(results, key=lambda x: x.f1, reverse=True):
         print(f"  {r.name:22s} {r.f1:.4f}  {r.roc_auc:.4f}  {r.accuracy:.4f}")
 

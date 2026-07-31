@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:20:59.929235+00:00",
+  "project": "10-crypto-ransomware-detector",
+  "dataset": {
+    "generated_at": "2026-07-31T06:20:26.823810+00:00",
+    "mode": "synthetic_fallback",
+    "name": "Scenario-based synthetic crypto-ransomware telemetry",
+    "source_url": "",
+    "license": "Local synthetic generator",
+    "citation": "",
+    "limitations": "Synthetic fallback; real Windows telemetry is required for operational claims.",
+    "rows": 15000
+  },
+  "split": {
+    "strategy": "StratifiedGroupKFold holdout by ransomware scenario",
+    "seed": 42,
+    "group_key": "scenario_id",
+    "partitions": {
+      "train": 11538,
+      "test": 3462
+    },
+    "train_groups": 10,
+    "test_groups": 3
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 1.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 1.0,
+    "class_imbalance_ratio": 4.0
+  },
+  "metrics": {
+    "DecisionTree": {
+      "name": "DecisionTree",
+      "family": "DecisionTreeClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 0.081,
+      "predict_time_s": 0.002,
+      "confusion_matrix": [
+        [
+          2770,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 0.955,
+      "predict_time_s": 0.115,
+      "confusion_matrix": [
+        [
+          2770,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 10.912,
+      "predict_time_s": 0.009,
+      "confusion_matrix": [
+        [
+          2770,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 0.072,
+      "predict_time_s": 0.002,
+      "confusion_matrix": [
+        [
+          2770,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0,
+      "train_time_s": 11.338,
+      "predict_time_s": 0.096,
+      "confusion_matrix": [
+        [
+          2770,
+          0
+        ],
+        [
+          0,
+          692
+        ]
+      ],
+      "notes": ""
+    }
+  }
+}

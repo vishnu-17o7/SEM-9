@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:04:12.495440+00:00",
+  "project": "04-email-phishing-nlp",
+  "dataset": {
+    "mode": "real",
+    "name": "Apache SpamAssassin public corpus",
+    "source_url": "https://spamassassin.apache.org/old/publiccorpus/",
+    "license": "Apache SpamAssassin public corpus terms apply",
+    "citation": "Apache SpamAssassin public corpus",
+    "limitations": "Raw corpus labels are spam/ham proxies for phishing; this is not a live enterprise phishing feed.",
+    "rows": 3285
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold by Message-ID/body hash",
+    "seed": 42,
+    "group_key": "message_id_or_body_hash",
+    "partitions": {
+      "train": 2463,
+      "test": 822
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.9586,
+    "class_imbalance_ratio": 5.5049504950495045
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "linear",
+      "accuracy": 0.9586,
+      "precision": 0.8298,
+      "recall": 0.9213,
+      "f1": 0.8731,
+      "roc_auc": 0.9873,
+      "train_time_s": 47.284,
+      "predict_time_s": 4.686,
+      "confusion_matrix": [
+        [
+          671,
+          24
+        ],
+        [
+          10,
+          117
+        ]
+      ],
+      "notes": ""
+    },
+    "ComplementNB": {
+      "name": "ComplementNB",
+      "family": "probabilistic",
+      "accuracy": 0.8735,
+      "precision": 0.6162,
+      "recall": 0.4803,
+      "f1": 0.5398,
+      "roc_auc": 0.711,
+      "train_time_s": 17.512,
+      "predict_time_s": 4.045,
+      "confusion_matrix": [
+        [
+          657,
+          38
+        ],
+        [
+          66,
+          61
+        ]
+      ],
+      "notes": ""
+    },
+    "LinearSVC": {
+      "name": "LinearSVC",
+      "family": "linear",
+      "accuracy": 0.8455,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.8638,
+      "train_time_s": 23.495,
+      "predict_time_s": 4.127,
+      "confusion_matrix": [
+        [
+          695,
+          0
+        ],
+        [
+          127,
+          0
+        ]
+      ],
+      "notes": ""
+    }
+  }
+}

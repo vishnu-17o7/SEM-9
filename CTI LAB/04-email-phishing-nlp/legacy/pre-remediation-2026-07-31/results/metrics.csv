@@ -1,0 +1,7 @@
+Model,Family,Accuracy,Precision,Recall,F1,ROC-AUC,Train_Time_s,Predict_Time_s
+LogisticRegression,LogisticRegression,0.9279,0.9304,0.8833,0.9062,0.9728,0.114,0.002
+RandomForest,RandomForestClassifier,0.9479,0.9624,0.9031,0.9318,0.9872,0.789,0.135
+GradientBoosting,GradientBoostingClassifier,0.9548,0.9548,0.9295,0.942,0.9874,6.976,0.012
+SVM_RBF,SVC,0.9235,0.9256,0.8767,0.9005,0.9737,2.698,0.205
+GaussianNB,GaussianNB,0.8254,0.7077,0.9493,0.8109,0.9368,0.028,0.002
+VotingEnsemble,ensemble,0.954,0.9506,0.9317,0.941,0.9911,8.368,0.121

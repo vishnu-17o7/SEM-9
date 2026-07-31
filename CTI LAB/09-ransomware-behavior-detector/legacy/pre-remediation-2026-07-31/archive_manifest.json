@@ -1,0 +1,72 @@
+{
+  "archived_at": "2026-07-31T05:15:35.608231+00:00",
+  "project": "09-ransomware-behavior-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "22b091d2e82db55538ea896f88dc000c4c93c214eeeeccd653aa5314be9c9b70"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "a7a0018763eb066872102977820eea7c052cd092c2fe846448c6cb2f930142a8"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "6beeda7989da376902e8812fac6f78821021ede1711aec389b5caf3a00fd1132"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "17f26f14b640e1f6c12b75e15d3d360113702a5358a1398791dca6da78d06233"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "0cd0b66d80aa0d14b72dd7c138899180e9dcd4718a1eac47a78718f26fb7d9dc"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\models\\SVM_RBF.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\SVM_RBF.joblib",
+      "sha256": "61be15a59ecd124113ad1450e1ef7c259f6a447cc2ae137dc95c36489e011ae7"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "7760b868092d12569349b4c77a5bd82da82e3122f96f8ced2ebfc5e51fb7f68a"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "661c58006db467c711b5a1ae9e481e6eabf7c56962ee7e27af659be6991a8a77"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "a84e1b3b60c47d43ae83d8caae8ce034fda4a8b21128f4f493ebb5d4275d13a7"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "cc32c135b6921423f8e98dbe0c6b849b74894d5296f2df7853c012311b660418"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\results\\predictions\\SVM_RBF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SVM_RBF.npz",
+      "sha256": "0f95fd9b4929c146773f516166dd9651c95648a3144ee8b7f80b3d9478815c25"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\data\\ransomware_activity.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\data\\ransomware_activity.csv",
+      "sha256": "7cc94d10c4f055afbde291cc53c6e065a5ecf165f278e86483f5064e24dd9bf3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\data\\ransomware_activity.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\09-ransomware-behavior-detector\\legacy\\pre-remediation-2026-07-31\\data\\ransomware_activity.npz",
+      "sha256": "352b33dcd3e0f7962b3248636d4cc834b74f59af6c59eee761180d420d20613b"
+    }
+  ]
+}

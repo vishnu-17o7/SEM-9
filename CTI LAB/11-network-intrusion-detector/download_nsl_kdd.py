@@ -12,6 +12,11 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
+
 DATA_DIR = Path(__file__).parent / "data"
 
 # Mirrors for NSL-KDD dataset
@@ -106,6 +111,14 @@ def main():
     print(f"\n  Training: {len(train_df)} samples ({train_df['label_binary'].mean():.1%} attacks)")
     print(f"  Test:     {len(test_df)} samples ({test_df['label_binary'].mean():.1%} attacks)")
     print(f"  Attack categories: {train_df['attack_category'].value_counts().to_dict()}")
+    write_source_context(DATA_DIR, {
+        "mode": "real",
+        "name": "NSL-KDD canonical train/test benchmark",
+        "source_url": "https://www.unb.ca/cic/datasets/nsl.html",
+        "license": "Dataset source terms apply",
+        "citation": "NSL-KDD",
+        "limitations": "Legacy benchmark; not a current enterprise network capture.",
+    })
 
 
 def generate_fallback():
@@ -178,6 +191,14 @@ def generate_fallback():
     train_df.to_csv(DATA_DIR / "KDDTrain_processed.csv", index=False)
     test_df.to_csv(DATA_DIR / "KDDTest_processed.csv", index=False)
     print(f"  Synthetic fallback: {len(train_df)} train, {len(test_df)} test")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback",
+        "name": "Synthetic NSL-KDD-like fallback",
+        "source_url": "https://www.unb.ca/cic/datasets/nsl.html",
+        "license": "Local synthetic generator",
+        "citation": "NSL-KDD",
+        "limitations": "Synthetic fallback; metrics do not establish current network intrusion generalization.",
+    })
 
 if __name__ == "__main__":
     main()

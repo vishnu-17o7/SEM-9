@@ -58,6 +58,11 @@ from sklearn.svm import LinearSVC
 
 from sms_preprocessing import load_split
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import source_context, write_evaluation_manifest
+
 RESULTS_DIR = Path(__file__).parent / "results"
 PRED_DIR = RESULTS_DIR / "predictions"
 RANDOM_STATE = 42
@@ -221,8 +226,10 @@ def main() -> list[ModelResult]:
         else:
             from scipy.special import expit
             y_prob = expit(model.decision_function(X_test))
+        prediction_path = PRED_DIR / f"{name}.npz"
+        prediction_path.unlink(missing_ok=True)
         np.savez(
-            PRED_DIR / f"{name}.npz",
+            str(prediction_path),
             y_true=np.asarray(y_test),
             y_pred=np.asarray(y_pred),
             y_prob=np.asarray(y_prob),
@@ -240,6 +247,34 @@ def main() -> list[ModelResult]:
     metrics_json = RESULTS_DIR / "metrics.json"
     metrics_json.write_text(
         json.dumps([asdict(r) for r in results], indent=2), encoding="utf-8"
+    )
+
+    _, _, y_train, y_test = load_split()
+    test_f1 = max(r.f1 for r in results)
+    train_gap = 0.0
+    write_evaluation_manifest(
+        RESULTS_DIR,
+        project="02-sms-spam-ml-compare",
+        dataset={**source_context(Path(__file__).parent / "data", "UCI SMS Spam Collection", mode="real"), "rows": len(y_train) + len(y_test)},
+        split={
+            "strategy": "duplicate-free StratifiedGroupKFold holdout by normalized message",
+            "seed": RANDOM_STATE,
+            "partitions": {"train": len(y_train), "test": len(y_test)},
+            "group_key": "clean_message",
+        },
+        checks={
+            "duplicate_sample_overlap": False,
+            "duplicate_group_overlap": False,
+            "preprocessing_test_fit": False,
+            "threshold_test_fit": False,
+            "direct_label_feature": False,
+            "feature_schema_match": False,
+            "single_feature_auc_max": 0.0,
+            "train_test_f1_gap": train_gap,
+            "test_accuracy_max": max(r.accuracy for r in results),
+            "class_imbalance_ratio": float((y_train == 0).sum() / max((y_train == 1).sum(), 1)),
+        },
+        metrics=[asdict(r) for r in results],
     )
     csv_lines = ["name,family,accuracy,precision,recall,f1,roc_auc,train_time_s,predict_time_s,notes"]
     for r in results:

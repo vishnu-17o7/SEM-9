@@ -1,0 +1,156 @@
+{
+  "LogisticRegression": {
+    "name": "LogisticRegression",
+    "family": "LogisticRegression",
+    "accuracy": 0.783,
+    "precision": 0.7676,
+    "recall": 0.8101,
+    "f1": 0.7883,
+    "roc_auc": 0.8568,
+    "train_time_s": 0.372,
+    "predict_time_s": 0.006,
+    "confusion_matrix": [
+      [
+        4750,
+        1533
+      ],
+      [
+        1187,
+        5063
+      ]
+    ],
+    "notes": ""
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "family": "RandomForestClassifier",
+    "accuracy": 0.8967,
+    "precision": 0.9153,
+    "recall": 0.8736,
+    "f1": 0.894,
+    "roc_auc": 0.9642,
+    "train_time_s": 2.043,
+    "predict_time_s": 0.149,
+    "confusion_matrix": [
+      [
+        5778,
+        505
+      ],
+      [
+        790,
+        5460
+      ]
+    ],
+    "notes": ""
+  },
+  "GradientBoosting": {
+    "name": "GradientBoosting",
+    "family": "GradientBoostingClassifier",
+    "accuracy": 0.9016,
+    "precision": 0.9166,
+    "recall": 0.883,
+    "f1": 0.8995,
+    "roc_auc": 0.9663,
+    "train_time_s": 39.573,
+    "predict_time_s": 0.089,
+    "confusion_matrix": [
+      [
+        5781,
+        502
+      ],
+      [
+        731,
+        5519
+      ]
+    ],
+    "notes": ""
+  },
+  "SVM_RBF": {
+    "name": "SVM_RBF",
+    "family": "SVC",
+    "accuracy": 0.8931,
+    "precision": 0.914,
+    "recall": 0.8672,
+    "f1": 0.89,
+    "roc_auc": 0.9595,
+    "train_time_s": 406.547,
+    "predict_time_s": 22.921,
+    "confusion_matrix": [
+      [
+        5773,
+        510
+      ],
+      [
+        830,
+        5420
+      ]
+    ],
+    "notes": ""
+  },
+  "KNN": {
+    "name": "KNN",
+    "family": "KNeighborsClassifier",
+    "accuracy": 0.8945,
+    "precision": 0.9067,
+    "recall": 0.8789,
+    "f1": 0.8926,
+    "roc_auc": 0.9502,
+    "train_time_s": 0.044,
+    "predict_time_s": 7.422,
+    "confusion_matrix": [
+      [
+        5718,
+        565
+      ],
+      [
+        757,
+        5493
+      ]
+    ],
+    "notes": ""
+  },
+  "GaussianNB": {
+    "name": "GaussianNB",
+    "family": "GaussianNB",
+    "accuracy": 0.5633,
+    "precision": 0.9034,
+    "recall": 0.1392,
+    "f1": 0.2412,
+    "roc_auc": 0.832,
+    "train_time_s": 0.076,
+    "predict_time_s": 0.017,
+    "confusion_matrix": [
+      [
+        6190,
+        93
+      ],
+      [
+        5380,
+        870
+      ]
+    ],
+    "notes": ""
+  },
+  "VotingEnsemble": {
+    "name": "VotingEnsemble",
+    "family": "ensemble",
+    "accuracy": 0.9037,
+    "precision": 0.9195,
+    "recall": 0.8843,
+    "f1": 0.9016,
+    "roc_auc": 0.9688,
+    "train_time_s": 45.164,
+    "predict_time_s": 1.115,
+    "confusion_matrix": [
+      [
+        5799,
+        484
+      ],
+      [
+        723,
+        5527
+      ]
+    ],
+    "notes": "Soft-vote of GradientBoosting, RandomForest, KNN"
+  }
+}

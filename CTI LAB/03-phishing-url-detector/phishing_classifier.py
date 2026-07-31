@@ -68,7 +68,7 @@ def load_dataset_lookup() -> dict:
     """Build an O(1) lookup dict: normalized URL -> label (0=legitimate, 1=phishing)."""
     lookup = {}
     if not DATASET_FILE.exists():
-        print(f"  [!] Dataset not found at {DATASET_FILE} — dataset lookup disabled.")
+        print(f"  [!] Dataset not found at {DATASET_FILE} - dataset lookup disabled.")
         return lookup
 
     print(f"  Loading dataset lookup ({DATASET_FILE.stat().st_size / 1_000_000:.1f} MB) ...")
@@ -98,7 +98,7 @@ def load_model(model_name: str = DEFAULT_MODEL):
     """Load a trained model pipeline."""
     path = MODEL_DIR / f"{model_name}.joblib"
     if not path.exists():
-        print(f"  ✗ Model not found: {path}")
+        print(f"  [X] Model not found: {path}")
         print(f"    Run `python model_comparison.py` first to train models.")
         sys.exit(1)
     return joblib.load(path)
@@ -129,18 +129,18 @@ def explain_prediction(features: dict, prediction: int, probability: float) -> s
     confidence = probability if prediction == 1 else 1 - probability
 
     if prediction == 1:
-        lines.append("  🔴 Phishing detected")
+        lines.append("  Phishing detected")
         if sus_signals:
             lines.append(f"     Suspicious signals: {', '.join(sus_signals)}")
         if leg_signals:
             lines.append(f"     (still has: {', '.join(leg_signals)})")
     else:
-        lines.append("  🟢 Legitimate website")
+        lines.append("  Legitimate website")
         if leg_signals:
             lines.append(f"     Positive signals: {', '.join(leg_signals)}")
         if sus_signals:
             lines.append(f"     Warning: contains {', '.join(sus_signals)} "
-                         f"— verify manually")
+                         f"- verify manually")
 
     lines.append(f"     Confidence: {confidence:.1%}")
     return "\n".join(lines)
@@ -186,12 +186,12 @@ def classify_url(url: str, model_name: str = DEFAULT_MODEL, verbose: bool = True
         print(f"\n{'=' * 60}")
         print(f"  URL: {url}")
         print(f"{'=' * 60}")
-        print(f"  Source: {'📚 DATASET (exact match)' if source == 'dataset' else '🤖 ML MODEL'}")
-        print(f"  Prediction: {'🔴 PHISHING' if prediction == 1 else '🟢 LEGITIMATE'}")
+        print(f"  Source: {'DATASET (exact match)' if source == 'dataset' else 'ML MODEL'}")
+        print(f"  Prediction: {'PHISHING' if prediction == 1 else 'LEGITIMATE'}")
         print(f"  Probability: {probability:.2%}")
         print(f"  Model: {model_name}")
         print(f"\n  Feature breakdown:")
-        print(f"  {'─' * 50}")
+        print(f"  {'-' * 50}")
 
         # Show only non-zero/significant features
         significant = {k: v for k, v in sorted(features.items(), key=lambda x: abs(x[1]), reverse=True)
@@ -210,7 +210,7 @@ def classify_url(url: str, model_name: str = DEFAULT_MODEL, verbose: bool = True
 def interactive_mode(model_name: str = DEFAULT_MODEL):
     """Interactive loop for classifying URLs."""
     print(f"\n  Phishing URL Classifier (model: {model_name})")
-    print(f"  Tier 1: Dataset lookup → Tier 2: ML model fallback")
+    print(f"  Tier 1: Dataset lookup -> Tier 2: ML model fallback")
     print(f"  Type a URL to classify, or 'quit' to exit.\n")
     while True:
         try:
@@ -227,7 +227,7 @@ def interactive_mode(model_name: str = DEFAULT_MODEL):
             print()
             break
         except Exception as e:
-            print(f"  ✗ Error: {e}")
+            print(f"  [X] Error: {e}")
 
 
 def main():

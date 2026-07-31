@@ -9,6 +9,11 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
+
 DATA_DIR = Path(__file__).parent / "data"
 RANDOM_SEED = 42
 random.seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
@@ -38,14 +43,14 @@ def generate_normal_activity():
     feats["doc_ratio"] = random.uniform(0.1, 0.4)
     feats["exe_ratio"] = random.uniform(0.0, 0.1)
     feats["compressed_ratio"] = random.uniform(0.0, 0.05)
-    feats["encrypted_ratio"] = random.uniform(0.0, 0.01)
+    feats["encrypted_ratio"] = random.uniform(0.0, 0.35)
 
     # Registry operations
     feats["num_registry_reads"] = random.randint(10, 200)
     feats["num_registry_writes"] = random.randint(0, 20)
     feats["num_registry_deletes"] = 0
-    feats["startup_registry_writes"] = 0
-    feats["run_registry_writes"] = 0
+    feats["startup_registry_writes"] = random.randint(0, 2)
+    feats["run_registry_writes"] = random.randint(0, 2)
 
     # Process behavior
     feats["num_processes_created"] = random.randint(0, 5)
@@ -54,9 +59,9 @@ def generate_normal_activity():
     feats["num_dns_queries"] = random.randint(0, 20)
 
     # Timing
-    feats["ops_per_second"] = random.uniform(0.5, 5.0)
-    feats["file_ops_per_second"] = random.uniform(0.3, 3.0)
-    feats["registry_ops_per_second"] = random.uniform(0.1, 2.0)
+    feats["ops_per_second"] = random.uniform(0.5, 80.0)
+    feats["file_ops_per_second"] = random.uniform(0.3, 60.0)
+    feats["registry_ops_per_second"] = random.uniform(0.1, 12.0)
 
     # Entropy
     feats["avg_file_entropy"] = random.uniform(3.0, 5.5)
@@ -67,7 +72,7 @@ def generate_normal_activity():
     feats["file_ext_diversity"] = random.uniform(0.3, 0.8)
 
     # Shadow copy operations
-    feats["shadow_copy_deletions"] = 0
+    feats["shadow_copy_deletions"] = random.randint(0, 1)
     feats["backup_file_ops"] = 0
 
     return feats
@@ -89,14 +94,14 @@ def generate_ransomware_activity():
     feats["doc_ratio"] = random.uniform(0.5, 0.9)
     feats["exe_ratio"] = random.uniform(0.0, 0.05)
     feats["compressed_ratio"] = random.uniform(0.0, 0.02)
-    feats["encrypted_ratio"] = random.uniform(0.6, 1.0)  # High encryption
+    feats["encrypted_ratio"] = random.uniform(0.05, 0.95)  # Correlated, but overlapping
 
     # Registry modifications — persistence
     feats["num_registry_reads"] = random.randint(50, 500)
     feats["num_registry_writes"] = random.randint(20, 200)
     feats["num_registry_deletes"] = random.randint(0, 10)
-    feats["startup_registry_writes"] = random.randint(1, 5)
-    feats["run_registry_writes"] = random.randint(1, 5)
+    feats["startup_registry_writes"] = random.randint(0, 4)
+    feats["run_registry_writes"] = random.randint(0, 4)
 
     # Process behavior
     feats["num_processes_created"] = random.randint(5, 50)
@@ -105,9 +110,9 @@ def generate_ransomware_activity():
     feats["num_dns_queries"] = random.randint(5, 50)
 
     # Timing — rapid operations
-    feats["ops_per_second"] = random.uniform(20.0, 500.0)
-    feats["file_ops_per_second"] = random.uniform(15.0, 400.0)
-    feats["registry_ops_per_second"] = random.uniform(1.0, 30.0)
+    feats["ops_per_second"] = random.uniform(5.0, 180.0)
+    feats["file_ops_per_second"] = random.uniform(4.0, 150.0)
+    feats["registry_ops_per_second"] = random.uniform(0.5, 25.0)
 
     # High entropy (encrypted content)
     feats["avg_file_entropy"] = random.uniform(6.5, 8.0)
@@ -118,7 +123,7 @@ def generate_ransomware_activity():
     feats["file_ext_diversity"] = random.uniform(0.0, 0.2)
 
     # Shadow copy deletion
-    feats["shadow_copy_deletions"] = random.randint(1, 10)
+    feats["shadow_copy_deletions"] = random.randint(0, 6)
     feats["backup_file_ops"] = random.randint(0, 5)
 
     return feats
@@ -149,9 +154,11 @@ def main():
     ransomware = [generate_ransomware_activity() for _ in tqdm(range(n_ransom))]
     all_feats = normal + ransomware
     labels = [0] * n_normal + [1] * n_ransom
-    combined = list(zip(all_feats, labels)); random.shuffle(combined)
-    all_feats, labels = zip(*combined)
+    metadata = [(f"scenario_{i % 13:02d}", f"host_{i % 40:02d}", "benign" if label == 0 else f"family_{i % 5:02d}", i) for i, label in enumerate(labels)]
+    combined = list(zip(all_feats, labels, metadata)); random.shuffle(combined)
+    all_feats, labels, metadata = zip(*combined)
     df = pd.DataFrame(all_feats); df["label"] = labels
+    df[["scenario_id", "host_id", "family_id", "timestamp"]] = pd.DataFrame(metadata, index=df.index)
     out_path = DATA_DIR / "ransomware_activity.csv"
     df.to_csv(out_path, index=False)
     X = df[FEATURE_NAMES].values.astype(np.float64)
@@ -160,6 +167,14 @@ def main():
     print(f"\n  Total: {len(df)} samples, {len(FEATURE_NAMES)} features")
     print(f"  Ransomware ratio: {sum(labels)/len(labels):.1%}")
     print(f"  Saved to {out_path}")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback",
+        "name": "Scenario-based synthetic Windows ransomware telemetry",
+        "source_url": "",
+        "license": "Local synthetic generator",
+        "citation": "",
+        "limitations": "Synthetic fallback with overlapping event distributions; not a real Windows telemetry benchmark.",
+    })
 
 if __name__ == "__main__":
     main()

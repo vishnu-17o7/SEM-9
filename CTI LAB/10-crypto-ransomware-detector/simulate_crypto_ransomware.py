@@ -9,6 +9,11 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
+
 DATA_DIR = Path(__file__).parent / "data"
 RANDOM_SEED = 42
 random.seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
@@ -24,14 +29,14 @@ def generate_normal_encryption_patterns():
     feats["files_read_per_sec"] = random.uniform(1, 20)
     feats["files_written_per_sec"] = random.uniform(0.1, 5)
     feats["avg_file_size_kb"] = random.uniform(10, 1000)
-    feats["write_read_ratio"] = random.uniform(0.01, 0.3)
+    feats["write_read_ratio"] = random.uniform(0.01, 0.7)
     feats["bytes_written_per_sec"] = random.uniform(1000, 50000)
 
     # Entropy
     feats["avg_entropy_before"] = random.uniform(3.0, 5.5)
-    feats["avg_entropy_after"] = random.uniform(3.0, 5.5)
-    feats["entropy_delta"] = random.uniform(-0.5, 0.5)
-    feats["max_entropy_delta"] = random.uniform(0, 1.0)
+    feats["avg_entropy_after"] = random.uniform(3.0, 7.5)
+    feats["entropy_delta"] = random.uniform(-0.5, 2.5)
+    feats["max_entropy_delta"] = random.uniform(0, 4.0)
 
     # CPU/Memory
     feats["cpu_usage_pct"] = random.uniform(2, 30)
@@ -43,11 +48,11 @@ def generate_normal_encryption_patterns():
     # File type changes
     feats["num_doc_files"] = random.randint(10, 200)
     feats["num_media_files"] = random.randint(5, 50)
-    feats["num_encrypted_extensions"] = 0
+    feats["num_encrypted_extensions"] = random.randint(0, 2)
     feats["file_rename_rate"] = random.uniform(0, 0.02)
 
     # Timing
-    feats["encryption_calls"] = 0
+    feats["encryption_calls"] = random.randint(0, 50)
     feats["decryption_calls"] = random.randint(0, 5)
     feats["key_operations"] = 0
     feats["compression_api_calls"] = random.randint(0, 5)
@@ -61,14 +66,14 @@ def generate_normal_encryption_patterns():
     feats["read_amplification"] = random.uniform(1, 5)
 
     # Process anomalies
-    feats["num_suspicious_procs"] = 0
-    feats["num_crypto_procs"] = 0
-    feats["num_powershell_spawns"] = 0
+    feats["num_suspicious_procs"] = random.randint(0, 2)
+    feats["num_crypto_procs"] = random.randint(0, 1)
+    feats["num_powershell_spawns"] = random.randint(0, 2)
 
     # File header changes
     feats["file_header_changes"] = 0
     feats["known_headers_ratio"] = random.uniform(0.9, 1.0)
-    feats["unexpected_headers"] = 0
+    feats["unexpected_headers"] = random.randint(0, 50)
 
     return feats
 
@@ -80,7 +85,7 @@ def generate_crypto_ransomware_patterns():
     feats["files_read_per_sec"] = random.uniform(50, 500)
     feats["files_written_per_sec"] = random.uniform(40, 400)
     feats["avg_file_size_kb"] = random.uniform(50, 500)
-    feats["write_read_ratio"] = random.uniform(0.5, 1.0)
+    feats["write_read_ratio"] = random.uniform(0.2, 1.0)
     feats["bytes_written_per_sec"] = random.uniform(50000, 5000000)
 
     # Entropy spike (encrypted files)
@@ -99,11 +104,11 @@ def generate_crypto_ransomware_patterns():
     # File type changes — target docs, change extensions
     feats["num_doc_files"] = random.randint(100, 5000)
     feats["num_media_files"] = random.randint(20, 200)
-    feats["num_encrypted_extensions"] = random.randint(1, 5)
+    feats["num_encrypted_extensions"] = random.randint(0, 6)
     feats["file_rename_rate"] = random.uniform(0.5, 1.0)
 
     # Encryption API calls
-    feats["encryption_calls"] = random.randint(100, 5000)
+    feats["encryption_calls"] = random.randint(20, 5000)
     feats["decryption_calls"] = 0
     feats["key_operations"] = random.randint(10, 100)
     feats["compression_api_calls"] = random.randint(0, 10)
@@ -117,14 +122,14 @@ def generate_crypto_ransomware_patterns():
     feats["read_amplification"] = random.uniform(2, 10)
 
     # Suspicious processes
-    feats["num_suspicious_procs"] = random.randint(1, 5)
-    feats["num_crypto_procs"] = random.randint(1, 3)
-    feats["num_powershell_spawns"] = random.randint(0, 5)
+    feats["num_suspicious_procs"] = random.randint(0, 6)
+    feats["num_crypto_procs"] = random.randint(0, 4)
+    feats["num_powershell_spawns"] = random.randint(0, 6)
 
     # File header changes (encrypted headers)
     feats["file_header_changes"] = random.randint(100, 5000)
     feats["known_headers_ratio"] = random.uniform(0, 0.3)
-    feats["unexpected_headers"] = random.randint(100, 5000)
+    feats["unexpected_headers"] = random.randint(20, 5000)
 
     return feats
 
@@ -151,15 +156,25 @@ def main():
     print(f"  Generating {n_mal} ransomware sessions...")
     malware = [generate_crypto_ransomware_patterns() for _ in tqdm(range(n_mal))]
     all_feats = normal + malware; labels = [0]*n_norm + [1]*n_mal
-    combined = list(zip(all_feats, labels)); random.shuffle(combined)
-    all_feats, labels = zip(*combined)
+    metadata = [(f"scenario_{i % 13:02d}", f"host_{i % 40:02d}", "benign" if label == 0 else f"family_{i % 5:02d}", i) for i, label in enumerate(labels)]
+    combined = list(zip(all_feats, labels, metadata)); random.shuffle(combined)
+    all_feats, labels, metadata = zip(*combined)
     df = pd.DataFrame(all_feats); df["label"] = labels
+    df[["scenario_id", "host_id", "family_id", "timestamp"]] = pd.DataFrame(metadata, index=df.index)
     out_path = DATA_DIR / "crypto_ransomware.csv"
     df.to_csv(out_path, index=False)
     X = df[FEATURE_NAMES].values.astype(np.float64); y = np.array(labels, dtype=np.int64)
     np.savez_compressed(DATA_DIR / "crypto_ransomware.npz", X=X, y=y)
     print(f"\n  Total: {len(df)} samples, {len(FEATURE_NAMES)} features")
     print(f"  Ransomware ratio: {sum(labels)/len(labels):.1%}")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback",
+        "name": "Scenario-based synthetic crypto-ransomware telemetry",
+        "source_url": "",
+        "license": "Local synthetic generator",
+        "citation": "",
+        "limitations": "Synthetic fallback with overlapping encryption and resource distributions.",
+    })
 
 if __name__ == "__main__":
     main()

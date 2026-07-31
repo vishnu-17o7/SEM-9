@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T05:37:15.484537+00:00",
+  "mode": "real",
+  "name": "External phishing URL corpus",
+  "source_url": "https://huggingface.co/datasets/ealvaradob/phishing-dataset/resolve/main/urls.json",
+  "license": "Dataset source terms apply",
+  "citation": "",
+  "limitations": "Domain-grouped evaluation; exact URL lookup is excluded from ML metrics."
+}

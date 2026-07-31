@@ -1,0 +1,87 @@
+{
+  "archived_at": "2026-07-31T05:15:35.031702+00:00",
+  "project": "04-email-phishing-nlp",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\feature_importance.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\feature_importance.csv",
+      "sha256": "d20bd3caf7656cc95541674fa9d9900fd033f5f78709b7e894c780ca80fc263b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\metrics.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\metrics.csv",
+      "sha256": "af21e6e6f3f46fba9d5ad3be9eb74da1fe46298a8f229dc690f6cf3f933195d1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "e35e62d711c280b26c9c20b5afdc9a8566867e89609a6d4ce669af4ebc30df95"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "948dbd207e5a04355eb67466a3a50bacc6b543ad9c1b3ccd359d3eb40e3711c6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\GaussianNB.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\GaussianNB.joblib",
+      "sha256": "f9753e6df60533e32aa0697b36e088541a933112992ced95627c0fa71b26b741"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "845514465696851ca7b0dfc25c0fc62ae8b0eddeb1ce2a756084b5c7b7a5e6b6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "8651afd20ce340b9f681397783e00bb14117e22cbc88713248082308bb5c25f3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "110e011ee3065b33135cdd658b76166434f46f60aabf1f2e691ed3780c8a45fe"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\SVM_RBF.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\SVM_RBF.joblib",
+      "sha256": "7a0ccf97155770d76c72b4126c3c3bc45edc52203a50afbd94ad43de1d7bb297"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "5a09afa0cf23577f20d1fd66d6472d3d56082f0d8c6f201faf093f199b8af0cf"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\GaussianNB.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GaussianNB.npz",
+      "sha256": "c82d366c305b730a28a03db657c1a7e84136d28c371a1dabe2bf6a2cfc8aeef1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "2827048277e917e39d34093fd8b133a07456f717a2362edfda6fdc6ef8d9afaa"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "38e3e62bc14a275489ea396b8f2f656adae99a3d2052cb3e1c79c4cb968a5b00"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "413a62e2fa5122edc23d5c885ccf222f1404308273ea8b8cb178f9b753c12d72"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\SVM_RBF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SVM_RBF.npz",
+      "sha256": "4ab806f58664b4646330ca6d5f9d0e2da7a3c65258c2b01403a90f2f7751ad35"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\results\\predictions\\VotingEnsemble.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\04-email-phishing-nlp\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\VotingEnsemble.npz",
+      "sha256": "b02909b1472d46c831b55fea6a715692f2b90ff204840a9216ce27d2b5376c4d"
+    }
+  ]
+}

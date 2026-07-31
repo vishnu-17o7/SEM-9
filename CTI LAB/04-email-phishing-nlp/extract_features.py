@@ -14,6 +14,7 @@ from email import policy
 from email.parser import BytesParser
 
 import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 SUSPICIOUS_KEYWORDS = [
@@ -37,7 +38,9 @@ def parse_email(raw_bytes: bytes) -> dict:
     parser = BytesParser(policy=policy.default)
     msg = parser.parsebytes(raw_bytes)
 
-    headers = dict(msg.items())
+    # Keep the EmailMessage object so repeated headers such as Received remain
+    # available to the structural feature extractor.
+    headers = msg
     body_parts = []
     html_parts = []
 
@@ -251,6 +254,18 @@ FEATURE_NAMES = [
 def features_to_vector(features: dict) -> np.ndarray:
     """Convert feature dict to numpy array in FEATURE_NAMES order."""
     return np.array([features.get(name, 0) for name in FEATURE_NAMES], dtype=np.float64)
+
+
+class EmailStructuredTransformer(BaseEstimator, TransformerMixin):
+    """Transform raw email strings into deterministic header/body features."""
+
+    def fit(self, X, y=None):
+        """Fit-free transformer for serialized email text."""
+        return self
+
+    def transform(self, X):
+        """Extract structured features without observing labels."""
+        return np.vstack([features_to_vector(extract_all_features(str(value))) for value in X])
 
 
 if __name__ == "__main__":

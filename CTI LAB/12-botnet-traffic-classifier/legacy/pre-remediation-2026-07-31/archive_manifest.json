@@ -1,0 +1,82 @@
+{
+  "archived_at": "2026-07-31T05:15:36.211378+00:00",
+  "project": "12-botnet-traffic-classifier",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "fc0119edb5b3623e6ae73e5f50db497837fc505ecb1420704938d3ed20e8eaa4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "b86b7f6091223df2d193eefb25ccd751442bc3b33c926600d64a8eee39381181"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "a5fb56c32d4d3aa35db907df70273912584beac00418387cee3923c6b215c740"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "47153448cfc372cecf5befad8d8966e09fc3e0e2855a86efe4b2146cc32c323c"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\MLP.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\MLP.joblib",
+      "sha256": "38b975463a3f5cf432f513e618b9d4e0d195ee7adc666ef46f22c99b46e3fc9e"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "3b24b5cb7a783c3a56d9fa227c5626c5e0c09b280128102fdd786e8d85135486"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\SVM_RBF.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\SVM_RBF.joblib",
+      "sha256": "27862d64a3afdfa7f6573df9d0d8db2b86872dc9e13725694e55c2fafdc86e97"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "97a020c2bcae7cc64981b4e9cbe8725ba22d1de7c7d0f2999730e72e0c3ff87b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "be2922ce1e8f73c3bf9b0f6903b93558cdfd3747cc28d2543656b5743a752f5d"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "c0713f6a94d7af4bc1958c3a834baee6f5c4fa17ca8dd86a254cffa12d8ce037"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\predictions\\MLP.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\MLP.npz",
+      "sha256": "26c4c0c4f90112f3a81c8f0e64f8c8c229e4a45af2a38cf6d8af423dcfc870df"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "e56f52f2a66a180e35d5f482f9ea7757981f7af64802f09e864581d7b99db03c"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\results\\predictions\\SVM_RBF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SVM_RBF.npz",
+      "sha256": "4c46a06fb247078312c8f0ef775f8854730ae32bdbde8b8055b55c52334514b8"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\data\\botnet_traffic.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\data\\botnet_traffic.csv",
+      "sha256": "947d0196e1b8f8826433d7a9bd5444f0cd9b50bd18b1428b8951a7b1dd92daf5"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\data\\botnet_traffic.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\12-botnet-traffic-classifier\\legacy\\pre-remediation-2026-07-31\\data\\botnet_traffic.npz",
+      "sha256": "7251b633e5b3a7309c7f7e19aab2c60b76922da33b169a14fe23c4f7a25b7542"
+    }
+  ]
+}

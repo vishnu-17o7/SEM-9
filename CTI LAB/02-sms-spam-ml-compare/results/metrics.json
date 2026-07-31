@@ -2,21 +2,21 @@
   {
     "name": "MultinomialNB",
     "family": "base",
-    "accuracy": 0.9641255605381166,
+    "accuracy": 0.9627085377821394,
     "precision": 1.0,
-    "recall": 0.7315436241610739,
-    "f1": 0.8449612403100775,
-    "roc_auc": 0.9792821709950394,
-    "train_time_s": 1.449,
-    "predict_time_s": 0.066,
+    "recall": 0.680672268907563,
+    "f1": 0.81,
+    "roc_auc": 0.9740242763772176,
+    "train_time_s": 0.27,
+    "predict_time_s": 0.031,
     "confusion_matrix": [
       [
-        966,
+        900,
         0
       ],
       [
-        40,
-        109
+        38,
+        81
       ]
     ],
     "notes": "",
@@ -25,21 +25,21 @@
   {
     "name": "ComplementNB",
     "family": "base",
-    "accuracy": 0.9721973094170404,
-    "precision": 0.8933333333333333,
-    "recall": 0.8993288590604027,
-    "f1": 0.8963210702341137,
-    "roc_auc": 0.9792821709950394,
-    "train_time_s": 0.202,
-    "predict_time_s": 0.031,
+    "accuracy": 0.97252208047105,
+    "precision": 0.8956521739130435,
+    "recall": 0.865546218487395,
+    "f1": 0.8803418803418803,
+    "roc_auc": 0.9740242763772176,
+    "train_time_s": 0.239,
+    "predict_time_s": 0.036,
     "confusion_matrix": [
       [
-        950,
-        16
+        888,
+        12
       ],
       [
-        15,
-        134
+        16,
+        103
       ]
     ],
     "notes": "",
@@ -48,21 +48,21 @@
   {
     "name": "LogisticRegression",
     "family": "base",
-    "accuracy": 0.9659192825112107,
+    "accuracy": 0.9617271835132483,
     "precision": 1.0,
-    "recall": 0.7449664429530202,
-    "f1": 0.8538461538461538,
-    "roc_auc": 0.9847499548404128,
-    "train_time_s": 0.813,
-    "predict_time_s": 0.027,
+    "recall": 0.6722689075630253,
+    "f1": 0.8040201005025126,
+    "roc_auc": 0.9852941176470588,
+    "train_time_s": 0.325,
+    "predict_time_s": 0.038,
     "confusion_matrix": [
       [
-        966,
+        900,
         0
       ],
       [
-        38,
-        111
+        39,
+        80
       ]
     ],
     "notes": "",
@@ -71,21 +71,21 @@
   {
     "name": "LinearSVC",
     "family": "base",
-    "accuracy": 0.9820627802690582,
-    "precision": 0.9777777777777777,
-    "recall": 0.8859060402684564,
-    "f1": 0.9295774647887324,
-    "roc_auc": 0.9877513304709103,
-    "train_time_s": 0.24,
-    "predict_time_s": 0.037,
+    "accuracy": 0.9862610402355251,
+    "precision": 1.0,
+    "recall": 0.8823529411764706,
+    "f1": 0.9375,
+    "roc_auc": 0.9861531279178338,
+    "train_time_s": 0.301,
+    "predict_time_s": 0.056,
     "confusion_matrix": [
       [
-        963,
-        3
+        900,
+        0
       ],
       [
-        17,
-        132
+        14,
+        105
       ]
     ],
     "notes": "",
@@ -94,21 +94,21 @@
   {
     "name": "RandomForest",
     "family": "base",
-    "accuracy": 0.9739910313901345,
-    "precision": 1.0,
-    "recall": 0.8053691275167785,
-    "f1": 0.8921933085501859,
-    "roc_auc": 0.9858476801867522,
-    "train_time_s": 2.38,
-    "predict_time_s": 0.18,
+    "accuracy": 0.9735034347399412,
+    "precision": 0.9893617021276596,
+    "recall": 0.7815126050420168,
+    "f1": 0.8732394366197183,
+    "roc_auc": 0.9906535947712418,
+    "train_time_s": 1.984,
+    "predict_time_s": 0.217,
     "confusion_matrix": [
       [
-        966,
-        0
+        899,
+        1
       ],
       [
-        29,
-        120
+        26,
+        93
       ]
     ],
     "notes": "",
@@ -117,21 +117,21 @@
   {
     "name": "GradientBoosting",
     "family": "base",
-    "accuracy": 0.9533632286995516,
-    "precision": 0.9619047619047619,
-    "recall": 0.6778523489932886,
-    "f1": 0.7952755905511811,
-    "roc_auc": 0.9534161490683231,
-    "train_time_s": 3.412,
-    "predict_time_s": 0.144,
+    "accuracy": 0.957801766437684,
+    "precision": 0.9523809523809523,
+    "recall": 0.6722689075630253,
+    "f1": 0.7881773399014779,
+    "roc_auc": 0.9595845004668534,
+    "train_time_s": 4.148,
+    "predict_time_s": 0.044,
     "confusion_matrix": [
       [
-        962,
+        896,
         4
       ],
       [
-        48,
-        101
+        39,
+        80
       ]
     ],
     "notes": "",
@@ -140,21 +140,21 @@
   {
     "name": "SoftVoting",
     "family": "ensemble",
-    "accuracy": 0.9838565022421525,
-    "precision": 0.9924812030075187,
-    "recall": 0.8859060402684564,
-    "f1": 0.9361702127659575,
-    "roc_auc": 0.9877374352133617,
-    "train_time_s": 3.443,
-    "predict_time_s": 0.046,
+    "accuracy": 0.9823356231599607,
+    "precision": 1.0,
+    "recall": 0.8487394957983193,
+    "f1": 0.9181818181818182,
+    "roc_auc": 0.9828758169934642,
+    "train_time_s": 5.492,
+    "predict_time_s": 0.059,
     "confusion_matrix": [
       [
-        965,
-        1
+        900,
+        0
       ],
       [
-        17,
-        132
+        18,
+        101
       ]
     ],
     "notes": "ensemble of NB + CNB + LR + SVM/GBDT",
@@ -163,21 +163,21 @@
   {
     "name": "Stacking",
     "family": "ensemble",
-    "accuracy": 0.9838565022421525,
-    "precision": 1.0,
-    "recall": 0.8791946308724832,
-    "f1": 0.9357142857142857,
-    "roc_auc": 0.9848819597871246,
-    "train_time_s": 16.736,
-    "predict_time_s": 0.032,
+    "accuracy": 0.9823356231599607,
+    "precision": 0.9902912621359223,
+    "recall": 0.8571428571428571,
+    "f1": 0.918918918918919,
+    "roc_auc": 0.9797852474323062,
+    "train_time_s": 28.181,
+    "predict_time_s": 0.058,
     "confusion_matrix": [
       [
-        966,
-        0
+        899,
+        1
       ],
       [
-        18,
-        131
+        17,
+        102
       ]
     ],
     "notes": "ensemble of NB + CNB + LR + SVM/GBDT",

@@ -1,0 +1,62 @@
+{
+  "archived_at": "2026-07-31T05:15:34.659293+00:00",
+  "project": "02-sms-spam-ml-compare",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\metrics.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\metrics.csv",
+      "sha256": "64859362178179c0ee53ea5b2f9a1918e6081d84d2ae24b7b32682d8d081a916"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "2b25b3a4c224583accdb368702c82a0be31a088b6001a5f529786d6070820449"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "f127cca0eff01e91299574baeb4df7b4d1c7e779eea10930697c8a887631bafc"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\ComplementNB.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\ComplementNB.npz",
+      "sha256": "93404b828a1e85ac7940162c370f81910d00787c7c0cc3e75c0166851d02dffe"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "2c4180b645a8c115f27268555fff2cb4b613f47baf3023860af8e527e2ff865f"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\LinearSVC.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LinearSVC.npz",
+      "sha256": "068c8205e449d64f0dff42bfe15477e06f27cb96f89781a83bbe83f5d879c49f"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "26cac2f2beb09a7bccc6c53f6da0f89c951af9b32287744723e218e743575a41"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\MultinomialNB.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\MultinomialNB.npz",
+      "sha256": "7a4698f5a966364979cffe3a8c9c37f96c9d607daba1e34b4e603cf7fac6a20d"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "594df90f4f29449971a67ef21da7b9479354a460c6d45b78742b69d7e80175cb"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\SoftVoting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SoftVoting.npz",
+      "sha256": "444d96a858d504317363b297d570f7e5a464ea33b5d18b723af7622ef59476f5"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\results\\predictions\\Stacking.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\02-sms-spam-ml-compare\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\Stacking.npz",
+      "sha256": "a5539205cd35ea7e5183fbd5638b08246127eeb1fd5793e9323b8f33a1d63ac7"
+    }
+  ]
+}

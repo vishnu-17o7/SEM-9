@@ -16,6 +16,11 @@ from urllib.parse import urlparse
 
 import numpy as np
 import pandas as pd
+
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from evaluation_support import write_source_context
 import requests
 from tqdm import tqdm
 
@@ -223,17 +228,17 @@ def download_phishing_urls(max_total: int = 15_000) -> list[str]:
                     # It's a domain — prefix with https
                     urls.append(f"https://{line}")
             urls = list(set(urls))
-            print(f"  ✓ {source['url'][:70]:70s} → {len(urls)} URLs")
+            print(f"  OK {source['url'][:70]:70s} -> {len(urls)} URLs")
             all_urls.extend(urls)
             sources_tried += 1
         except Exception as e:
-            print(f"  ✗ {source['url'][:70]:70s} → failed ({e})")
+            print(f"  FAIL {source['url'][:70]:70s} -> failed ({e})")
 
     unique = list(set(all_urls))
     print(f"\n  Total unique phishing URLs downloaded: {len(unique)}")
 
     if not unique:
-        print("  ⚠ No online sources available — generating synthetic phishing URLs.")
+        print("  WARN No online sources available - generating synthetic phishing URLs.")
         # Generate synthetic phishing domains based on common brand impersonations
         brands = [
             "paypal", "ebay", "amazon", "apple", "microsoft", "google",
@@ -266,9 +271,9 @@ def download_external_dataset(max_per_class: int = 25_000) -> tuple[list[str], l
         resp = requests.get(EXTERNAL_DATASET_URL, timeout=300)
         with open(dataset_path, "wb") as f:
             f.write(resp.content)
-        print(f"  ✓ Downloaded to {dataset_path}")
+        print(f"  OK Downloaded to {dataset_path}")
     else:
-        print(f"  ✓ Using cached dataset")
+        print(f"  OK Using cached dataset")
 
     print(f"  Loading JSON...")
     with open(dataset_path, "r", encoding="utf-8") as f:
@@ -357,7 +362,7 @@ def main():
     # 2/3. Extract features
     print(f"\n[{3 if args.synthetic else 2}/4] Extracting features...")
     df = dataframe_from_urls(all_urls, labels)
-    print(f"  Feature matrix: {df.shape[0]} samples × {df.shape[1]} features")
+    print(f"  Feature matrix: {df.shape[0]} samples x {df.shape[1]} features")
     print(f"  Class distribution:\n    phishing (1): {df['label'].sum()}\n    legitimate (0): {len(df) - df['label'].sum()}")
 
     # 4. Save
@@ -367,11 +372,19 @@ def main():
     # Save raw URLs with labels
     raw_df = pd.DataFrame({"url": all_urls, "label": labels})
     raw_df.to_csv(DATASET_FILE, index=False)
-    print(f"  ✓ Raw URLs: {DATASET_FILE}")
+    print(f"  OK Raw URLs: {DATASET_FILE}")
 
     # Save feature matrix
     df.to_csv(FEATURES_FILE, index=False)
-    print(f"  ✓ Features: {FEATURES_FILE}")
+    print(f"  OK Features: {FEATURES_FILE}")
+    write_source_context(DATA_DIR, {
+        "mode": "synthetic_fallback" if args.synthetic else "real",
+        "name": "Synthetic phishing URLs" if args.synthetic else "External phishing URL corpus",
+        "source_url": "" if args.synthetic else EXTERNAL_DATASET_URL,
+        "license": "Local generator" if args.synthetic else "Dataset source terms apply",
+        "citation": "",
+        "limitations": "Synthetic URLs are only a fallback." if args.synthetic else "Domain-grouped evaluation; exact URL lookup is excluded from ML metrics.",
+    })
 
     print("\n" + "=" * 60)
     print("  Dataset build complete!")

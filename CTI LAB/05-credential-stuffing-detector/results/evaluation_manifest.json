@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:06:33.650219+00:00",
+  "project": "05-credential-stuffing-detector",
+  "dataset": {
+    "mode": "real",
+    "name": "CICIDS2017 labelled web brute-force flow subset",
+    "source_url": "https://www.unb.ca/cic/datasets/ids-2017.html",
+    "license": "CIC dataset terms apply",
+    "citation": "CICIDS2017",
+    "limitations": "Flow labels are a credential-stuffing proxy, not application login outcomes.",
+    "rows": 30406
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold by five-minute capture window",
+    "seed": 42,
+    "group_key": "timestamp_floor_5m",
+    "partitions": {
+      "train": 24360,
+      "test": 6046,
+      "deduplication": {
+        "rows_before": 31455,
+        "rows_after": 30406,
+        "duplicates_removed": 1049,
+        "conflicting_keys": 0,
+        "conflicting_rows_removed": 9
+      },
+      "train_groups": 11,
+      "test_groups": 3
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.9974,
+    "class_imbalance_ratio": 20.367533380182714
+  },
+  "metrics": {
+    "RuleBased": {
+      "name": "RuleBased",
+      "accuracy": 0.9395,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "train_time_s": 0.0,
+      "predict_time_s": 0.001,
+      "confusion_matrix": [
+        [
+          5680,
+          2
+        ],
+        [
+          364,
+          0
+        ]
+      ],
+      "detection_count": 2,
+      "false_positive_rate": 0.0004
+    },
+    "IsolationForest": {
+      "name": "IsolationForest",
+      "accuracy": 0.9074,
+      "precision": 0.0776,
+      "recall": 0.0495,
+      "f1": 0.0604,
+      "train_time_s": 0.562,
+      "predict_time_s": 0.053,
+      "confusion_matrix": [
+        [
+          5468,
+          214
+        ],
+        [
+          346,
+          18
+        ]
+      ],
+      "detection_count": 232,
+      "false_positive_rate": 0.0377
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "accuracy": 0.9974,
+      "precision": 0.9603,
+      "recall": 0.9973,
+      "f1": 0.9784,
+      "train_time_s": 1.07,
+      "predict_time_s": 0.116,
+      "confusion_matrix": [
+        [
+          5667,
+          15
+        ],
+        [
+          1,
+          363
+        ]
+      ],
+      "detection_count": 378,
+      "false_positive_rate": 0.0026
+    },
+    "LOF": {
+      "name": "LOF",
+      "accuracy": 0.896,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "train_time_s": 3.059,
+      "predict_time_s": 0.625,
+      "confusion_matrix": [
+        [
+          5417,
+          265
+        ],
+        [
+          364,
+          0
+        ]
+      ],
+      "detection_count": 265,
+      "false_positive_rate": 0.0466
+    }
+  }
+}

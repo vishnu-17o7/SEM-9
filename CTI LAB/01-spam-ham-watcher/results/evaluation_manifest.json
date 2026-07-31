@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T05:19:35.334037+00:00",
+  "project": "01-spam-ham-watcher",
+  "dataset": {
+    "mode": "real",
+    "name": "UCI SMS Spam Collection",
+    "source_url": "",
+    "license": "Synthetic fallback generated locally",
+    "citation": "",
+    "limitations": "Synthetic fallback; metrics do not establish real-world generalization.",
+    "rows": 5092,
+    "deduplication": {
+      "rows_before": 5572,
+      "rows_after": 5092,
+      "duplicates_removed": 480,
+      "conflicting_keys": 0
+    }
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold holdout by normalized message",
+    "seed": 42,
+    "group_key": "clean_message",
+    "partitions": {
+      "train": 4073,
+      "test": 1019
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.9794,
+    "class_imbalance_ratio": 7.572390572390573
+  },
+  "metrics": {
+    "accuracy": 0.9794,
+    "precision": 0.9712,
+    "recall": 0.8487,
+    "f1": 0.9058,
+    "roc_auc": 0.983,
+    "best_params": {
+      "clf__alpha": 0.1,
+      "tfidf__max_features": 10000,
+      "tfidf__min_df": 1
+    },
+    "classification_report": {
+      "0": {
+        "precision": 0.980327868852459,
+        "recall": 0.9966666666666667,
+        "f1-score": 0.9884297520661157,
+        "support": 900.0
+      },
+      "1": {
+        "precision": 0.9711538461538461,
+        "recall": 0.8487394957983193,
+        "f1-score": 0.905829596412556,
+        "support": 119.0
+      },
+      "accuracy": 0.9793915603532876,
+      "macro avg": {
+        "precision": 0.9757408575031525,
+        "recall": 0.922703081232493,
+        "f1-score": 0.9471296742393358,
+        "support": 1019.0
+      },
+      "weighted avg": {
+        "precision": 0.9792565158582148,
+        "recall": 0.9793915603532876,
+        "f1-score": 0.9787836102380749,
+        "support": 1019.0
+      }
+    }
+  }
+}

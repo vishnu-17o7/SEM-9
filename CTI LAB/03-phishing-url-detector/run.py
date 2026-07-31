@@ -50,7 +50,9 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Phishing URL Detector -- unified runner")
     parser.add_argument("command", nargs="?", default="steps",
-                        help="data | train | report | classify | web | all | steps")
+                        help="data | train | report | audit | classify | web | all | steps")
+    parser.add_argument("--source", choices=["auto", "real", "synthetic"], default="auto")
+    parser.add_argument("--input", type=Path, help="Optional local dataset or source archive")
     parser.add_argument("cmd_args", nargs="*", help="Extra args for classify/web")
     args = parser.parse_args()
 
@@ -69,11 +71,17 @@ def main() -> None:
         return
 
     if cmd == "all":
-        steps: list[list[str]] = []
-        for step_list in COMMANDS.values():
-            steps.extend(step_list)
+        data_step = ["dataset_builder.py"] + (["--synthetic"] if args.source == "synthetic" else [])
+        steps: list[list[str]] = [data_step, ["model_comparison.py"]]
         run_scripts(steps)
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "evaluation_guard.py"), "--project", str(DIR)]])
+        run_scripts([["report.py"]])
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "report_badge.py"), "--project", str(DIR)]])
         print("\n  [OK] Pipeline complete!")
+        return
+
+    if cmd == "audit":
+        run_scripts([[str(DIR.parents[1] / "CTI LAB" / "evaluation_guard.py"), "--project", str(DIR)]])
         return
 
     if cmd in COMMANDS:

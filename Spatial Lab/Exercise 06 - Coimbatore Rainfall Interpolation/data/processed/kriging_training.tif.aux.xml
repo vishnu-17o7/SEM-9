@@ -1,0 +1,12 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>Ordinary Kriging prediction; October 1965 rainfall (mm)</Description>
+    <Metadata>
+      <MDI key="STATISTICS_MINIMUM">40.752868652344</MDI>
+      <MDI key="STATISTICS_MAXIMUM">316.24118041992</MDI>
+      <MDI key="STATISTICS_MEAN">174.14557375511</MDI>
+      <MDI key="STATISTICS_STDDEV">51.531057633363</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">100</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

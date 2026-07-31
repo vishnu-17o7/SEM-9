@@ -1,0 +1,186 @@
+[
+  {
+    "name": "MultinomialNB",
+    "family": "base",
+    "accuracy": 0.9641255605381166,
+    "precision": 1.0,
+    "recall": 0.7315436241610739,
+    "f1": 0.8449612403100775,
+    "roc_auc": 0.9792821709950394,
+    "train_time_s": 1.449,
+    "predict_time_s": 0.066,
+    "confusion_matrix": [
+      [
+        966,
+        0
+      ],
+      [
+        40,
+        109
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "ComplementNB",
+    "family": "base",
+    "accuracy": 0.9721973094170404,
+    "precision": 0.8933333333333333,
+    "recall": 0.8993288590604027,
+    "f1": 0.8963210702341137,
+    "roc_auc": 0.9792821709950394,
+    "train_time_s": 0.202,
+    "predict_time_s": 0.031,
+    "confusion_matrix": [
+      [
+        950,
+        16
+      ],
+      [
+        15,
+        134
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "LogisticRegression",
+    "family": "base",
+    "accuracy": 0.9659192825112107,
+    "precision": 1.0,
+    "recall": 0.7449664429530202,
+    "f1": 0.8538461538461538,
+    "roc_auc": 0.9847499548404128,
+    "train_time_s": 0.813,
+    "predict_time_s": 0.027,
+    "confusion_matrix": [
+      [
+        966,
+        0
+      ],
+      [
+        38,
+        111
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "LinearSVC",
+    "family": "base",
+    "accuracy": 0.9820627802690582,
+    "precision": 0.9777777777777777,
+    "recall": 0.8859060402684564,
+    "f1": 0.9295774647887324,
+    "roc_auc": 0.9877513304709103,
+    "train_time_s": 0.24,
+    "predict_time_s": 0.037,
+    "confusion_matrix": [
+      [
+        963,
+        3
+      ],
+      [
+        17,
+        132
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "RandomForest",
+    "family": "base",
+    "accuracy": 0.9739910313901345,
+    "precision": 1.0,
+    "recall": 0.8053691275167785,
+    "f1": 0.8921933085501859,
+    "roc_auc": 0.9858476801867522,
+    "train_time_s": 2.38,
+    "predict_time_s": 0.18,
+    "confusion_matrix": [
+      [
+        966,
+        0
+      ],
+      [
+        29,
+        120
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "GradientBoosting",
+    "family": "base",
+    "accuracy": 0.9533632286995516,
+    "precision": 0.9619047619047619,
+    "recall": 0.6778523489932886,
+    "f1": 0.7952755905511811,
+    "roc_auc": 0.9534161490683231,
+    "train_time_s": 3.412,
+    "predict_time_s": 0.144,
+    "confusion_matrix": [
+      [
+        962,
+        4
+      ],
+      [
+        48,
+        101
+      ]
+    ],
+    "notes": "",
+    "estimator": ""
+  },
+  {
+    "name": "SoftVoting",
+    "family": "ensemble",
+    "accuracy": 0.9838565022421525,
+    "precision": 0.9924812030075187,
+    "recall": 0.8859060402684564,
+    "f1": 0.9361702127659575,
+    "roc_auc": 0.9877374352133617,
+    "train_time_s": 3.443,
+    "predict_time_s": 0.046,
+    "confusion_matrix": [
+      [
+        965,
+        1
+      ],
+      [
+        17,
+        132
+      ]
+    ],
+    "notes": "ensemble of NB + CNB + LR + SVM/GBDT",
+    "estimator": ""
+  },
+  {
+    "name": "Stacking",
+    "family": "ensemble",
+    "accuracy": 0.9838565022421525,
+    "precision": 1.0,
+    "recall": 0.8791946308724832,
+    "f1": 0.9357142857142857,
+    "roc_auc": 0.9848819597871246,
+    "train_time_s": 16.736,
+    "predict_time_s": 0.032,
+    "confusion_matrix": [
+      [
+        966,
+        0
+      ],
+      [
+        18,
+        131
+      ]
+    ],
+    "notes": "ensemble of NB + CNB + LR + SVM/GBDT",
+    "estimator": ""
+  }
+]

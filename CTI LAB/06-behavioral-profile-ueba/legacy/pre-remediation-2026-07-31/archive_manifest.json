@@ -1,0 +1,57 @@
+{
+  "archived_at": "2026-07-31T05:15:35.141953+00:00",
+  "project": "06-behavioral-profile-ueba",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "ebee3024bce0beccf96d108593c3af30f80bb6510c4fdee5b78ee274f5210d25"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "97e444791537f176f9660fa505b1763779823afdda7fa78cc3691a2b9116f94b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\models\\Autoencoder.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\models\\Autoencoder.joblib",
+      "sha256": "129dd6c8e46394729fb82f336b7492df542373e8bca1aa6a4de5eaff06874388"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\models\\GMM.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\models\\GMM.joblib",
+      "sha256": "6dcdfbf0bbb0693b629ede116b2823c228bd596bf2aca5dafba6fe4ca6c7855d"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\models\\IsolationForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\models\\IsolationForest.joblib",
+      "sha256": "f135044ae045e43f0aeaa89977ac31960475808cf65ff7f7d28e9f4abf2adb5f"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\predictions\\Autoencoder.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\Autoencoder.npz",
+      "sha256": "5d070d6824d412fe6f64c14628549c8538ae7fcf70de4bada8177aad23555ddc"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\predictions\\GMM.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GMM.npz",
+      "sha256": "4ee95fb4b6126f1db945afb51aca5a598e2c62c85b5af46a61597abefde84ea7"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\predictions\\IsolationForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\IsolationForest.npz",
+      "sha256": "3cdfbe8e7417f88f3e458150e2297de6f1b84306954eb26423c82aef87cd10e0"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\results\\predictions\\PCA_Mahalanobis.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\PCA_Mahalanobis.npz",
+      "sha256": "4ed078f7447fb3d1d1574e35567e9c19f21b9631e99c5565fa04891e424b52c7"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\data\\user_activity.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\06-behavioral-profile-ueba\\legacy\\pre-remediation-2026-07-31\\data\\user_activity.csv",
+      "sha256": "fe993b09cd045280990bab7312217a24368570f09dfed88f4af416c37d4bbd97"
+    }
+  ]
+}

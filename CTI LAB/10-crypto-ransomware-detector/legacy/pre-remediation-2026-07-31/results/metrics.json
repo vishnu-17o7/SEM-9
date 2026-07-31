@@ -1,0 +1,112 @@
+{
+  "DecisionTree": {
+    "name": "DecisionTree",
+    "family": "DecisionTreeClassifier",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 0.052,
+    "predict_time_s": 0.001,
+    "confusion_matrix": [
+      [
+        3000,
+        0
+      ],
+      [
+        0,
+        750
+      ]
+    ],
+    "notes": ""
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "family": "RandomForestClassifier",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 0.654,
+    "predict_time_s": 0.099,
+    "confusion_matrix": [
+      [
+        3000,
+        0
+      ],
+      [
+        0,
+        750
+      ]
+    ],
+    "notes": ""
+  },
+  "GradientBoosting": {
+    "name": "GradientBoosting",
+    "family": "GradientBoostingClassifier",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 7.816,
+    "predict_time_s": 0.007,
+    "confusion_matrix": [
+      [
+        3000,
+        0
+      ],
+      [
+        0,
+        750
+      ]
+    ],
+    "notes": ""
+  },
+  "LogisticRegression": {
+    "name": "LogisticRegression",
+    "family": "LogisticRegression",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 0.04,
+    "predict_time_s": 0.002,
+    "confusion_matrix": [
+      [
+        3000,
+        0
+      ],
+      [
+        0,
+        750
+      ]
+    ],
+    "notes": ""
+  },
+  "VotingEnsemble": {
+    "name": "VotingEnsemble",
+    "family": "ensemble",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "train_time_s": 8.451,
+    "predict_time_s": 0.11,
+    "confusion_matrix": [
+      [
+        3000,
+        0
+      ],
+      [
+        0,
+        750
+      ]
+    ],
+    "notes": ""
+  }
+}

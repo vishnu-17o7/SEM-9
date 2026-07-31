@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T06:19:27.021924+00:00",
+  "mode": "synthetic_fallback",
+  "name": "Scenario-based synthetic Windows ransomware telemetry",
+  "source_url": "",
+  "license": "Local synthetic generator",
+  "citation": "",
+  "limitations": "Synthetic fallback with overlapping event distributions; not a real Windows telemetry benchmark."
+}

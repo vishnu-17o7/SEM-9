@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Spam/Ham Evidence</title><style>body{font-family:system-ui;max-width:900px;margin:40px auto;line-height:1.5}.badge{padding:5px 10px;background:#0f766e;color:#fff;border-radius:12px}pre{background:#f3f4f6;padding:16px;overflow:auto}</style></head><body><div data-evaluation-badge="true" style="position:relative;margin:0 auto 1rem;padding:.65rem 1rem;border-radius:999px;background:#0f172a;color:#f8fafc;border:2px solid #14b8a6;font:700 0.82rem/1.2 system-ui;letter-spacing:.08em;text-align:center;max-width:28rem">REAL DATA</div><h1>Spam/Ham Watcher</h1><p><span class='badge'>REAL</span></p><p>Synthetic fallback; metrics do not establish real-world generalization.</p><h2>Locked evaluation</h2><pre>{
+  "strategy": "duplicate-free StratifiedGroupKFold holdout by normalized message",
+  "seed": 42,
+  "group_key": "clean_message",
+  "partitions": {
+    "train": 4073,
+    "test": 1019
+  }
+}</pre><h2>Metrics</h2><pre>{
+  "accuracy": 0.9794,
+  "precision": 0.9712,
+  "recall": 0.8487,
+  "f1": 0.9058,
+  "roc_auc": 0.983,
+  "best_params": {
+    "clf__alpha": 0.1,
+    "tfidf__max_features": 10000,
+    "tfidf__min_df": 1
+  },
+  "classification_report": {
+    "0": {
+      "precision": 0.980327868852459,
+      "recall": 0.9966666666666667,
+      "f1-score": 0.9884297520661157,
+      "support": 900.0
+    },
+    "1": {
+      "precision": 0.9711538461538461,
+      "recall": 0.8487394957983193,
+      "f1-score": 0.905829596412556,
+      "support": 119.0
+    },
+    "accuracy": 0.9793915603532876,
+    "macro avg": {
+      "precision": 0.9757408575031525,
+      "recall": 0.922703081232493,
+      "f1-score": 0.9471296742393358,
+      "support": 1019.0
+    },
+    "weighted avg": {
+      "precision": 0.9792565158582148,
+      "recall": 0.9793915603532876,
+      "f1-score": 0.9787836102380749,
+      "support": 1019.0
+    }
+  }
+}</pre></body></html>

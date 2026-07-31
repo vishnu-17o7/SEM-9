@@ -1,0 +1,112 @@
+{
+  "LogisticRegression": {
+    "name": "LogisticRegression",
+    "family": "LogisticRegression",
+    "accuracy": 0.9997,
+    "precision": 1.0,
+    "recall": 0.9991,
+    "f1": 0.9996,
+    "roc_auc": 1.0,
+    "train_time_s": 0.036,
+    "predict_time_s": 0.002,
+    "confusion_matrix": [
+      [
+        2625,
+        0
+      ],
+      [
+        1,
+        1124
+      ]
+    ],
+    "notes": ""
+  },
+  "RandomForest": {
+    "name": "RandomForest",
+    "family": "RandomForestClassifier",
+    "accuracy": 0.9997,
+    "precision": 1.0,
+    "recall": 0.9991,
+    "f1": 0.9996,
+    "roc_auc": 1.0,
+    "train_time_s": 0.71,
+    "predict_time_s": 0.088,
+    "confusion_matrix": [
+      [
+        2625,
+        0
+      ],
+      [
+        1,
+        1124
+      ]
+    ],
+    "notes": ""
+  },
+  "GradientBoosting": {
+    "name": "GradientBoosting",
+    "family": "GradientBoostingClassifier",
+    "accuracy": 0.9981,
+    "precision": 1.0,
+    "recall": 0.9938,
+    "f1": 0.9969,
+    "roc_auc": 0.9996,
+    "train_time_s": 12.863,
+    "predict_time_s": 0.016,
+    "confusion_matrix": [
+      [
+        2625,
+        0
+      ],
+      [
+        7,
+        1118
+      ]
+    ],
+    "notes": ""
+  },
+  "SVM_RBF": {
+    "name": "SVM_RBF",
+    "family": "SVC",
+    "accuracy": 0.9997,
+    "precision": 0.9991,
+    "recall": 1.0,
+    "f1": 0.9996,
+    "roc_auc": 1.0,
+    "train_time_s": 1.501,
+    "predict_time_s": 0.088,
+    "confusion_matrix": [
+      [
+        2624,
+        1
+      ],
+      [
+        0,
+        1125
+      ]
+    ],
+    "notes": ""
+  },
+  "VotingEnsemble": {
+    "name": "VotingEnsemble",
+    "family": "ensemble",
+    "accuracy": 0.9997,
+    "precision": 1.0,
+    "recall": 0.9991,
+    "f1": 0.9996,
+    "roc_auc": 1.0,
+    "train_time_s": 2.402,
+    "predict_time_s": 0.187,
+    "confusion_matrix": [
+      [
+        2625,
+        0
+      ],
+      [
+        1,
+        1124
+      ]
+    ],
+    "notes": "Soft-vote of LogisticRegression, RandomForest, SVM_RBF"
+  }
+}

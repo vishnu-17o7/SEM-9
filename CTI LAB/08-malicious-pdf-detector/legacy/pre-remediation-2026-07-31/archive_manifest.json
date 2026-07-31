@@ -1,0 +1,77 @@
+{
+  "archived_at": "2026-07-31T05:15:35.563768+00:00",
+  "project": "08-malicious-pdf-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "222a1a28852480f2ebda52d388b4320a642480589115722bce0abca24c6a6c64"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "78109e3ec51066abadbaf02986bb835802d8b5c3de4843c0a567cdb5d145921c"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "5847b7f53961b528ffa7d54cfce0c74f7fcee7d47c4fe4d26dba3ed4237372f4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "73dd0d46a8a8ec807b40fe06677abf8881045783ad3d34319c98207a191de16c"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "f07528fe567d0560ac7ef407888bc77e7bd26e05f348e5cd7a1e7046f11b4a86"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\models\\SVM_RBF.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\SVM_RBF.joblib",
+      "sha256": "afd3f8e097d82284d23f315537dfeeb916d870d0541c3354ed085d4c8029c9f3"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "7bfce0e68160c0508b8e8768850c6442530e52480bdb1e1558331110d2ea1199"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "f54c6d63f2155a166e492fd59839f6a28d736c84659007e573fceafdd4840c9b"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "cdaa149a03f1ecb5e528759ef7b5dbf08d8c4bd196cf6e621c5b7c4e2fa5cb61"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "380d6061006ab9134311623d9cdd246678fe319f8c8433a732307868e4c14497"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\predictions\\SVM_RBF.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\SVM_RBF.npz",
+      "sha256": "2ad1b0eac876e8053bae25c64bcf561d3bf057abfcbce93547bb621d924ae299"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\results\\predictions\\VotingEnsemble.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\VotingEnsemble.npz",
+      "sha256": "15db3407440b9518caca619cd6143072361c47e2e7911428ede47313a24df3d2"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\data\\pdf_features.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\data\\pdf_features.csv",
+      "sha256": "ed4a3955fb74bef172e0bbe076d7bf27fb4d35e197d7db59f3a54296a08b3eac"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\data\\pdf_features.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\08-malicious-pdf-detector\\legacy\\pre-remediation-2026-07-31\\data\\pdf_features.npz",
+      "sha256": "cacc19d7bfdf356a17cb9cae0cfbf07f06bac52fc2d6756a296c39ff545a0fca"
+    }
+  ]
+}

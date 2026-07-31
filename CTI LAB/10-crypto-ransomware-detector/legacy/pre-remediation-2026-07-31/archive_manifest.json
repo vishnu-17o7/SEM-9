@@ -1,0 +1,72 @@
+{
+  "archived_at": "2026-07-31T05:15:35.649375+00:00",
+  "project": "10-crypto-ransomware-detector",
+  "warning": "These artifacts were generated before the CTI ML validity remediation. They are preserved for comparison only and must not be presented as generalization evidence.",
+  "files": [
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\metrics.json",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\metrics.json",
+      "sha256": "9cf03c9b26218706400d08193bcc2be12d92df9e909df34339148f80ea4b62a5"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\report.html",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\report.html",
+      "sha256": "b0f3507c6ce8cb334cdaf62b6e1482bf7391cad6c9c626beb9ef205fa1883652"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\models\\DecisionTree.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\DecisionTree.joblib",
+      "sha256": "99f603a159c12b2d18522c20aff852283a0af6dc1c5a75f78a70ee2636cf9cd4"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\models\\GradientBoosting.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\GradientBoosting.joblib",
+      "sha256": "b129dcc57e7b08714b03cddaad409cf5e83391b25e156bf03906491aecaa51ba"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\models\\LogisticRegression.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\LogisticRegression.joblib",
+      "sha256": "ce51fd7a35314b48b499754c03501da2b091474ef2c9527260e17375daa82fb6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\models\\RandomForest.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\RandomForest.joblib",
+      "sha256": "e7af8cf00d55bd5dd8cb5279bb6b7bf1da58273e1d5464ce7b6c879ea430eb21"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\models\\VotingEnsemble.joblib",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\models\\VotingEnsemble.joblib",
+      "sha256": "9b82855fa937b42d7abc01a75bc03ad6b10b34db5df2495d3862f390817ec3e6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\predictions\\DecisionTree.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\DecisionTree.npz",
+      "sha256": "729e0841f633f89e9ee709d3303f5796641bb2214d0e2e8b75877e04c03ab6d1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\predictions\\GradientBoosting.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\GradientBoosting.npz",
+      "sha256": "ec2f94701aea2f9f0a0dfc06f05378a28263d78240594532537654a321704d99"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\predictions\\LogisticRegression.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\LogisticRegression.npz",
+      "sha256": "5ea37b940aeae0930fdd34801f3907327df8b5063533829df2400dd32043f3b6"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\results\\predictions\\RandomForest.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\results\\predictions\\RandomForest.npz",
+      "sha256": "729e0841f633f89e9ee709d3303f5796641bb2214d0e2e8b75877e04c03ab6d1"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\data\\crypto_ransomware.csv",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\data\\crypto_ransomware.csv",
+      "sha256": "880d9f39ef2c67d0d2f626c3bbc0a732bd40bfed51777d7f195c87715e99f874"
+    },
+    {
+      "original": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\data\\crypto_ransomware.npz",
+      "archived": "C:\\Users\\vishn\\Desktop\\Programs\\SEM 9\\CTI LAB\\10-crypto-ransomware-detector\\legacy\\pre-remediation-2026-07-31\\data\\crypto_ransomware.npz",
+      "sha256": "1b0ee6ea8251555314e55b4590ea6270c4ced6baf528a082565095dcc44b5eb3"
+    }
+  ]
+}

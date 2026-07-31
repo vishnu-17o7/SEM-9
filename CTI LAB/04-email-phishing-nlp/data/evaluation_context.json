@@ -1,0 +1,8 @@
+{
+  "mode": "real",
+  "name": "Apache SpamAssassin public corpus",
+  "source_url": "https://spamassassin.apache.org/old/publiccorpus/",
+  "license": "Apache SpamAssassin public corpus terms apply",
+  "citation": "Apache SpamAssassin public corpus",
+  "limitations": "Spam/ham labels are a phishing proxy, not a live enterprise phishing feed."
+}

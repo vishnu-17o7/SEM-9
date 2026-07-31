@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-31T06:16:15.404050+00:00",
+  "mode": "synthetic_fallback",
+  "name": "Synthetic PE feature benchmark",
+  "source_url": "https://github.com/elastic/ember",
+  "license": "Local synthetic generator; EMBER license applies only to official data.",
+  "citation": "EMBER: An Open Dataset for Training Static PE Malware Machine Learning Models",
+  "limitations": "Synthetic fallback; metrics do not establish real malware generalization."
+}

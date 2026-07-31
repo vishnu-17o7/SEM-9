@@ -35,10 +35,13 @@ def classify(email_text, model=None, model_name=DEFAULT_MODEL):
         model = load_model(model_name)
 
     features = extract_all_features(email_text)
-    X = np.array([features_to_vector(features)], dtype=np.float64)
-
-    pred = int(model.predict(X)[0])
-    proba = model.predict_proba(X)[0]
+    if hasattr(model, "named_steps") and "features" in model.named_steps:
+        pred = int(model.predict([email_text])[0])
+        proba = model.predict_proba([email_text])[0]
+    else:
+        X = np.array([features_to_vector(features)], dtype=np.float64)
+        pred = int(model.predict(X)[0])
+        proba = model.predict_proba(X)[0]
     spam_prob = float(proba[1])
     confidence = spam_prob if pred == 1 else 1 - spam_prob
 

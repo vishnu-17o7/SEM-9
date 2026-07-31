@@ -2,21 +2,21 @@
   "LogisticRegression": {
     "name": "LogisticRegression",
     "family": "LogisticRegression",
-    "accuracy": 0.783,
-    "precision": 0.7676,
-    "recall": 0.8101,
-    "f1": 0.7883,
-    "roc_auc": 0.8568,
-    "train_time_s": 0.372,
-    "predict_time_s": 0.006,
+    "accuracy": 0.7712,
+    "precision": 0.7624,
+    "recall": 0.7521,
+    "f1": 0.7572,
+    "roc_auc": 0.8493,
+    "train_time_s": 0.207,
+    "predict_time_s": 0.004,
     "confusion_matrix": [
       [
-        4750,
-        1533
+        2073,
+        556
       ],
       [
-        1187,
-        5063
+        588,
+        1784
       ]
     ],
     "notes": ""
@@ -24,21 +24,21 @@
   "RandomForest": {
     "name": "RandomForest",
     "family": "RandomForestClassifier",
-    "accuracy": 0.8967,
-    "precision": 0.9153,
-    "recall": 0.8736,
-    "f1": 0.894,
-    "roc_auc": 0.9642,
-    "train_time_s": 2.043,
-    "predict_time_s": 0.149,
+    "accuracy": 0.8626,
+    "precision": 0.8793,
+    "recall": 0.8234,
+    "f1": 0.8504,
+    "roc_auc": 0.9435,
+    "train_time_s": 1.291,
+    "predict_time_s": 0.142,
     "confusion_matrix": [
       [
-        5778,
-        505
+        2361,
+        268
       ],
       [
-        790,
-        5460
+        419,
+        1953
       ]
     ],
     "notes": ""
@@ -46,65 +46,21 @@
   "GradientBoosting": {
     "name": "GradientBoosting",
     "family": "GradientBoostingClassifier",
-    "accuracy": 0.9016,
-    "precision": 0.9166,
-    "recall": 0.883,
-    "f1": 0.8995,
-    "roc_auc": 0.9663,
-    "train_time_s": 39.573,
-    "predict_time_s": 0.089,
+    "accuracy": 0.8772,
+    "precision": 0.8921,
+    "recall": 0.8432,
+    "f1": 0.8669,
+    "roc_auc": 0.9517,
+    "train_time_s": 17.452,
+    "predict_time_s": 0.058,
     "confusion_matrix": [
       [
-        5781,
-        502
+        2387,
+        242
       ],
       [
-        731,
-        5519
-      ]
-    ],
-    "notes": ""
-  },
-  "SVM_RBF": {
-    "name": "SVM_RBF",
-    "family": "SVC",
-    "accuracy": 0.8931,
-    "precision": 0.914,
-    "recall": 0.8672,
-    "f1": 0.89,
-    "roc_auc": 0.9595,
-    "train_time_s": 406.547,
-    "predict_time_s": 22.921,
-    "confusion_matrix": [
-      [
-        5773,
-        510
-      ],
-      [
-        830,
-        5420
-      ]
-    ],
-    "notes": ""
-  },
-  "KNN": {
-    "name": "KNN",
-    "family": "KNeighborsClassifier",
-    "accuracy": 0.8945,
-    "precision": 0.9067,
-    "recall": 0.8789,
-    "f1": 0.8926,
-    "roc_auc": 0.9502,
-    "train_time_s": 0.044,
-    "predict_time_s": 7.422,
-    "confusion_matrix": [
-      [
-        5718,
-        565
-      ],
-      [
-        757,
-        5493
+        372,
+        2000
       ]
     ],
     "notes": ""
@@ -112,21 +68,21 @@
   "GaussianNB": {
     "name": "GaussianNB",
     "family": "GaussianNB",
-    "accuracy": 0.5633,
-    "precision": 0.9034,
-    "recall": 0.1392,
-    "f1": 0.2412,
-    "roc_auc": 0.832,
-    "train_time_s": 0.076,
-    "predict_time_s": 0.017,
+    "accuracy": 0.5855,
+    "precision": 0.9118,
+    "recall": 0.1395,
+    "f1": 0.242,
+    "roc_auc": 0.847,
+    "train_time_s": 0.032,
+    "predict_time_s": 0.007,
     "confusion_matrix": [
       [
-        6190,
-        93
+        2597,
+        32
       ],
       [
-        5380,
-        870
+        2041,
+        331
       ]
     ],
     "notes": ""
@@ -134,23 +90,23 @@
   "VotingEnsemble": {
     "name": "VotingEnsemble",
     "family": "ensemble",
-    "accuracy": 0.9037,
-    "precision": 0.9195,
-    "recall": 0.8843,
-    "f1": 0.9016,
-    "roc_auc": 0.9688,
-    "train_time_s": 45.164,
-    "predict_time_s": 1.115,
+    "accuracy": 0.8706,
+    "precision": 0.8832,
+    "recall": 0.8381,
+    "f1": 0.86,
+    "roc_auc": 0.945,
+    "train_time_s": 16.186,
+    "predict_time_s": 0.176,
     "confusion_matrix": [
       [
-        5799,
-        484
+        2366,
+        263
       ],
       [
-        723,
-        5527
+        384,
+        1988
       ]
     ],
-    "notes": "Soft-vote of GradientBoosting, RandomForest, KNN"
+    "notes": "Soft-vote of GradientBoosting, RandomForest, LogisticRegression"
   }
 }

@@ -56,11 +56,11 @@ th.sortable.sorted-asc::after { content: ' ↑'; opacity: 1; }
 th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
 </style>
 </head>
-<body>
+<body><div data-evaluation-badge="true" style="position:relative;margin:0 auto 1rem;padding:.65rem 1rem;border-radius:999px;background:#0f172a;color:#f8fafc;border:2px solid #14b8a6;font:700 0.82rem/1.2 system-ui;letter-spacing:.08em;text-align:center;max-width:28rem">REAL DATA</div>
 
 <h1>🕵️ Phishing URL Detection <small>Model Comparison Report</small></h1>
 <p class="subtitle">
-    URL-based feature extraction · 7 classifiers evaluated ·
+    URL-based feature extraction · 5 classifiers evaluated ·
     
     Dataset: synthetic phishing + legitimate URLs
 </p>
@@ -69,14 +69,14 @@ th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
 <div class="card">
     <div class="flex-row">
         <div class="stat">
-            <div class="stat-value" style="color:var(--accent);">0.9995</div>
+            <div class="stat-value" style="color:var(--accent);">0.8669</div>
             <div class="stat-label">Best F1 Score</div>
-            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">GradientBoosting</div>
         </div>
         <div class="stat">
-            <div class="stat-value" style="color:var(--accent2);">0.9995</div>
+            <div class="stat-value" style="color:var(--accent2);">0.9517</div>
             <div class="stat-label">Best ROC-AUC</div>
-            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">GradientBoosting</div>
         </div>
         <div class="stat">
             <div class="stat-value" style="color:var(--warn);">35.2s</div>
@@ -84,9 +84,9 @@ th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
             <div style="font-size:0.8rem;color:var(--text-dim);">all models</div>
         </div>
         <div class="stat">
-            <div class="stat-value" style="color:var(--success);">7</div>
+            <div class="stat-value" style="color:var(--success);">5</div>
             <div class="stat-label">Models Compared</div>
-            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression, RandomForest, GradientBoosting, SVM_RBF, KNN, GaussianNB, VotingEnsemble</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">LogisticRegression, RandomForest, GradientBoosting, GaussianNB, VotingEnsemble</div>
         </div>
     </div>
 </div>
@@ -110,73 +110,53 @@ th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
         <tbody>
             
         <tr>
-            <td><strong>LogisticRegression</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">LogisticRegression</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9989 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 </td>
-            <td>0.071s</td>
-            <td><img src="cm_LogisticRegression.png" style="width:160px;border-radius:6px;" /></td>
-        </tr>
-        <tr>
-            <td><strong>SVM_RBF</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">SVC</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9989 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>0.9997 </td>
-            <td>7.864s</td>
-            <td><img src="cm_SVM_RBF.png" style="width:160px;border-radius:6px;" /></td>
-        </tr>
-        <tr>
-            <td><strong>KNN</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">KNeighborsClassifier</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9989 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 </td>
-            <td>0.053s</td>
-            <td><img src="cm_KNN.png" style="width:160px;border-radius:6px;" /></td>
+            <td><strong>GradientBoosting</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">GradientBoostingClassifier</span></td>
+            <td>0.8772 <span class="badge badge-best">BEST</span></td>
+            <td>0.8921 </td>
+            <td>0.8432 <span class="badge badge-best">BEST</span></td>
+            <td>0.8669 <span class="badge badge-best">BEST</span></td>
+            <td>0.9517 <span class="badge badge-best">BEST</span></td>
+            <td>17.452s</td>
+            <td><img src="cm_GradientBoosting.png" style="width:160px;border-radius:6px;" /></td>
         </tr>
         <tr>
             <td><strong>VotingEnsemble</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">ensemble</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9989 <span class="badge badge-best">BEST</span></td>
-            <td>0.9995 <span class="badge badge-best">BEST</span></td>
-            <td>0.9997 </td>
-            <td>7.477s</td>
+            <td>0.8706 </td>
+            <td>0.8832 </td>
+            <td>0.8381 </td>
+            <td>0.8600 </td>
+            <td>0.9450 </td>
+            <td>16.186s</td>
             <td><img src="cm_VotingEnsemble.png" style="width:160px;border-radius:6px;" /></td>
         </tr>
         <tr>
             <td><strong>RandomForest</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">RandomForestClassifier</span></td>
-            <td>0.9993 </td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9987 </td>
-            <td>0.9993 </td>
-            <td>0.9999 <span class="badge badge-best">BEST</span></td>
-            <td>0.798s</td>
+            <td>0.8626 </td>
+            <td>0.8793 </td>
+            <td>0.8234 </td>
+            <td>0.8504 </td>
+            <td>0.9435 </td>
+            <td>1.291s</td>
             <td><img src="cm_RandomForest.png" style="width:160px;border-radius:6px;" /></td>
         </tr>
         <tr>
-            <td><strong>GradientBoosting</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">GradientBoostingClassifier</span></td>
-            <td>0.9993 </td>
-            <td>0.9997 </td>
-            <td>0.9989 <span class="badge badge-best">BEST</span></td>
-            <td>0.9993 </td>
-            <td>0.9999 <span class="badge badge-best">BEST</span></td>
-            <td>18.872s</td>
-            <td><img src="cm_GradientBoosting.png" style="width:160px;border-radius:6px;" /></td>
+            <td><strong>LogisticRegression</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">LogisticRegression</span></td>
+            <td>0.7712 </td>
+            <td>0.7624 </td>
+            <td>0.7521 </td>
+            <td>0.7572 </td>
+            <td>0.8493 </td>
+            <td>0.207s</td>
+            <td><img src="cm_LogisticRegression.png" style="width:160px;border-radius:6px;" /></td>
         </tr>
         <tr>
             <td><strong>GaussianNB</strong><br><span style="color:var(--text-dim);font-size:0.8rem;">GaussianNB</span></td>
-            <td>0.9988 </td>
-            <td>1.0000 <span class="badge badge-best">BEST</span></td>
-            <td>0.9976 </td>
-            <td>0.9988 </td>
-            <td>0.9993 </td>
-            <td>0.054s</td>
+            <td>0.5855 </td>
+            <td>0.9118 <span class="badge badge-best">BEST</span></td>
+            <td>0.1395 </td>
+            <td>0.2420 </td>
+            <td>0.8470 </td>
+            <td>0.032s</td>
             <td><img src="cm_GaussianNB.png" style="width:160px;border-radius:6px;" /></td>
         </tr>
         </tbody>
@@ -215,12 +195,12 @@ th.sortable.sorted-desc::after { content: ' ↓'; opacity: 1; }
 <div class="card">
     <h2>🔲 Confusion Matrices</h2>
     <div class="grid-2">
-        <div class="chart-container"><img src="cm_GaussianNB.png" alt="cm_GaussianNB.png" /></div><div class="chart-container"><img src="cm_GradientBoosting.png" alt="cm_GradientBoosting.png" /></div><div class="chart-container"><img src="cm_KNN.png" alt="cm_KNN.png" /></div><div class="chart-container"><img src="cm_LogisticRegression.png" alt="cm_LogisticRegression.png" /></div><div class="chart-container"><img src="cm_RandomForest.png" alt="cm_RandomForest.png" /></div><div class="chart-container"><img src="cm_SVM_RBF.png" alt="cm_SVM_RBF.png" /></div><div class="chart-container"><img src="cm_VotingEnsemble.png" alt="cm_VotingEnsemble.png" /></div>
+        <div class="chart-container"><img src="cm_GaussianNB.png" alt="cm_GaussianNB.png" /></div><div class="chart-container"><img src="cm_GradientBoosting.png" alt="cm_GradientBoosting.png" /></div><div class="chart-container"><img src="cm_LogisticRegression.png" alt="cm_LogisticRegression.png" /></div><div class="chart-container"><img src="cm_RandomForest.png" alt="cm_RandomForest.png" /></div><div class="chart-container"><img src="cm_VotingEnsemble.png" alt="cm_VotingEnsemble.png" /></div>
     </div>
 </div>
 
 <!-- Feature importance -->
-
+<div class="card chart-container"><h2>⭐ Feature Importances</h2><div class="chart-container"><img src="feature_importance.png" alt="feature_importance.png" /></div></div>
 
 <!-- How it works -->
 <div class="card">

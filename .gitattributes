@@ -1,4 +1,8 @@
 * text=auto
+
+# Treat exported PDF documents as binary so Git checks do not parse compressed
+# document bytes as source text.
+*.pdf binary
 "CV LAB/outputs/experiment_7_defect_detection/fasterrcnn_defect.pth" filter=lfs diff=lfs merge=lfs -text
 "CV LAB/outputs/test7/fasterrcnn_defect.pth" filter=lfs diff=lfs merge=lfs -text
 

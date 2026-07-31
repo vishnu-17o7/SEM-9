@@ -1,0 +1,5 @@
+Model,Family,Accuracy,Precision,Recall,F1,ROC-AUC,Train_Time_s
+LogisticRegression,LogisticRegression,1.0,1.0,1.0,1.0,1.0,1.608
+RandomForest,RandomForestClassifier,1.0,1.0,1.0,1.0,1.0,3.883
+GradientBoosting,GradientBoostingClassifier,1.0,1.0,1.0,1.0,1.0,43.326
+VotingEnsemble,ensemble,1.0,1.0,1.0,1.0,1.0,51.615

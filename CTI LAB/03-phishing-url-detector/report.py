@@ -13,7 +13,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-import seaborn as sns
 
 RESULTS_DIR = Path(__file__).parent / "results"
 PREDICTIONS_DIR = RESULTS_DIR / "predictions"
@@ -109,11 +108,12 @@ def _bar_chart(df: pd.DataFrame, x: str, y: str, title: str, filename: str,
 def _confusion_matrix(cm: list[list[int]], model_name: str) -> str:
     """Plot confusion matrix and return filename."""
     fig, ax = plt.subplots(figsize=(4, 3.5))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="viridis",
-                xticklabels=["Legitimate", "Phishing"],
-                yticklabels=["Legitimate", "Phishing"],
-                ax=ax, cbar=False,
-                annot_kws={"color": "white", "fontsize": 13})
+    image = ax.imshow(cm, cmap="viridis")
+    ax.set_xticks([0, 1], labels=["Legitimate", "Phishing"])
+    ax.set_yticks([0, 1], labels=["Legitimate", "Phishing"])
+    for row in range(len(cm)):
+        for column in range(len(cm[row])):
+            ax.text(column, row, str(cm[row][column]), ha="center", va="center", color="white", fontsize=13)
     ax.set_xlabel("Predicted", color="#e0e0e0")
     ax.set_ylabel("Actual", color="#e0e0e0")
     ax.set_title(f"{model_name}", color="#e0e0e0", fontsize=11, pad=8)
@@ -147,7 +147,7 @@ def _roc_curves() -> str:
         y_true = data["y_true"]
         y_prob = data["y_prob"]
         fpr, tpr, _ = roc_curve(y_true, y_prob)
-        auc = np.trapz(tpr, fpr)
+        auc = np.trapezoid(tpr, fpr)
         color = colors[i % len(colors)]
         ax.plot(fpr, tpr, color=color, lw=1.5,
                 label=f"{npz_path.stem} (AUC={auc:.4f})")
@@ -162,6 +162,7 @@ def _roc_curves() -> str:
     fig.tight_layout()
     filename = "roc_curves.png"
     path = RESULTS_DIR / filename
+    path.unlink(missing_ok=True)
     fig.savefig(path, dpi=120, bbox_inches="tight", facecolor="#1a1a2e")
     plt.close(fig)
     return path.name
@@ -407,7 +408,7 @@ document.querySelectorAll('.sortable').forEach(th => {{
     with open(REPORT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"  ✓ Report: {REPORT_FILE}")
+    print(f"  OK Report: {REPORT_FILE}")
 
 
 if __name__ == "__main__":

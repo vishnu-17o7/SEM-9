@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-31T06:43:19.424804+00:00",
+  "project": "03-phishing-url-detector",
+  "dataset": {
+    "generated_at": "2026-07-31T05:37:15.484537+00:00",
+    "mode": "real",
+    "name": "External phishing URL corpus",
+    "source_url": "https://huggingface.co/datasets/ealvaradob/phishing-dataset/resolve/main/urls.json",
+    "license": "Dataset source terms apply",
+    "citation": "",
+    "limitations": "Exact URL lookup is operational only and excluded from ML evaluation.",
+    "rows": 20000
+  },
+  "split": {
+    "strategy": "duplicate-free StratifiedGroupKFold holdout by registrable domain",
+    "seed": 42,
+    "deduplication": {
+      "rows_before": 60000,
+      "rows_after": 20000,
+      "duplicates_removed": 40000,
+      "conflicting_rows_dropped": 3687
+    },
+    "group_key": "registrable_domain",
+    "group_count": 12456,
+    "train_groups": 9340,
+    "test_groups": 3116,
+    "partitions": {
+      "train": 14999,
+      "test": 5001
+    }
+  },
+  "checks": {
+    "duplicate_sample_overlap": false,
+    "duplicate_group_overlap": false,
+    "preprocessing_test_fit": false,
+    "threshold_test_fit": false,
+    "direct_label_feature": false,
+    "feature_schema_match": false,
+    "single_feature_auc_max": 0.0,
+    "train_test_f1_gap": 0.0,
+    "test_accuracy_max": 0.8772,
+    "class_imbalance_ratio": 0.0
+  },
+  "metrics": {
+    "LogisticRegression": {
+      "name": "LogisticRegression",
+      "family": "LogisticRegression",
+      "accuracy": 0.7712,
+      "precision": 0.7624,
+      "recall": 0.7521,
+      "f1": 0.7572,
+      "roc_auc": 0.8493,
+      "train_time_s": 0.207,
+      "predict_time_s": 0.004,
+      "confusion_matrix": [
+        [
+          2073,
+          556
+        ],
+        [
+          588,
+          1784
+        ]
+      ],
+      "notes": ""
+    },
+    "RandomForest": {
+      "name": "RandomForest",
+      "family": "RandomForestClassifier",
+      "accuracy": 0.8626,
+      "precision": 0.8793,
+      "recall": 0.8234,
+      "f1": 0.8504,
+      "roc_auc": 0.9435,
+      "train_time_s": 1.291,
+      "predict_time_s": 0.142,
+      "confusion_matrix": [
+        [
+          2361,
+          268
+        ],
+        [
+          419,
+          1953
+        ]
+      ],
+      "notes": ""
+    },
+    "GradientBoosting": {
+      "name": "GradientBoosting",
+      "family": "GradientBoostingClassifier",
+      "accuracy": 0.8772,
+      "precision": 0.8921,
+      "recall": 0.8432,
+      "f1": 0.8669,
+      "roc_auc": 0.9517,
+      "train_time_s": 17.452,
+      "predict_time_s": 0.058,
+      "confusion_matrix": [
+        [
+          2387,
+          242
+        ],
+        [
+          372,
+          2000
+        ]
+      ],
+      "notes": ""
+    },
+    "GaussianNB": {
+      "name": "GaussianNB",
+      "family": "GaussianNB",
+      "accuracy": 0.5855,
+      "precision": 0.9118,
+      "recall": 0.1395,
+      "f1": 0.242,
+      "roc_auc": 0.847,
+      "train_time_s": 0.032,
+      "predict_time_s": 0.007,
+      "confusion_matrix": [
+        [
+          2597,
+          32
+        ],
+        [
+          2041,
+          331
+        ]
+      ],
+      "notes": ""
+    },
+    "VotingEnsemble": {
+      "name": "VotingEnsemble",
+      "family": "ensemble",
+      "accuracy": 0.8706,
+      "precision": 0.8832,
+      "recall": 0.8381,
+      "f1": 0.86,
+      "roc_auc": 0.945,
+      "train_time_s": 16.186,
+      "predict_time_s": 0.176,
+      "confusion_matrix": [
+        [
+          2366,
+          263
+        ],
+        [
+          384,
+          1988
+        ]
+      ],
+      "notes": "Soft-vote of GradientBoosting, RandomForest, LogisticRegression"
+    }
+  }
+}
