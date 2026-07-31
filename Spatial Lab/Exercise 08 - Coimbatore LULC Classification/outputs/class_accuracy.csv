@@ -1,0 +1,6 @@
+class_id,class_name,reference_samples,predicted_samples,correct_samples,producer_accuracy_percent,user_accuracy_percent
+1,Water,200,187,182,91.0,97.33
+2,Forest and vegetation,200,188,149,74.5,79.26
+3,Agriculture,200,231,161,80.5,69.7
+4,Built-up,200,226,178,89.0,78.76
+5,Barren and open land,200,168,147,73.5,87.5

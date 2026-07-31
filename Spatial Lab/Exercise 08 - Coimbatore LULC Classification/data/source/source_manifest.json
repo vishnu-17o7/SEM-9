@@ -1,0 +1,85 @@
+{
+  "study_area": "Coimbatore district, Tamil Nadu, India",
+  "target_crs": "EPSG:32643",
+  "pixel_size_metres": 20.0,
+  "sentinel_collection": "sentinel-2-l2a",
+  "sentinel_items": [
+    {
+      "id": "S2A_43PFM_20260310_0_L2A",
+      "datetime": "2026-03-10T05:26:26.569000Z",
+      "cloud_cover_percent": 0.622971,
+      "assets": {
+        "B02": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B02.tif",
+        "B03": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B03.tif",
+        "B04": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B04.tif",
+        "B08": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B08.tif",
+        "B11": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B11.tif",
+        "B12": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/B12.tif",
+        "SCL": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FM/2026/3/S2A_43PFM_20260310_0_L2A/SCL.tif"
+      }
+    },
+    {
+      "id": "S2A_43PGM_20260310_0_L2A",
+      "datetime": "2026-03-10T05:26:23.579000Z",
+      "cloud_cover_percent": 0.565871,
+      "assets": {
+        "B02": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B02.tif",
+        "B03": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B03.tif",
+        "B04": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B04.tif",
+        "B08": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B08.tif",
+        "B11": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B11.tif",
+        "B12": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/B12.tif",
+        "SCL": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GM/2026/3/S2A_43PGM_20260310_0_L2A/SCL.tif"
+      }
+    },
+    {
+      "id": "S2A_43PFN_20260310_0_L2A",
+      "datetime": "2026-03-10T05:26:11.664000Z",
+      "cloud_cover_percent": 2.489719,
+      "assets": {
+        "B02": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B02.tif",
+        "B03": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B03.tif",
+        "B04": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B04.tif",
+        "B08": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B08.tif",
+        "B11": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B11.tif",
+        "B12": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/B12.tif",
+        "SCL": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/FN/2026/3/S2A_43PFN_20260310_0_L2A/SCL.tif"
+      }
+    },
+    {
+      "id": "S2A_43PGN_20260310_0_L2A",
+      "datetime": "2026-03-10T05:26:08.959000Z",
+      "cloud_cover_percent": 0.270082,
+      "assets": {
+        "B02": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B02.tif",
+        "B03": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B03.tif",
+        "B04": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B04.tif",
+        "B08": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B08.tif",
+        "B11": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B11.tif",
+        "B12": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/B12.tif",
+        "SCL": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/43/P/GN/2026/3/S2A_43PGN_20260310_0_L2A/SCL.tif"
+      }
+    }
+  ],
+  "worldcover": {
+    "product": "ESA WorldCover 2021 v200",
+    "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N09E075_Map.tif"
+  },
+  "class_mapping": {
+    "1": "Water",
+    "2": "Forest and vegetation",
+    "3": "Agriculture",
+    "4": "Built-up",
+    "5": "Barren and open land"
+  },
+  "worldcover_to_class": {
+    "80": 1,
+    "10": 2,
+    "20": 2,
+    "30": 2,
+    "40": 3,
+    "50": 4,
+    "60": 5
+  },
+  "random_seed": 42
+}

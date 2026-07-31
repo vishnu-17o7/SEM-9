@@ -1,0 +1,6 @@
+reference_class,predicted_water,predicted_forest_and_vegetation,predicted_agriculture,predicted_built-up,predicted_barren_and_open_land,total
+Water,182,8,6,3,1,200
+Forest and vegetation,0,149,44,6,1,200
+Agriculture,0,30,161,7,2,200
+Built-up,2,0,3,178,17,200
+Barren and open land,3,1,17,32,147,200

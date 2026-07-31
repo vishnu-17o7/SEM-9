@@ -1,0 +1,5 @@
+metric,value
+Validation samples used,1000
+Correct predictions,817
+Overall accuracy percent,81.7
+Cohen kappa,0.7712
