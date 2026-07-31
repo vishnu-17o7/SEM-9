@@ -11,6 +11,8 @@
 "Spatial Lab/**/*.kml" filter=lfs diff=lfs merge=lfs -text
 "Spatial Lab/**/*.osm" filter=lfs diff=lfs merge=lfs -text
 "Spatial Lab/**/*.osm.gz" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/*.csv.gz" filter=lfs diff=lfs merge=lfs -text
+"Spatial Lab/**/ghcnd-stations.txt" filter=lfs diff=lfs merge=lfs -text
 "Spatial Lab/**/*.qgz" filter=lfs diff=lfs merge=lfs -text
 "Spatial Lab/**/*.pdf" filter=lfs diff=lfs merge=lfs -text
 "Spatial Lab/**/*.png" filter=lfs diff=lfs merge=lfs -text

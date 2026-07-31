@@ -1,0 +1,3 @@
+Method,MAE_mm,RMSE_mm,Bias_mm,Rank
+IDW,41.332,56.704,31.569,1
+Ordinary Kriging,41.628,61.342,29.387,2

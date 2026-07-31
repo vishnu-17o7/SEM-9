@@ -9,6 +9,9 @@ This directory contains the QGIS exercises, their source and processed spatial d
 3. **Exercise 03 - Bengaluru Flood Mapping** — combine drains, water bodies, infrastructure, buffers, and evacuation analysis.
 4. **Exercise 04 - Tamil Nadu Thematic Maps** — create incidence, pie-chart, bar-chart, graduated-symbol, and proportional-symbol maps.
 5. **Exercise 05 - Nilgiris Check-Dam Suitability** — compare TIN and IDW terrain models, derive drainage, and screen preliminary check-dam sites.
+6. **Exercise 06 - Coimbatore Rainfall Interpolation** — compare IDW and Ordinary Kriging rainfall surfaces using independent validation stations.
+7. **Exercise 07 - Coimbatore Healthcare Service Areas** — build Thiessen service regions, apply population/capacity load weighting, propose candidate sites, and estimate 5 km accessibility.
+8. **Exercise 08 - Coimbatore LULC Classification** — classify Sentinel-2 imagery at 20 m with Dzetsaka Random Forest, validate held-out samples, calculate class areas, and export a presentation map.
 
 Each exercise has a `project` directory containing the QGIS entry point. `data/source` contains input data, `data/processed` contains analysis-ready layers, and `outputs` contains exported results. Legacy and failed experiments are retained under `archive`.
 
