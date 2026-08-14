@@ -49,7 +49,7 @@ CV LAB/assets/models/midas_v21_small_256.onnx
 CV LAB/assets/models/MobileNetSSD_deploy.caffemodel
 CV LAB/assets/models/MobileNetSSD_deploy.prototxt
 
-# --- Research directory ---
+# --- Research directory (own private repo: vishnu-17o7/ephmas) ---
 Research - Explainable Privacy Preserving Multi Agent Healthcare/
 
 # --- CTI Theory / CV Theory (notes) ---
